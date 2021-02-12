@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{C98948C7-1EF3-4211-B436-AED31CAA60D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C1BF7F7F-BAA4-4399-9FA6-015EAE76ACC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalClinicAPI", "DentalClinicAPI\DentalClinicAPI.csproj", "{7CC1EA62-39E3-48EB-9002-4C29456209B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppFrontEnd", "AppFrontEnd", "{057F42E2-BD8E-4325-A89E-6018A64B8B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBModels", "DBModels\DBModels.csproj", "{1A51A10B-0F8A-4101-8AA0-FBDD0F49CC92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Enums\Enums.csproj", "{CE92D07E-67A3-4984-A3ED-643272D454C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContext", "DBContext\DBContext.csproj", "{C035B670-EA24-4EC6-87FC-70139C1DCF6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CC1EA62-39E3-48EB-9002-4C29456209B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC1EA62-39E3-48EB-9002-4C29456209B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC1EA62-39E3-48EB-9002-4C29456209B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC1EA62-39E3-48EB-9002-4C29456209B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A51A10B-0F8A-4101-8AA0-FBDD0F49CC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A51A10B-0F8A-4101-8AA0-FBDD0F49CC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A51A10B-0F8A-4101-8AA0-FBDD0F49CC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A51A10B-0F8A-4101-8AA0-FBDD0F49CC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE92D07E-67A3-4984-A3ED-643272D454C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE92D07E-67A3-4984-A3ED-643272D454C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE92D07E-67A3-4984-A3ED-643272D454C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE92D07E-67A3-4984-A3ED-643272D454C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C035B670-EA24-4EC6-87FC-70139C1DCF6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C035B670-EA24-4EC6-87FC-70139C1DCF6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C035B670-EA24-4EC6-87FC-70139C1DCF6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C035B670-EA24-4EC6-87FC-70139C1DCF6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A51A10B-0F8A-4101-8AA0-FBDD0F49CC92} = {C1BF7F7F-BAA4-4399-9FA6-015EAE76ACC6}
+		{CE92D07E-67A3-4984-A3ED-643272D454C1} = {C1BF7F7F-BAA4-4399-9FA6-015EAE76ACC6}
+		{C035B670-EA24-4EC6-87FC-70139C1DCF6F} = {C1BF7F7F-BAA4-4399-9FA6-015EAE76ACC6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA631DA6-E454-425F-BD56-098F19C13FF8}
+	EndGlobalSection
+EndGlobal

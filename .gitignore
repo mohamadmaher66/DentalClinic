@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/DBContext/bin/Debug/netstandard2.0
+/DBModels/bin/Debug/netstandard2.0
+/DBModels/obj/Debug/netstandard2.0
+/DentalClinicAPI/bin/Debug/netcoreapp3.1
+/DentalClinicAPI/obj
+/Enums/bin/Debug/netstandard2.0
+/Enums/obj
+/DBContext/obj
+/DBModels/obj
