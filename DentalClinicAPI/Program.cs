@@ -16,7 +16,6 @@ namespace DentalClinicAPI
         {
             using (var dbContext = new DentalClinicDBContext())
             {
-                //Ensure database is created
                 dbContext.Database.EnsureCreated();
                 dbContext.SaveChanges();
             }

@@ -13,3 +13,7 @@
 /DBContext/obj
 /DBModels/obj
 /AppFrontEnd/.vs
+/Infrastructure/bin/Debug/netstandard2.0
+/Infrastructure/obj
+/Request/bin/Debug/netstandard2.0
+/Request/obj
