@@ -21,6 +21,7 @@ namespace DentalClinicAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddHttpContextAccessor();

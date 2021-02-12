@@ -16,7 +16,8 @@ namespace DBContext
         public DbSet<Patient> Patient { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Expense> Expense { get; set; }
-        
+        public DbSet<AppointmentTooth> AppointmentTooth { get; set; }
+
 
         private static string _connectionString;
         private static string ConnectionString

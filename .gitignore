@@ -17,3 +17,10 @@
 /Infrastructure/obj
 /Request/bin/Debug/netstandard2.0
 /Request/obj
+/DTOs/obj
+/DTOs/bin/Debug/netstandard2.0
+/Module.MedicalHistory/bin/Debug/netstandard2.0
+/Module.MedicalHistory/obj
+/Module.MedicalHistoryAPI/bin/Debug/netcoreapp3.1
+/Module.MedicalHistoryAPI/obj
+/MedicalHistoryModule/obj
