@@ -13,6 +13,8 @@ namespace DTOs
         public UserDTO User { get; set; }
         public int PatientId { get; set; }
         public PatientDTO Patient { get; set; }
+        public int ClinicId { get; set; }
+        public ClinicDTO Clinic { get; set; }
         public DateTime Date { get; set; }
         public float TotalPrice { get; set; }
         public float DiscountPercentage { get; set; }

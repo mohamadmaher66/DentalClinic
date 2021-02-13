@@ -24,3 +24,11 @@
 /Module.MedicalHistoryAPI/bin/Debug/netcoreapp3.1
 /Module.MedicalHistoryAPI/obj
 /MedicalHistoryModule/obj
+/DBContext/bin/Release/netstandard2.0
+/DBModels/bin/Release/netstandard2.0
+/DentalClinicAPI/bin/Release/netcoreapp3.1
+/DentalClinicAPI/Properties/PublishProfiles
+/Enums/bin/Release/netstandard2.0
+/Request/bin/Release/netstandard2.0
+/DentalClinicAPI/App_Data/DentalClinicDB.mdf
+/DentalClinicAPI/App_Data/DentalClinicDB_log.ldf

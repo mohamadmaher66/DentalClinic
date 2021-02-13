@@ -13,6 +13,7 @@ namespace DBModels
         public int CategoryId { get; set; }
         public int UserId { get; set; }
         public int PatientId { get; set; }
+        public int ClinicId { get; set; }
         public DateTime Date { get; set; }
         public float TotalPrice { get; set; }
         public float DiscountPercentage { get; set; }

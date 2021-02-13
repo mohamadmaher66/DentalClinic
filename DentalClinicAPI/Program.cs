@@ -1,5 +1,6 @@
 using DBContext;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 
 namespace DentalClinicAPI
@@ -10,7 +11,7 @@ namespace DentalClinicAPI
         {
             using (var dbContext = new DentalClinicDBContext())
             {
-                dbContext.Database.EnsureCreated();
+                dbContext.Database.Migrate();
                 dbContext.SaveChanges();
             }
             CreateHostBuilder(args).Build().Run();

@@ -29,6 +29,9 @@ namespace DBContext.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ClinicId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
@@ -188,6 +191,36 @@ namespace DBContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attachment");
+                });
+
+            modelBuilder.Entity("DBModels.Clinic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clinic");
                 });
 
             modelBuilder.Entity("DBModels.Expense", b =>

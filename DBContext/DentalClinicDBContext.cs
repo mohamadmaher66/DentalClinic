@@ -17,6 +17,7 @@ namespace DBContext
         public DbSet<User> User { get; set; }
         public DbSet<Expense> Expense { get; set; }
         public DbSet<AppointmentTooth> AppointmentTooth { get; set; }
+        public DbSet<Clinic> Clinic { get; set; }
 
 
         private static string _connectionString;
@@ -30,6 +31,7 @@ namespace DBContext
                         .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "appsettings.json"))
                         .Build();
                     _connectionString = config.GetSection("ConnectionStrings")["DBConnectionString"];
+                    _connectionString = _connectionString.Replace("[DataDirectory]", Directory.GetCurrentDirectory());
                 }
                 return _connectionString;
             }

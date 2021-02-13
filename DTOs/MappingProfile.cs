@@ -16,6 +16,7 @@ namespace DTOs
             CreateMap<Patient, PatientDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<AppointmentTooth, AppointmentToothDTO>().ReverseMap();
+            CreateMap<Clinic, ClinicDTO>().ReverseMap();
 
         }
     }
