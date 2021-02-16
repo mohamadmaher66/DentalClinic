@@ -1,12 +1,15 @@
+using System.Text;
 using System.Text.Json;
 using AutoMapper;
 using DentalClinicAPI.Helpers;
 using DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DentalClinicAPI
 {
@@ -40,23 +43,24 @@ namespace DentalClinicAPI
             });
 
             // JWT Config
-            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                        .GetBytes("DonationManagerKey#12*")),
+                        .GetBytes("DentalClinicKey#12*")),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-            });*/
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -68,9 +72,11 @@ namespace DentalClinicAPI
                 ExceptionHandler.HandleException(context); 
             }));
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
+
+            app.UseSetUserIdMiddleware();
 
             app.UseStaticFiles();
 

@@ -2,6 +2,7 @@
 using DTOs;
 using Enums;
 using MedicalHistoryModule;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Request;
 
@@ -9,6 +10,7 @@ namespace DentalClinicAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MedicalHistoryController : ControllerBase
     {
         private readonly MedicalHistoryDSL medicalHistoryDSL;

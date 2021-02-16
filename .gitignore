@@ -72,3 +72,5 @@
 /DentalClinic/.vs/DentalClinic/v16
 /DentalClinic/.vs/slnx.sqlite
 /DentalClinic/.vs
+/DentalClinic/UserModule/bin/Debug/netstandard2.0
+/DentalClinic/UserModule/obj

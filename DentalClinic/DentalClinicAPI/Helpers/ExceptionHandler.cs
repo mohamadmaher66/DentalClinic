@@ -25,7 +25,7 @@ namespace DentalClinicAPI.Helpers
                         {
                             Type = AlertTypeEnum.Error,
                             Message = exception.Message,
-                            Title = "Error"
+                            Title = "حذث خطأ"
                         }
                     }
             };

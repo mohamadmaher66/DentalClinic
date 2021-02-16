@@ -9,5 +9,7 @@ namespace DTOs
         public double Cost { get; set; }
         public string Description { get; set; }
         public ExpenseType Type { get; set; }
+        public int ClinicId { get; set; }
+
     }
 }
