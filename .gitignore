@@ -78,3 +78,5 @@
 /DentalClinic_FrontEnd/DentalClinic/.vscode/settings.json
 /DentalClinic_FrontEnd/DentalClinic/.vscode
 /DentalClinic_FrontEnd/workspace.code-workspace
+/DentalClinic/Modules/UserModule/bin/Debug/netstandard2.0
+/DentalClinic/Modules/UserModule/obj

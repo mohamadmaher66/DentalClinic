@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalHistoryModule", "Mod
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MedicalHistory", "MedicalHistory", "{17EFDE7E-7B1E-4E22-8DB6-0E35CA2DD525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserModule", "UserModule\UserModule.csproj", "{ED3AE412-8F13-45CA-A49B-40D3AEEBB616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserModule", "Modules\UserModule\UserModule.csproj", "{ED3AE412-8F13-45CA-A49B-40D3AEEBB616}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
