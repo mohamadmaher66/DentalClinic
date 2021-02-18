@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { IconComponent } from '@coreui/icons-angular';
 import { DefaultLayoutComponent } from './containers';
 import { LoginComponent } from './modules/user/components/login/login.component';
 import { P404Component } from './views/error/404.component';
@@ -18,9 +19,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
+    data: { title: 'Login Page' }
   },
   {
     path: '',
@@ -36,6 +35,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
         data:{ title: 'Dashboard'}
       },
+      {
+        path: 'icons',
+        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
+      },
       // App Components
       {
         path: 'medicalhistory',
@@ -46,6 +49,11 @@ export const routes: Routes = [
         path: 'user',
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) ,
         data:{ title: 'User'}
+      },
+      {
+        path: 'clinic',
+        loadChildren: () => import('./modules/clinic/clinic.module').then(m => m.ClinicModule) ,
+        data:{ title: 'Clinic'}
       }
     ]
   },

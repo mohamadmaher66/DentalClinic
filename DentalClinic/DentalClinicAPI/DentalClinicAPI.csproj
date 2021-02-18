@@ -32,9 +32,9 @@
     <ProjectReference Include="..\Core\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\Core\Enums\Enums.csproj" />
     <ProjectReference Include="..\Core\Request\Request.csproj" />
+    <ProjectReference Include="..\Modules\ClinicModule\ClinicModule.csproj" />
     <ProjectReference Include="..\Modules\MedicalHistoryModule\MedicalHistoryModule.csproj" />
     <ProjectReference Include="..\Modules\UserModule\UserModule.csproj" />
-    <ProjectReference Include="..\UserModule\UserModule.csproj" />
   </ItemGroup>
 
 

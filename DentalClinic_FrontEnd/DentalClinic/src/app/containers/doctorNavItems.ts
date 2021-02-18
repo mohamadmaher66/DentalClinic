@@ -24,6 +24,11 @@ export const doctorNavItems: INavData[] = [
     icon: 'cil-bookmark',
     children: [
       {
+        name: 'العيادات',
+        url: '/clinic',
+        icon: 'cil-location-pin'
+      },
+      {
         name: 'التاريخ الطبي',
         url: '/medicalhistory',
         icon: 'cil-hospital'
@@ -38,6 +43,11 @@ export const doctorNavItems: INavData[] = [
   {
     name: 'Charts',
     url: '/charts',
+    icon: 'icon-pie-chart'
+  },
+  {
+    name: 'Icons',
+    url: '/icons',
     icon: 'icon-pie-chart'
   },
   {

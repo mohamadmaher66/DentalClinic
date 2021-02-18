@@ -43,7 +43,7 @@ namespace UserModule
         {
             return _mapper.Map<List<UserDTO>>(dbset.Where(x => x.IsActive == true)
                                                     .Select(u => new User { Id = u.Id, Username = u.Username, FullName = u.FullName})
-                                                    .OrderByDescending(m => m.CreationDate));
+                                                    .OrderBy(m => m.FullName));
         }
 
         public UserDTO GetById(int userId)

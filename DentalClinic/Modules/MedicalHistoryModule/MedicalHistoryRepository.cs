@@ -33,7 +33,7 @@ namespace MedicalHistoryModule
         }
         public IEnumerable<MedicalHistoryDTO> GetAllLite()
         {
-            return _mapper.Map<List<MedicalHistoryDTO>>(dbset.OrderByDescending(m => m.CreationDate));
+            return _mapper.Map<List<MedicalHistoryDTO>>(dbset.OrderBy(m => m.Name));
         }
 
         public MedicalHistoryDTO GetById(int medicalHistoryId)
