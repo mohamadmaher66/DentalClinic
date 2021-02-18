@@ -12,5 +12,6 @@ namespace DTOs
         public string Phone { get; set; }
         public RoleEnum Role { get; set; }
         public bool IsActive { get; set; }
+        public string Token { get; set; }
     }
 }

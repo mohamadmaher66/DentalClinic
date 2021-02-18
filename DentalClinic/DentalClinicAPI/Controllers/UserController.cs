@@ -91,7 +91,7 @@ namespace DentalClinicAPI.Controllers
                     expires: DateTime.Now.AddDays(1),
                     signingCredentials: credentials);
 
-                requestedData.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                requestedData.Entity.Token = new JwtSecurityTokenHandler().WriteToken(token);
             }
             return Ok(requestedData);
         }
