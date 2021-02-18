@@ -1,0 +1,22 @@
+<div class="row" style="margin-bottom:15px;">
+    <div class="col-md-3 input-group">
+      
+      <input type="file" #file placeholder="Choose file" accept="image/x-png,image/gif,image/jpeg"
+       (change)="uploadFile(file.files)" style="display:none;">
+      <button type="button" class="btn btn-success" (click)="file.click()" style="margin: 15px;">
+          <span class="glyphicon glyphicon-upload" ></span> Choose Image</button>
+    </div>
+    <!--<div class="col-md-4" *ngIf="isUploaded">
+      <span class="upload" *ngIf="progress > 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div>
+    <div class="col-md-4" *ngIf="!isUploaded">
+        <span class="uploadFailed" *ngIf="message">
+          {{message}}
+        </span>
+      </div>-->
+  </div>

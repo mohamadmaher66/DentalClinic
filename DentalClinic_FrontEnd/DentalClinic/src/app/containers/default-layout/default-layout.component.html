@@ -1,0 +1,24 @@
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/tooth.svg', width: 89, height: 25, alt: 'Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/tooth.svg', width: 30, height: 30, alt: 'Logo'}"
+  [navbarBrandText]="'Dental Clinic'"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="false"
+  [mobileAsideMenuToggler]="false">  
+</app-header>
+<!-- <app-header-custom></app-header-custom> -->
+<div class="app-body">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <div class="container-fluid" style="margin-top: 20px;">
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  <mat-spinner diameter="150" *ngIf="inProgress"></mat-spinner>
+  </main>
+</div>
