@@ -1,30 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IconComponent } from '@coreui/icons-angular';
 import { DefaultLayoutComponent } from './containers';
 import { LoginComponent } from './modules/user/components/login/login.component';
 import { P404Component } from './views/error/404.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
-    path: '404',
-    component: P404Component,
-    data: { title: 'Page 404' }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: { title: 'Login Page' }
-  },
-  {
-    path: '',
-    component: DefaultLayoutComponent,
-    data: { title: 'Home' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '404', component: P404Component, data: { title: 'Page 404' } },
+  { path: 'login', component: LoginComponent, data: { title: 'Login Page' } },
+  { path: '', component: DefaultLayoutComponent, data: { title: 'Home' },
     children: [
       {
         path: 'base',
@@ -59,6 +43,11 @@ export const routes: Routes = [
         path: 'appointmentaddition',
         loadChildren: () => import('./modules/appointment-addition/appointment-addition.module').then(m => m.AppointmentAdditionModule) ,
         data:{ title: 'Appointment Addition'}
+      },
+      {
+        path: 'appointmentcategory',
+        loadChildren: () => import('./modules/appointment-category/appointment-category.module').then(m => m.AppointmentCategoryModule) ,
+        data:{ title: 'Appointment Category'}
       }
     ]
   },
