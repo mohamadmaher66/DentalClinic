@@ -54,6 +54,11 @@ export const routes: Routes = [
         path: 'clinic',
         loadChildren: () => import('./modules/clinic/clinic.module').then(m => m.ClinicModule) ,
         data:{ title: 'Clinic'}
+      },
+      {
+        path: 'appointmentaddition',
+        loadChildren: () => import('./modules/appointment-addition/appointment-addition.module').then(m => m.AppointmentAdditionModule) ,
+        data:{ title: 'Appointment Addition'}
       }
     ]
   },

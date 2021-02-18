@@ -32,6 +32,11 @@ export const doctorNavItems: INavData[] = [
         name: 'التاريخ الطبي',
         url: '/medicalhistory',
         icon: 'cil-hospital'
+      },
+      {
+        name: 'اضافات للكشف',
+        url: '/appointmentaddition',
+        icon: 'cil-plus'
       }
     ]
   },

@@ -67,7 +67,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteClinic([FromBody] RequestedData<ClinicDTO> requestedData)
         {
             requestedData.EntityList = clinicDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم جذف العيادة بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف العيادة بنجاح" });
             return Ok(requestedData);
         }
     }

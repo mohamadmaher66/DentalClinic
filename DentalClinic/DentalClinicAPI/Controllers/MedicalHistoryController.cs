@@ -67,7 +67,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteMedicalHistory([FromBody] RequestedData<MedicalHistoryDTO> requestedData)
         {
             requestedData.EntityList = medicalHistoryDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم جذف التاريخ الطبي بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف التاريخ الطبي بنجاح" });
             return Ok(requestedData);
         }
     }

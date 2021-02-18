@@ -72,7 +72,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteUser([FromBody] RequestedData<UserDTO> requestedData)
         {
             requestedData.EntityList = userDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم جذف المستخدم بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف المستخدم بنجاح" });
             return Ok(requestedData);
         }
 
