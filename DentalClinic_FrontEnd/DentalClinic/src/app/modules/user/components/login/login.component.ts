@@ -39,9 +39,10 @@ export class LoginComponent {
   }
   loginOnSuccess(res: any): void {
     if(hasValue(res.entity.token)){
-      this.sessionService.setToken(res.entity.token);
       this.sessionService.currentUser = res.entity;
+      this.sessionService.setToken(res.entity.token);
       this.sessionService.setUserRole(res.entity.role);
+      this.sessionService.setUserName(res.entity.fullName);
       this.router.navigateByUrl('/dashboard');
     }
     else{

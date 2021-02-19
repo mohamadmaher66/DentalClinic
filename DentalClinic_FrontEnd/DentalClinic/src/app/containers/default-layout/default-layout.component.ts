@@ -13,6 +13,7 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems;
   inProgress: boolean = false;
+  name: string;
 
   constructor(private httpService: HttpService,
     private sessionService: SessionService) {
@@ -20,6 +21,10 @@ export class DefaultLayoutComponent {
       this.httpService.inProgressEventEmitter.subscribe(
         res => this.inProgress = res
       )
+  }
+
+  ngOnAfterViewInit(){
+    //this.name = this.;
   }
 
   toggleMinimize(e) {
@@ -33,5 +38,9 @@ export class DefaultLayoutComponent {
     else{
       this.navItems = assistantNavItems;
     }
+  }
+
+  logout(){
+    this.sessionService.signOutWithErrorMessage(null);
   }
 }
