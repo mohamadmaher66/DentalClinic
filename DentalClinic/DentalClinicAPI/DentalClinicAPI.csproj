@@ -35,6 +35,7 @@
     <ProjectReference Include="..\Modules\AppointmentAdditionModule\AppointmentAdditionModule.csproj" />
     <ProjectReference Include="..\Modules\AppointmentCategoryModule\AppointmentCategoryModule.csproj" />
     <ProjectReference Include="..\Modules\ClinicModule\ClinicModule.csproj" />
+    <ProjectReference Include="..\Modules\ExpenseModule\ExpenseModule.csproj" />
     <ProjectReference Include="..\Modules\MedicalHistoryModule\MedicalHistoryModule.csproj" />
     <ProjectReference Include="..\Modules\UserModule\UserModule.csproj" />
   </ItemGroup>

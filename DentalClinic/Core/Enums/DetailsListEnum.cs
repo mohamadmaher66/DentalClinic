@@ -3,6 +3,7 @@ namespace Enums
 {
     public enum DetailsListEnum
     {
-        None = 0
+        None = 0,
+        Clinic = 1
     }
 }

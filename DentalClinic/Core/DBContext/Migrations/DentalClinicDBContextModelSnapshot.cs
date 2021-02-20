@@ -230,6 +230,9 @@ namespace DBContext.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("ActionDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ClinicId")
                         .HasColumnType("int");
 

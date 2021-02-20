@@ -48,6 +48,11 @@ export const routes: Routes = [
         path: 'appointmentcategory',
         loadChildren: () => import('./modules/appointment-category/appointment-category.module').then(m => m.AppointmentCategoryModule) ,
         data:{ title: 'Appointment Category'}
+      },
+      {
+        path: 'expense',
+        loadChildren: () => import('./modules/expense/expense.module').then(m => m.ExpenseModule) ,
+        data:{ title: 'Expense'}
       }
     ]
   },
