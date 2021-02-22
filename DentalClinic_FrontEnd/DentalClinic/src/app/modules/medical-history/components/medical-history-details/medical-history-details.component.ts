@@ -53,7 +53,7 @@ export class MedicalHistoryDetailsComponent implements OnInit {
   }
 
   private getMedicalHistoryOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public submitMedicalHistory(form:NgForm) {

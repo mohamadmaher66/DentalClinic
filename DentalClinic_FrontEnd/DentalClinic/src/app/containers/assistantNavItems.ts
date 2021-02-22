@@ -34,5 +34,10 @@ export const assistantNavItems: INavData[] = [
     name: 'المستخدمين',
     url: '/user',
     icon: 'cil-user'
+  },
+  {
+    name: 'المرضي',
+    url: '/patient',
+    icon: 'cil-medical-cross'
   }
 ];

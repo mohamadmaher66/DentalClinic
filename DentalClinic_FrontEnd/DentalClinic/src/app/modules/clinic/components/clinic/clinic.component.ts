@@ -136,7 +136,7 @@ export class ClinicComponent extends BaseComponent {
   }
 
   private deleteClinicOnError(response: any) {
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   applyFilter(filterValue: string) {

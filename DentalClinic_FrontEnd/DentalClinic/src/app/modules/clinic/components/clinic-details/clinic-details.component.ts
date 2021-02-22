@@ -49,7 +49,7 @@ export class ClinicDetailsComponent implements OnInit {
   }
 
   private getClinicOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public submitClinic(form:NgForm) {

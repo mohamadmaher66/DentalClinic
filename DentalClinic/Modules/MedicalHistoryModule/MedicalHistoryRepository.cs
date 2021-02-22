@@ -27,9 +27,9 @@ namespace MedicalHistoryModule
         {
             IEnumerable<MedicalHistory> medicalHistoryList = dbset.Where(x => string.IsNullOrEmpty(gridSettings.SearchText) ? true : x.Name.Contains(gridSettings.SearchText));
             gridSettings.RowsCount = medicalHistoryList.Count();
-            return _mapper.Map<List<MedicalHistoryDTO>>(medicalHistoryList
+            return _mapper.Map<List<MedicalHistoryDTO>>(medicalHistoryList.OrderByDescending(m => m.CreationDate)
                                      .Skip(gridSettings.PageSize * gridSettings.PageIndex)
-                                     .Take(gridSettings.PageSize).OrderByDescending(m => m.CreationDate));
+                                     .Take(gridSettings.PageSize));
         }
         public IEnumerable<MedicalHistoryDTO> GetAllLite()
         {

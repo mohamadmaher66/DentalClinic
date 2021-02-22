@@ -32,9 +32,9 @@ namespace AppointmentAdditionModule
                                                                                     ));
 
             gridSettings.RowsCount = appointmentAdditionList.Count();
-            return _mapper.Map<List<AppointmentAdditionDTO>>(appointmentAdditionList
+            return _mapper.Map<List<AppointmentAdditionDTO>>(appointmentAdditionList.OrderByDescending(m => m.CreationDate)
                                      .Skip(gridSettings.PageSize * gridSettings.PageIndex)
-                                     .Take(gridSettings.PageSize).OrderByDescending(m => m.CreationDate));
+                                     .Take(gridSettings.PageSize));
         }
         public IEnumerable<AppointmentAdditionDTO> GetAllLite()
         {

@@ -1,5 +1,6 @@
 export enum DetailsListEnum
 {
     None = 0,
-    Clinic = 1
+    Clinic = 1,
+    MedicalHistory = 2
 }

@@ -58,7 +58,7 @@ export class ExpenseDetailsComponent implements OnInit {
   }
 
   private getExpenseOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public submitExpense(form:NgForm) {
@@ -116,7 +116,7 @@ export class ExpenseDetailsComponent implements OnInit {
   }
 
   private GetExpenseDetailsListsOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public filterClinic(value: string){

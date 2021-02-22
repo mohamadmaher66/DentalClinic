@@ -32,9 +32,9 @@ namespace AppointmentCategoryModule
                                                                                     ));
 
             gridSettings.RowsCount = appointmentCategoryList.Count();
-            return _mapper.Map<List<AppointmentCategoryDTO>>(appointmentCategoryList
+            return _mapper.Map<List<AppointmentCategoryDTO>>(appointmentCategoryList.OrderByDescending(m => m.CreationDate)
                                      .Skip(gridSettings.PageSize * gridSettings.PageIndex)
-                                     .Take(gridSettings.PageSize).OrderByDescending(m => m.CreationDate));
+                                     .Take(gridSettings.PageSize));
         }
         public IEnumerable<AppointmentCategoryDTO> GetAllLite()
         {

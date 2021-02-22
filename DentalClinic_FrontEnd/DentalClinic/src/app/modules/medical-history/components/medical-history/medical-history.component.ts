@@ -136,7 +136,7 @@ export class MedicalHistoryComponent extends BaseComponent {
   }
 
   private deleteMedicalHistoryOnError(response: any) {
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   applyFilter(filterValue: string) {

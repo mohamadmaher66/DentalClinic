@@ -50,7 +50,7 @@ export class FileUploaderComponent implements OnInit {
   }
 
   private uploadOnError(error: any) {
-    this.alertService.viewAlerts(error.error);
+    this.alertService.viewAlerts(error.error.alerts);
     this.isUploaded = false;
   }
 }

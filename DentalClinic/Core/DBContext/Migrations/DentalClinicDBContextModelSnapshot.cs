@@ -290,12 +290,7 @@ namespace DBContext.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("MedicalHistory");
                 });
@@ -322,8 +317,8 @@ namespace DBContext.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<int>("ModifiedBy")
                         .HasColumnType("int");
@@ -337,6 +332,21 @@ namespace DBContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Patient");
+                });
+
+            modelBuilder.Entity("DBModels.PatientMedicalHistory", b =>
+                {
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicalHistoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PatientId", "MedicalHistoryId");
+
+                    b.HasIndex("MedicalHistoryId");
+
+                    b.ToTable("PatientMedicalHistory");
                 });
 
             modelBuilder.Entity("DBModels.User", b =>
@@ -388,11 +398,19 @@ namespace DBContext.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("DBModels.MedicalHistory", b =>
+            modelBuilder.Entity("DBModels.PatientMedicalHistory", b =>
                 {
-                    b.HasOne("DBModels.Patient", null)
-                        .WithMany("MedicalHistory")
-                        .HasForeignKey("PatientId");
+                    b.HasOne("DBModels.MedicalHistory", "MedicalHistory")
+                        .WithMany("PatientMedicalHistoryList")
+                        .HasForeignKey("MedicalHistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModels.Patient", "Patient")
+                        .WithMany("PatientMedicalHistoryList")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

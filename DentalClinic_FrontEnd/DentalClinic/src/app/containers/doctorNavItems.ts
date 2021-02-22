@@ -57,6 +57,11 @@ export const doctorNavItems: INavData[] = [
     icon: 'cil-user'
   },
   {
+    name: 'المرضي',
+    url: '/patient',
+    icon: 'cil-medical-cross'
+  },
+  {
     name: 'Charts',
     url: '/charts',
     icon: 'icon-pie-chart'

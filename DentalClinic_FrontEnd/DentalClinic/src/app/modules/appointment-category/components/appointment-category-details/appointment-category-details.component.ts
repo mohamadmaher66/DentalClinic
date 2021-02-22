@@ -47,7 +47,7 @@ export class AppointmentCategoryDetailsComponent implements OnInit {
   }
 
   private getAppointmentCategoryOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public submitAppointmentCategory(form:NgForm) {

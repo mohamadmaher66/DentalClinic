@@ -136,7 +136,7 @@ export class AppointmentAdditionComponent extends BaseComponent {
   }
 
   private deleteAppointmentAdditionOnError(response: any) {
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   applyFilter(filterValue: string) {

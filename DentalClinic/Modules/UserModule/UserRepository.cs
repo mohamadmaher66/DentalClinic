@@ -35,9 +35,9 @@ namespace UserModule
                                             FullName = u.FullName, IsActive = u.IsActive, Phone = u.Phone, Role = u.Role });
 
             gridSettings.RowsCount = userList.Count();
-            return _mapper.Map<List<UserDTO>>(userList
+            return _mapper.Map<List<UserDTO>>(userList.OrderByDescending(m => m.CreationDate)
                                      .Skip(gridSettings.PageSize * gridSettings.PageIndex)
-                                     .Take(gridSettings.PageSize).OrderByDescending(m => m.CreationDate));
+                                     .Take(gridSettings.PageSize));
         }
         public IEnumerable<UserDTO> GetAllLite()
         {

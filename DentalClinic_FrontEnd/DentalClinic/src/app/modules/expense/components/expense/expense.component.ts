@@ -138,7 +138,7 @@ export class ExpenseComponent extends BaseComponent {
   }
 
   private deleteExpenseOnError(response: any) {
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   applyFilter(filterValue: string) {

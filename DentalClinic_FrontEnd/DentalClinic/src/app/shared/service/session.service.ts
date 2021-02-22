@@ -46,6 +46,7 @@ export class SessionService {
 
     private getValue(key: string) {
         if (isNullOrEmptyString(localStorage.getItem(key))) {
+            this.router.navigate(['login']);
             return null;
         }
         switch (key) {

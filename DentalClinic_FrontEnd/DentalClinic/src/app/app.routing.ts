@@ -53,9 +53,14 @@ export const routes: Routes = [
         path: 'expense',
         loadChildren: () => import('./modules/expense/expense.module').then(m => m.ExpenseModule) ,
         data:{ title: 'Expense'}
+      },
+      {
+        path: 'patient',
+        loadChildren: () => import('./modules/patient/patient.module').then(m => m.PatientModule) ,
+        data:{ title: 'Patient'}
       }
     ]
-  },
+  }
   //{ path: '**', component: P404Component },
   
 ];

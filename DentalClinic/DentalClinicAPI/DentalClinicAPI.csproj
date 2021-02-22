@@ -37,6 +37,7 @@
     <ProjectReference Include="..\Modules\ClinicModule\ClinicModule.csproj" />
     <ProjectReference Include="..\Modules\ExpenseModule\ExpenseModule.csproj" />
     <ProjectReference Include="..\Modules\MedicalHistoryModule\MedicalHistoryModule.csproj" />
+    <ProjectReference Include="..\Modules\PatientModule\PatientModule.csproj" />
     <ProjectReference Include="..\Modules\UserModule\UserModule.csproj" />
   </ItemGroup>
 

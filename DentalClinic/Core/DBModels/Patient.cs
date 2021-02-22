@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DBModels
 {
-    public class Patient : AuditModel
+    public partial class Patient : AuditModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,9 +13,9 @@ namespace DBModels
         public string FullName { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public string Gender { get; set; }
+        public GenderEnum Gender { get; set; }
         public int Age { get; set; }
 
-        public ICollection<MedicalHistory> MedicalHistory { get; set; }
+        public ICollection<PatientMedicalHistory> PatientMedicalHistoryList { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DBModels;
 using System;
+using System.Linq;
 
 namespace DTOs
 {
@@ -14,7 +15,9 @@ namespace DTOs
             CreateMap<Attachment, AttachmentDTO>().ReverseMap();
             CreateMap<Expense, ExpenseDTO>().ReverseMap();
             CreateMap<MedicalHistory, MedicalHistoryDTO>().ReverseMap();
-            CreateMap<Patient, PatientDTO>().ReverseMap();
+            CreateMap<Patient, PatientDTO>()
+                    .ForMember(dto => dto.MedicalHistoryList, PMH => PMH.MapFrom(MH => MH.PatientMedicalHistoryList.Select(cs => cs.MedicalHistory)))
+                    .ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<AppointmentTooth, AppointmentToothDTO>().ReverseMap();
             CreateMap<Clinic, ClinicDTO>().ReverseMap();

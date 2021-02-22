@@ -31,9 +31,9 @@ namespace ClinicModule
                                     ));
 
             gridSettings.RowsCount = clinicList.Count();
-            return _mapper.Map<List<ClinicDTO>>(clinicList
+            return _mapper.Map<List<ClinicDTO>>(clinicList.OrderByDescending(m => m.CreationDate)
                                      .Skip(gridSettings.PageSize * gridSettings.PageIndex)
-                                     .Take(gridSettings.PageSize).OrderByDescending(m => m.CreationDate));
+                                     .Take(gridSettings.PageSize));
         }
         public IEnumerable<ClinicDTO> GetAllLite()
         {

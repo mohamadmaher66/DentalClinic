@@ -18,7 +18,8 @@ namespace DBContext
         public DbSet<Expense> Expense { get; set; }
         public DbSet<AppointmentTooth> AppointmentTooth { get; set; }
         public DbSet<Clinic> Clinic { get; set; }
-
+        public DbSet<PatientMedicalHistory> PatientMedicalHistory { get; set; }
+        
 
         private static string _connectionString;
         private static string ConnectionString
@@ -46,6 +47,10 @@ namespace DBContext
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique(true);
+
+            modelBuilder.Entity<PatientMedicalHistory>()
+               .HasKey(PMH => new { PMH.PatientId, PMH.MedicalHistoryId });
+            
         }
     }
 }

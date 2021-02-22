@@ -39,8 +39,6 @@ import { AlertService } from './shared/service/alert.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginComponent } from './modules/user/components/login/login.component';
 import { AppHeaderCustomComponent } from './containers/header/header.component';
-import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 export function initializerFn(configService: ConfigService) {
   return () => {

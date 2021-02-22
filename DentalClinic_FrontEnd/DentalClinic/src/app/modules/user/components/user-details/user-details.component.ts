@@ -49,7 +49,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   private getUserOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public submitUser(form:NgForm) {

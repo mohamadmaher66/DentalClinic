@@ -138,7 +138,7 @@ export class UserComponent extends BaseComponent {
   }
 
   private deleteUserOnError(response: any) {
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   applyFilter(filterValue: string) {

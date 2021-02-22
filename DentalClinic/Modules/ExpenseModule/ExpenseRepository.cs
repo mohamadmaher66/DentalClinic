@@ -47,9 +47,11 @@ namespace ExpenseModule
 
 
             gridSettings.RowsCount = expenseList.Count();
-            return (expenseList.Skip(gridSettings.PageSize * gridSettings.PageIndex)
-                               .Take(gridSettings.PageSize).OrderByDescending(m => m.ActionDate));
+            return (expenseList.OrderByDescending(m => m.ActionDate)
+                                .Skip(gridSettings.PageSize * gridSettings.PageIndex)
+                                .Take(gridSettings.PageSize));
         }
+
 
         public ExpenseDTO GetById(int expenseId)
         {

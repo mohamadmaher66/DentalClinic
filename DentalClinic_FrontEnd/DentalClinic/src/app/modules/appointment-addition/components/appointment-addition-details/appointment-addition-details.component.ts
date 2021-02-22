@@ -47,7 +47,7 @@ export class AppointmentAdditionDetailsComponent implements OnInit {
   }
 
   private getAppointmentAdditionOnError(response:any){
-    this.alertService.viewAlerts(response.error);
+    this.alertService.viewAlerts(response.error.alerts);
   }
 
   public submitAppointmentAddition(form:NgForm) {
