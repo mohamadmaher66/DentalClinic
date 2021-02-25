@@ -10,6 +10,7 @@ namespace DBModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int AppointmentId { get; set; }
+        public Appointment Appointment { get; set; }
         public int ToothNumber { get; set; }
         public ToothpositionEnum ToothPosition { get; set; }
     }

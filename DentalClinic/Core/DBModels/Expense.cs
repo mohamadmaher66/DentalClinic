@@ -16,5 +16,6 @@ namespace DBModels
         public string Description { get; set; }
         public ExpenseType Type { get; set; }
         public int ClinicId { get; set; }
+        public Clinic Clinic { get; set; }
     }
 }

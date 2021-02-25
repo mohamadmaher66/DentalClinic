@@ -70,6 +70,14 @@ namespace DBContext.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ClinicId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Appointment");
                 });
 
@@ -104,6 +112,21 @@ namespace DBContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppointmentAddition");
+                });
+
+            modelBuilder.Entity("DBModels.AppointmentAppointmentAddition", b =>
+                {
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppointmentAdditionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppointmentId", "AppointmentAdditionId");
+
+                    b.HasIndex("AppointmentAdditionId");
+
+                    b.ToTable("AppointmentAppointmentAddition");
                 });
 
             modelBuilder.Entity("DBModels.AppointmentCategory", b =>
@@ -157,6 +180,8 @@ namespace DBContext.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppointmentId");
+
                     b.ToTable("AppointmentTooth");
                 });
 
@@ -189,6 +214,8 @@ namespace DBContext.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Attachment");
                 });
@@ -261,6 +288,8 @@ namespace DBContext.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClinicId");
 
                     b.ToTable("Expense");
                 });
@@ -396,6 +425,75 @@ namespace DBContext.Migrations
                         .HasFilter("[Username] IS NOT NULL");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("DBModels.Appointment", b =>
+                {
+                    b.HasOne("DBModels.AppointmentCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModels.Clinic", "Clinic")
+                        .WithMany()
+                        .HasForeignKey("ClinicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModels.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModels.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DBModels.AppointmentAppointmentAddition", b =>
+                {
+                    b.HasOne("DBModels.AppointmentAddition", "AppointmentAddition")
+                        .WithMany("AppointmentAppointmentAddition")
+                        .HasForeignKey("AppointmentAdditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBModels.Appointment", "Appointment")
+                        .WithMany("AppointmentAppointmentAdditionList")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DBModels.AppointmentTooth", b =>
+                {
+                    b.HasOne("DBModels.Appointment", "Appointment")
+                        .WithMany("AppointmentToothList")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DBModels.Attachment", b =>
+                {
+                    b.HasOne("DBModels.Appointment", "Appointment")
+                        .WithMany("AttachmentList")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DBModels.Expense", b =>
+                {
+                    b.HasOne("DBModels.Clinic", "Clinic")
+                        .WithMany()
+                        .HasForeignKey("ClinicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DBModels.PatientMedicalHistory", b =>

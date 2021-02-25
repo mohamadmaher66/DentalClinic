@@ -19,7 +19,8 @@ namespace DBContext
         public DbSet<AppointmentTooth> AppointmentTooth { get; set; }
         public DbSet<Clinic> Clinic { get; set; }
         public DbSet<PatientMedicalHistory> PatientMedicalHistory { get; set; }
-        
+        public DbSet<AppointmentAppointmentAddition> AppointmentAppointmentAddition { get; set; }
+
 
         private static string _connectionString;
         private static string ConnectionString
@@ -50,7 +51,9 @@ namespace DBContext
 
             modelBuilder.Entity<PatientMedicalHistory>()
                .HasKey(PMH => new { PMH.PatientId, PMH.MedicalHistoryId });
-            
+
+            modelBuilder.Entity<AppointmentAppointmentAddition>()
+                .HasKey(aaa => new { aaa.AppointmentId, aaa.AppointmentAdditionId });
         }
     }
 }

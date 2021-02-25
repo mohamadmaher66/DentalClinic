@@ -23,5 +23,6 @@ namespace DTOs
         public string Notes { get; set; }
         public List<AttachmentDTO> AttachmentList { get; set; }
         public List<AppointmentToothDTO> ToothList { get; set; }
+        public List<AppointmentAdditionDTO> AppointmentAdditionList { get; set; }
     }
 }
