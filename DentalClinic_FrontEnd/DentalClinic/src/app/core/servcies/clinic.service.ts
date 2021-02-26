@@ -14,7 +14,7 @@ export class ClinicService {
     return this.httpService.httpPost(object, this.url + 'GetAllClinics');
   }
 
-  public GetAllClinicLite(object: any) {
+  public getAllClinicLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllClinicLite');
   }
 

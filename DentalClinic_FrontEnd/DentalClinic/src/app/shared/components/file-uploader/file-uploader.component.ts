@@ -30,7 +30,6 @@ export class FileUploaderComponent implements OnInit {
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    debugger;
 
     this.http.post('https://localhost:44335/api/shared/Upload', formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => this.uploadOnSuccess(event),

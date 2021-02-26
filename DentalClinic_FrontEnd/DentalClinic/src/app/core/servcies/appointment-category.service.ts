@@ -14,7 +14,7 @@ export class AppointmentCategoryService {
     return this.httpService.httpPost(object, this.url + 'GetAllAppointmentCategorys');
   }
 
-  public GetAllAppointmentCategoryLite(object: any) {
+  public getAllAppointmentCategoryLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllAppointmentCategoryLite');
   }
 

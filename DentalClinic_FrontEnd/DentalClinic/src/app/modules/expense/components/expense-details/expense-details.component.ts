@@ -62,7 +62,6 @@ export class ExpenseDetailsComponent implements OnInit {
   }
 
   public submitExpense(form:NgForm) {
-    debugger;
     if(form.invalid){
       return;
     }
@@ -104,18 +103,18 @@ export class ExpenseDetailsComponent implements OnInit {
   private getDetailsLists(){
     this.requestExpenseData = new RequestedData<Expense>();
 
-    this.ExpenseService.GetExpenseDetailsLists(this.requestExpenseData).subscribe(
-      res => this.GetExpenseDetailsListsOnSuccess(res) ,        
-      err => this.GetExpenseDetailsListsOnError(err)
+    this.ExpenseService.getExpenseDetailsLists(this.requestExpenseData).subscribe(
+      res => this.getExpenseDetailsListsOnSuccess(res) ,        
+      err => this.getExpenseDetailsListsOnError(err)
     );
   }
 
-  private GetExpenseDetailsListsOnSuccess(response: any){
+  private getExpenseDetailsListsOnSuccess(response: any){
     this.alertService.viewAlerts(response.alerts);
     this.setDetailsLists(response);
   }
 
-  private GetExpenseDetailsListsOnError(response:any){
+  private getExpenseDetailsListsOnError(response:any){
     this.alertService.viewAlerts(response.error.alerts);
   }
 

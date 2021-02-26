@@ -1,7 +1,4 @@
-﻿using Enums;
-using System;
-
-namespace DTOs
+﻿namespace DTOs
 {
     public class AttachmentDTO
     {

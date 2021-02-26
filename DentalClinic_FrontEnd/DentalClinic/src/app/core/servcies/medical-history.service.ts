@@ -16,7 +16,7 @@ export class MedicalHistoryService {
     return this.httpService.httpPost(object, this.url + 'GetAllMedicalHistorys');
   }
 
-  public GetAllMedicalHistoryLite(object: any) {
+  public getAllMedicalHistoryLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllMedicalHistoryLite');
   }
 

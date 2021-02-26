@@ -16,7 +16,7 @@ export class UserService {
     return this.httpService.httpPost(object, this.url + 'GetAllUsers');
   }
 
-  public GetAllUserLite(object: any) {
+  public getAllUserLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllUserLite');
   }
 

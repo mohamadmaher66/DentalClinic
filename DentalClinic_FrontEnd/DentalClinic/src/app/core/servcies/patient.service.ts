@@ -14,7 +14,7 @@ export class PatientService {
     return this.httpService.httpPost(object, this.url + 'GetAllPatients');
   }
 
-  public GetAllPatientLite(object: any) {
+  public getAllPatientLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllPatientLite');
   }
 
@@ -33,7 +33,7 @@ export class PatientService {
     return this.httpService.httpPost(object, this.url + 'DeletePatient');
   }
 
-  public GetPatientDetailsLists(object: any) {
+  public getPatientDetailsLists(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetPatientDetailsLists');
   }
 }

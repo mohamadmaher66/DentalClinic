@@ -28,7 +28,7 @@ export class ExpenseService {
   public deleteExpense(object: any) {
     return this.httpService.httpPost(object, this.url + 'DeleteExpense');
   }
-  public GetExpenseDetailsLists(object: any) {
+  public getExpenseDetailsLists(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetExpenseDetailsLists');
   }
   

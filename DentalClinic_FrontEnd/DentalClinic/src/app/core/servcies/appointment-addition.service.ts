@@ -14,7 +14,7 @@ export class AppointmentAdditionService {
     return this.httpService.httpPost(object, this.url + 'GetAllAppointmentAdditions');
   }
 
-  public GetAllAppointmentAdditionLite(object: any) {
+  public getAllAppointmentAdditionLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllAppointmentAdditionLite');
   }
 

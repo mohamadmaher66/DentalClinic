@@ -63,7 +63,6 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   public submitPatient(form:NgForm) {
-    debugger;
     if(form.invalid){
       return;
     }
@@ -106,18 +105,18 @@ export class PatientDetailsComponent implements OnInit {
   private getDetailsLists(){
     this.requestPatientData = new RequestedData<Patient>();
 
-    this.PatientService.GetPatientDetailsLists(this.requestPatientData).subscribe(
-      res => this.GetPatientDetailsListsOnSuccess(res) ,        
-      err => this.GetPatientDetailsListsOnError(err)
+    this.PatientService.getPatientDetailsLists(this.requestPatientData).subscribe(
+      res => this.getPatientDetailsListsOnSuccess(res) ,        
+      err => this.getPatientDetailsListsOnError(err)
     );
   }
 
-  private GetPatientDetailsListsOnSuccess(response: any){
+  private getPatientDetailsListsOnSuccess(response: any){
     this.alertService.viewAlerts(response.alerts);
     this.setDetailsLists(response);
   }
 
-  private GetPatientDetailsListsOnError(response:any){
+  private getPatientDetailsListsOnError(response:any){
     this.alertService.viewAlerts(response.error.alerts);
   }
 
