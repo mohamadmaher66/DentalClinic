@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text;
 using System.Text.Json;
 using AutoMapper;
@@ -6,8 +7,10 @@ using DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
@@ -70,7 +73,7 @@ namespace DentalClinicAPI
             app.UseExceptionHandler(a => a.Run(async context =>
             {
                 ExceptionHandler.HandleException(context); 
-            }));
+            })); 
 
             app.UseAuthentication();
 
@@ -79,6 +82,12 @@ namespace DentalClinicAPI
             app.UseSetUserIdMiddleware();
 
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+                RequestPath = new PathString("/Images")
+            });
 
             app.UseEndpoints(endpoints =>
             {

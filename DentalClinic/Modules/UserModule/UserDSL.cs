@@ -44,7 +44,17 @@ namespace UserModule
                 throw e;
             }
         }
-
+        public List<UserDTO> GetAllDoctorsLite()
+        {
+            try
+            {
+                return userRepository.GetAllDoctorsLite().ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public UserDTO GetById(int userId)
         {
             try

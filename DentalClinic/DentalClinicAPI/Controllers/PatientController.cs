@@ -42,7 +42,7 @@ namespace DentalPatientAPI.Controllers
         public IActionResult AddPatient([FromBody] RequestedData<PatientDTO> requestedData)
         {
             patientDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة المصاريف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة المريض بنجاح" });
             return Ok(requestedData);
         }
 
@@ -51,7 +51,7 @@ namespace DentalPatientAPI.Controllers
         public IActionResult EditPatient([FromBody] RequestedData<PatientDTO> requestedData)
         {
             patientDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل المصاريف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل المريض بنجاح" });
             return Ok(requestedData);
         }
 
@@ -60,7 +60,7 @@ namespace DentalPatientAPI.Controllers
         public IActionResult DeletePatient([FromBody] RequestedData<PatientDTO> requestedData)
         {
             requestedData.EntityList = patientDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف المصاريف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف المريض بنجاح" });
             return Ok(requestedData);
         }
 

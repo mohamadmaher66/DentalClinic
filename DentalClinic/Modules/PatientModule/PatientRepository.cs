@@ -41,7 +41,10 @@ namespace PatientModule
 
         public IEnumerable<PatientDTO> GetAllLite()
         {
-            return _mapper.Map<List<PatientDTO>>(dbset.OrderBy(m => m.FullName));
+            return _mapper.Map<List<PatientDTO>>(dbset
+                .Include(PMH => PMH.PatientMedicalHistoryList)
+                .ThenInclude(MH => MH.MedicalHistory)
+                .OrderBy(m => m.FullName));
         }
 
         public PatientDTO GetById(int patientId)

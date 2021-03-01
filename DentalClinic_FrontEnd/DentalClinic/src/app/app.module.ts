@@ -3,7 +3,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { IconComponent, IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
+import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -37,8 +37,9 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { AlertService } from './shared/service/alert.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { LoginComponent } from './modules/user/components/login/login.component';
-import { AppHeaderCustomComponent } from './containers/header/header.component';
 
 export function initializerFn(configService: ConfigService) {
   return () => {
@@ -52,6 +53,8 @@ export function initializerFn(configService: ConfigService) {
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    RouterModule,
+    CommonModule,
     FormsModule,
     AppAsideModule,
     AppHeaderModule,
@@ -77,8 +80,7 @@ export function initializerFn(configService: ConfigService) {
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    LoginComponent,
-    AppHeaderCustomComponent
+    LoginComponent
   ],
   providers: [
     IconSetService,

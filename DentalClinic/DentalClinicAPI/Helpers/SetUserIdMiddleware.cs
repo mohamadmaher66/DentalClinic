@@ -27,7 +27,9 @@ namespace DentalClinicAPI.Helpers
         {
             try
             {
-                if (httpContext.User.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
+                if (httpContext.Request.Method == HttpMethods.Post
+                    && !httpContext.Request.ContentType.Contains("multipart/form-data")
+                    && httpContext.User.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
                 {
                     int userId = Convert.ToInt32(httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
                     httpContext.Request.EnableBuffering();

@@ -45,7 +45,11 @@ namespace UserModule
                                                     .Select(u => new User { Id = u.Id, Username = u.Username, FullName = u.FullName})
                                                     .OrderBy(m => m.FullName));
         }
-
+        public IEnumerable<UserDTO> GetAllDoctorsLite()
+        {
+            return _mapper.Map<List<UserDTO>>(dbset.Where(x => x.Role == Enums.RoleEnum.Doctor && x.IsActive == true)
+                                                    .OrderBy(m => m.FullName));
+        }
         public UserDTO GetById(int userId)
         {
             return _mapper.Map<UserDTO>(entities.Set<User>().AsNoTracking()

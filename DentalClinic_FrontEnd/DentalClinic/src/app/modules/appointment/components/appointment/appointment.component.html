@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+    <h3>الكشوفات</h3>
+    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">اضافة جديد</button>
+    <br>
+    <mat-form-field class="col-md-10">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث" style="font-size: 15px;">
+    </mat-form-field>
+    <div class="example-container">
+        <table mat-table [dataSource]="appointmentList" style="width: 100%;">
+            <ng-container matColumnDef="categoryName">
+                <th mat-header-cell *matHeaderCellDef>نوع الكشف</th>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.category.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="patientName">
+                <th mat-header-cell *matHeaderCellDef>اسم المريض</th>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.patient.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="userName">
+                <th mat-header-cell *matHeaderCellDef>الدكتور</th>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.user.name}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="clinicName">
+                <th mat-header-cell *matHeaderCellDef>العيادة</th>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.clinic.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>التاريخ</th>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.date | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef>الحالة</th>
+                <td mat-cell *matCellDef="let appointment" style="width: 10%;">
+                    <label *ngIf="appointment.state == appointmentStateEnum.Finished">انتهى</label>
+                    <label *ngIf="appointment.state == appointmentStateEnum.Pending">قيد الانتظار</label>
+                    <label *ngIf="appointment.state == appointmentStateEnum.Current">جارى</label>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> الخيارات </th>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%; ">
+                    <a (click)="editRecord(appointment.id)"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a>
+                    <a (click)="deleteRecord(appointment.id, appointment.name)"><i class="fa fa-trash fa-lg"
+                            aria-hidden="true"></i></a>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <mat-paginator [pageSize]="configService.configuration.pageSize" showFirstLastButtons 
+        [hidePageSize]="true" (page)="getServerData($event)" [length]="rowsCount"></mat-paginator>

@@ -27,8 +27,8 @@
                   <label for="gender">النوع</label>
                   <mat-form-field appearance="fill" class="mat-select-cls">
                     <mat-select [(ngModel)]="patient.gender" [required]="true" #gender="ngModel" name="gender" id="gender"
-                      panelClass="mat-select-cls">
-                      <mat-option [value]="genderEnum.Male" [selected]="true"> ذكر </mat-option>
+                                  panelClass="mat-select-cls">
+                      <mat-option [value]="genderEnum.Male"> ذكر </mat-option>
                       <mat-option [value]="genderEnum.Female"> انثى </mat-option>
                     </mat-select>
                   </mat-form-field>                  

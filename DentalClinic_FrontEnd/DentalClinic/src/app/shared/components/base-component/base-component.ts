@@ -3,7 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-base-component'
+  selector: 'app-base-component',
+  template: ""
 })
 export class BaseComponent  {
 

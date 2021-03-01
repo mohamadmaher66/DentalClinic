@@ -7,13 +7,9 @@ namespace DTOs
     public class AppointmentDTO
     {
         public int Id { get; set; }
-        public int CategoryId { get; set; }
         public AppointmentCategoryDTO Category { get; set; }
-        public int UserId { get; set; }
         public UserDTO User { get; set; }
-        public int PatientId { get; set; }
         public PatientDTO Patient { get; set; }
-        public int ClinicId { get; set; }
         public ClinicDTO Clinic { get; set; }
         public DateTime Date { get; set; }
         public float TotalPrice { get; set; }

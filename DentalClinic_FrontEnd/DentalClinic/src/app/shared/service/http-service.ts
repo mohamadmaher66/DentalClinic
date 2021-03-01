@@ -10,6 +10,7 @@ import { hasValue } from './helper.service';
 
 @Injectable()
 export class HttpService {
+
     private baseUrl: string;
     inProgressEventEmitter: EventEmitter<boolean> = new EventEmitter();
 
@@ -58,6 +59,20 @@ export class HttpService {
     private parseResponse(response: any) {
         this.inProgressEventEmitterChange(false);
         return response;
+    }
+
+    public uploadFile(uploadURL: string, formData: FormData, reportProgress: boolean, observe: string) {
+        this.inProgressEventEmitterChange(true);
+
+        let headers = new HttpHeaders()
+
+        if (typeof (Storage) !== "undefined" && hasValue(this.sessionService.getToken())) {
+            headers = headers.set('Authorization', this.sessionService.getToken());
+        }
+
+        return this.http.post(uploadURL, formData, { headers, reportProgress: true, observe: 'events' })
+            .pipe(map((response) => this.parseResponse(response)))
+            .pipe(catchError(err => this.handleError(err)));
     }
 
     private handleError(error: any) {

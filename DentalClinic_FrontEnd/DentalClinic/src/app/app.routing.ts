@@ -27,37 +27,42 @@ export const routes: Routes = [
       {
         path: 'medicalhistory',
         loadChildren: () => import('./modules/medical-history/medical-history.module').then(m => m.MedicalHistoryModule) ,
-        data:{ title: 'Medical History'}
+        data:{ title: 'التاريخ الطبي'}
       },
       {
         path: 'user',
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) ,
-        data:{ title: 'User'}
+        data:{ title: 'المستخدمين'}
       },
       {
         path: 'clinic',
         loadChildren: () => import('./modules/clinic/clinic.module').then(m => m.ClinicModule) ,
-        data:{ title: 'Clinic'}
+        data:{ title: 'العيادات'}
       },
       {
         path: 'appointmentaddition',
         loadChildren: () => import('./modules/appointment-addition/appointment-addition.module').then(m => m.AppointmentAdditionModule) ,
-        data:{ title: 'Appointment Addition'}
+        data:{ title: 'اضافات الكشف'}
       },
       {
         path: 'appointmentcategory',
         loadChildren: () => import('./modules/appointment-category/appointment-category.module').then(m => m.AppointmentCategoryModule) ,
-        data:{ title: 'Appointment Category'}
+        data:{ title: 'انواع الكشف'}
       },
       {
         path: 'expense',
         loadChildren: () => import('./modules/expense/expense.module').then(m => m.ExpenseModule) ,
-        data:{ title: 'Expense'}
+        data:{ title: 'المصاريف'}
       },
       {
         path: 'patient',
         loadChildren: () => import('./modules/patient/patient.module').then(m => m.PatientModule) ,
-        data:{ title: 'Patient'}
+        data:{ title: 'المرضي'}
+      },
+      {
+        path: 'appointment',
+        loadChildren: () => import('./modules/appointment/appointment.module').then(m => m.AppointmentModule) ,
+        data:{ title: 'الكشوفات'}
       }
     ]
   }

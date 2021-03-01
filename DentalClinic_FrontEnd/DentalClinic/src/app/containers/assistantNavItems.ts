@@ -31,6 +31,11 @@ export const assistantNavItems: INavData[] = [
     ]
   },
   {
+    name: 'الكشوفات',
+    url: '/appointment',
+    icon: 'cil-briefcase'
+  },
+  {
     name: 'المستخدمين',
     url: '/user',
     icon: 'cil-user'

@@ -13,18 +13,17 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems;
   inProgress: boolean = false;
-  name: string;
 
   constructor(private httpService: HttpService,
-    private sessionService: SessionService) {
-      this.setNavItems();
+    public sessionService: SessionService) {
+    this.setNavItems();
+
+    setTimeout(() => {
       this.httpService.inProgressEventEmitter.subscribe(
         res => this.inProgress = res
       )
-  }
+    });
 
-  ngOnAfterViewInit(){
-    //this.name = this.;
   }
 
   toggleMinimize(e) {
@@ -32,15 +31,15 @@ export class DefaultLayoutComponent {
   }
 
   setNavItems() {
-    if(this.sessionService.getUserRole() == RoleEnum.Doctor){
+    if (this.sessionService.getUserRole() == RoleEnum.Doctor) {
       this.navItems = doctorNavItems;
     }
-    else{
+    else {
       this.navItems = assistantNavItems;
     }
   }
 
-  logout(){
+  logout() {
     this.sessionService.signOutWithErrorMessage(null);
   }
 }
