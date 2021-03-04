@@ -70,6 +70,32 @@ namespace AppointmentModule
             {
                 appointment.State = AppointmentStateEnum.Pending;
                 appointment.Id = appointmentRepository.Add(appointment, userId);
+                AddAttachmentList(appointment.AttachmentList, appointment.Id);
+                AddToothList(appointment.ToothList, appointment.Id);
+                AddAppointmentAdditionList(appointment.AppointmentAdditionList, appointment.Id);
+                UoW.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        
+        public void Update(AppointmentDTO appointment, int userId)
+        {
+            try
+            {
+                appointmentRepository.Update(appointment, userId);
+
+                DeleteAttachmentList(appointment.Id);
+                AddAttachmentList(appointment.AttachmentList, appointment.Id);
+
+                DeleteToothList(appointment.Id);
+                AddToothList(appointment.ToothList, appointment.Id);
+
+                DeleteAppointmentAdditionList(appointment.Id);
+                AddAppointmentAdditionList(appointment.AppointmentAdditionList, appointment.Id);
+
                 UoW.SaveChanges();
             }
             catch (Exception e)
@@ -78,22 +104,14 @@ namespace AppointmentModule
             }
         }
 
-        public void Update(AppointmentDTO appointment, int userId)
-        {
-            try
-            {
-                appointmentRepository.Update(appointment, userId);
-                UoW.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
         public List<AppointmentDTO> Delete(AppointmentDTO appointment, GridSettings gridSettings)
         {
             try
             {
+                DeleteAttachmentList(appointment.Id);
+                DeleteToothList(appointment.Id);
+                DeleteAppointmentAdditionList(appointment.Id);
+
                 appointmentRepository.Delete(appointment);
                 UoW.SaveChanges();
             }
@@ -151,6 +169,34 @@ namespace AppointmentModule
             {
                 throw e;
             }
+        }
+
+        private void AddAttachmentList(List<AttachmentDTO> attachmentList, int appointmentId)
+        {
+            appointmentRepository.AddAttachmentList(attachmentList, appointmentId);
+        }
+        private void AddToothList(List<AppointmentToothDTO> toothList, int appointmentId)
+        {
+            appointmentRepository.AddToothList(toothList, appointmentId);
+        }
+        private void AddAppointmentAdditionList(List<AppointmentAdditionDTO> appointmentAdditionList, int appointmentId)
+        {
+            appointmentRepository.AddAppointmentAdditionList(appointmentAdditionList, appointmentId);
+        }
+
+        private void DeleteAttachmentList(int appointmentId)
+        {
+            appointmentRepository.DeleteAttachmentList(appointmentId);
+        }
+
+        private void DeleteToothList(int appointmentId)
+        {
+            appointmentRepository.DeleteToothList(appointmentId);
+        }
+
+        private void DeleteAppointmentAdditionList(int appointmentId)
+        {
+            appointmentRepository.DeleteAppointmentAdditionList(appointmentId);
         }
     }
 }

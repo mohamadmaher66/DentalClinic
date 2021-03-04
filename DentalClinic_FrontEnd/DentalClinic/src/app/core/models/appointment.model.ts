@@ -17,7 +17,7 @@ export class Appointment {
     public totalPrice: number = 0;
     public discountPercentage: number = 0;
     public paidAmount: number = 0;
-    public state: AppointmentStateEnum;
+    public state: AppointmentStateEnum = AppointmentStateEnum.Pending;
     public notes: string;
     public attachmentList = new Array<Attachment>();
     public toothList = new Array<AppointmentTooth>();

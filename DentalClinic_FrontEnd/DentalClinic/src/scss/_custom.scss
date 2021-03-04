@@ -35,7 +35,7 @@ button.d-lg-block.d-none.navbar-toggler{
 mat-spinner.mat-spinner.mat-progress-spinner.mat-primary.mat-progress-spinner-indeterminate-animation{
     top: 50%;
     left: 40%;
-    z-index: 9999;
+    z-index: 99999;
     position: absolute;
 }
 
@@ -109,4 +109,8 @@ i.fa{
       }
       .remove-image:active {
        background: #E54E4E;
+      }
+
+      .box-footer button.btn.btn-secondary{
+        margin-right: 10px;
       }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { RoleEnum } from '../../shared/enum/role.enum';
 import { HttpService } from '../../shared/service/http-service';
 import { SessionService } from '../../shared/service/session.service';
@@ -15,14 +15,16 @@ export class DefaultLayoutComponent {
   inProgress: boolean = false;
 
   constructor(private httpService: HttpService,
-    public sessionService: SessionService) {
+    public sessionService: SessionService,
+    private cdref: ChangeDetectorRef) {
     this.setNavItems();
 
     setTimeout(() => {
       this.httpService.inProgressEventEmitter.subscribe(
-        res => this.inProgress = res
+        res => this.inProgress = res,
+                cdref.detectChanges()
       )
-    });
+    , 2000});
 
   }
 

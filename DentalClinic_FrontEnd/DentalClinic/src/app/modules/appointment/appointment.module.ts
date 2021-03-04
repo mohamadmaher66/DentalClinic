@@ -16,8 +16,8 @@ import { PatientModule } from '../patient/patient.module';
   imports: [
     CommonModule,
     SharedModule,
-    PatientModule,
-    AppointmentRoutingModule
+    AppointmentRoutingModule,
+    PatientModule
   ]
   
 })

@@ -2,9 +2,21 @@
     <h3>الكشوفات</h3>
     <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">اضافة جديد</button>
     <br>
-    <mat-form-field class="col-md-10">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث" style="font-size: 15px;">
-    </mat-form-field>
+    <div class="row">
+        <mat-form-field class="col-md-6">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث" style="font-size: 15px;">
+        </mat-form-field>
+        <div class="col-md-4 form-group">
+            <label for="date">التاريخ <i style="color: red;">*</i></label>
+            <mat-form-field appearance="legacy">
+            <mat-label>اختر تاريخ</mat-label>
+            <input matInput [matDatepicker]="picker" style="height: auto;" name="date" class="form-control"
+            id="date" placeholder="التاريخ" (dateChange)="applyDateFilter($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
     <div class="example-container">
         <table mat-table [dataSource]="appointmentList" style="width: 100%;">
             <ng-container matColumnDef="categoryName">
@@ -14,12 +26,12 @@
 
             <ng-container matColumnDef="patientName">
                 <th mat-header-cell *matHeaderCellDef>اسم المريض</th>
-                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.patient.name}} </td>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.patient.fullName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="userName">
                 <th mat-header-cell *matHeaderCellDef>الدكتور</th>
-                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.user.name}} </td>
+                <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.user.fullName}} </td>
             </ng-container>
             
             <ng-container matColumnDef="clinicName">
@@ -28,7 +40,7 @@
             </ng-container>
 
             <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef>التاريخ</th>
+                <th mat-header-cell *matHeaderCellDef> التاريخ </th>
                 <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.date | date: 'dd/MM/yyyy'}} </td>
             </ng-container>
 
@@ -45,7 +57,7 @@
                 <th mat-header-cell *matHeaderCellDef> الخيارات </th>
                 <td mat-cell *matCellDef="let appointment" style="width: 15%; ">
                     <a (click)="editRecord(appointment.id)"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a>
-                    <a (click)="deleteRecord(appointment.id, appointment.name)"><i class="fa fa-trash fa-lg"
+                    <a (click)="deleteRecord(appointment.id, appointment.patient.fullName + ' - ' + appointment.category.name)"><i class="fa fa-trash fa-lg"
                             aria-hidden="true"></i></a>
                 </td>
             </ng-container>

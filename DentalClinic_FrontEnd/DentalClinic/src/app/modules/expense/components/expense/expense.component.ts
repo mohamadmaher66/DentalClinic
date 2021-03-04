@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Expense } from '../../../../core/models/expense.model';
 import { ExpenseService } from '../../../../core/servcies/expense.service';
 import { BaseComponent } from '../../../../shared/components/base-component/base-component';
@@ -46,6 +47,14 @@ export class ExpenseComponent extends BaseComponent {
       super(cdref, route, title);
   }
 
+  ngOnInit(){
+    this.searchSub.pipe(debounceTime(300), distinctUntilChanged())
+    .subscribe((filterValue: string) => {
+      this.searchText = filterValue.trim().toLowerCase();
+      this.getAllExpenses();
+    });
+  }
+  
   ngAfterViewInit() {
     this.getAllExpenses();
   }
@@ -142,8 +151,7 @@ export class ExpenseComponent extends BaseComponent {
   }
 
   applyFilter(filterValue: string) {
-    this.searchText = filterValue.trim().toLowerCase();
-    this.getAllExpenses();
+    this.searchSub.next(filterValue);
   }
 
   getServerData(event: any) {

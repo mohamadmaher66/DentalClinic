@@ -5,7 +5,7 @@ import { LoginComponent } from './modules/user/components/login/login.component'
 import { P404Component } from './views/error/404.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '404', component: P404Component, data: { title: 'Page 404' } },
   { path: 'login', component: LoginComponent, data: { title: 'Login Page' } },
   { path: '', component: DefaultLayoutComponent, data: { title: 'Home' },

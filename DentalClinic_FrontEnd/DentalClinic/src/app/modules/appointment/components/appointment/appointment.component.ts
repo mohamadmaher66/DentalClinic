@@ -1,9 +1,12 @@
+import { formatDate } from '@angular/common';
 import { ChangeDetectorRef, Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Appointment } from '../../../../core/models/appointment.model';
 import { AppointmentService } from '../../../../core/servcies/appointment.service';
 import { BaseComponent } from '../../../../shared/components/base-component/base-component';
@@ -44,6 +47,14 @@ export class AppointmentComponent extends BaseComponent {
       super(cdref, route, title);
   }
 
+  ngOnInit(){
+    this.searchSub.pipe(debounceTime(300), distinctUntilChanged())
+    .subscribe((filterValue: string) => {
+      this.searchText = filterValue.trim().toLowerCase();
+      this.getAllAppointments();
+    });
+  }
+
   ngAfterViewInit() {
     this.getAllAppointments();
   }
@@ -60,7 +71,8 @@ export class AppointmentComponent extends BaseComponent {
       this.requestedAppointmentInfo.gridSettings.searchText = this.searchText;
     }
 
-    this.appointmentService.getAllAppointments(this.requestedAppointmentInfo).subscribe(
+    this.appointmentService.getAllAppointments(this.requestedAppointmentInfo)
+    .subscribe(
       res => this.getAllAppointmentsOnSuccess(res),
       err => this.getAllAppointmentsOnError(err)
     );
@@ -84,7 +96,7 @@ export class AppointmentComponent extends BaseComponent {
 
 
   editRecord(id: number) {
-    
+    this.router.navigate(['appointment/appointmentdetails', id]);
   }
 
   addNewRecord() {
@@ -124,7 +136,10 @@ export class AppointmentComponent extends BaseComponent {
   }
 
   applyFilter(filterValue: string) {
-    this.searchText = filterValue.trim().toLowerCase();
+    this.searchSub.next(filterValue)
+  }
+  applyDateFilter(event: any){
+    this.searchText = formatDate(event.value,"dd/MM/yyy","en-US");
     this.getAllAppointments();
   }
 

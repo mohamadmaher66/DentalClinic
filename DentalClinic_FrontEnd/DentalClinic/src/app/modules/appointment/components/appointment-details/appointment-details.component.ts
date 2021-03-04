@@ -18,7 +18,9 @@ import { AppointmentTooth } from '../../../../core/models/appointment-tooth.mode
 import { ConfigService } from '../../../../shared/service/config.service';
 import { Attachment } from '../../../../core/models/attachment.model';
 import { PatientDetailsComponent } from '../../../patient/components/patient-details/patient-details.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertType } from '../../../../shared/enum/alert-type.enum';
+import { AppointmentStateEnum } from '../../../../shared/enum/appointment-state.enum';
 
 
 @Component({
@@ -49,25 +51,30 @@ export class AppointmentDetailsComponent implements OnInit {
   //Enums
   genderEnum = GenderEnum;
   toothPositionEnum = ToothPositionEnum;
+  appointmentStateEnum = AppointmentStateEnum;
 
   constructor(private AppointmentService: AppointmentService,
     private alertService: AlertService,
     private configService: ConfigService,
     private dialog: MatDialog,
     private router: Router,
+    private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit() {
-    this.appointment.id = this.data.selectedDetails;
     this.uploadURL = this.configService.configuration.apiUrl + this.AppointmentService.url + "UploadImages";
-    if (this.appointment.id > 0) {
-      this.getAppointment();
-    }
-    else {
-      this.addNewTooth();
-      this.getDetailsLists();
-    }
+    this.route.params.subscribe(params => {
+      let id: string = params['id'];
+      if (id != undefined) {
+        this.appointment.id = parseInt(id);
+        this.getAppointment();
+      }
+      else{
+        this.addNewTooth();
+        this.getDetailsLists();
+      }
+    });
   }
 
   private getAppointment() {
@@ -93,6 +100,10 @@ export class AppointmentDetailsComponent implements OnInit {
 
   public submitAppointment(form: NgForm) {
     if (form.invalid) {
+      return;
+    }
+    if(this.appointment.totalPrice - this.appointment.discountPercentage - this.appointment.paidAmount < 0){
+      this.alertService.viewAlerts([{title:"خطأ", type: AlertType.Error, message: "لا يمكن ان يكون الباقي اقل من الصفر" }]);
       return;
     }
     this.requestAppointmentData = new RequestedData<Appointment>();
@@ -123,6 +134,7 @@ export class AppointmentDetailsComponent implements OnInit {
 
   private AppointmentActionOnSuccess(response: any) {
     this.alertService.viewAlerts(response.alerts);
+    this.router.navigate(['appointment']);
   }
 
   private AppointmentActionOnError(response: any) {
@@ -249,10 +261,16 @@ export class AppointmentDetailsComponent implements OnInit {
   private setDetailsLists(response: RequestedData<any>) {
     if (listHasValue(response.detailsList)) { }
     response.detailsList.forEach(list => {
+
       switch (list.detailsListId) {
         case DetailsListEnum.Clinic:
           this.clinicList = list.list;
           this.filteredClinicList = this.clinicList;
+
+          if(hasValue(this.appointment.clinic.id)){
+            let selectedClinicId = this.appointment.clinic.id;
+            this.appointment.clinic = this.clinicList.find(p => p.id == selectedClinicId);
+          }
           break;
 
         case DetailsListEnum.Patient:
@@ -268,11 +286,21 @@ export class AppointmentDetailsComponent implements OnInit {
         case DetailsListEnum.User:
           this.userList = list.list;
           this.filteredUserList = this.userList;
+
+          if(hasValue(this.appointment.user.id)){
+            let selectedUserId = this.appointment.user.id;
+            this.appointment.user = this.userList.find(p => p.id == selectedUserId);
+          }
           break;
 
         case DetailsListEnum.AppointmentCategory:
           this.categoryList = list.list;
           this.filteredCategoryList = this.categoryList;
+
+          if(hasValue(this.appointment.category.id)){
+            let selectedCategoryId = this.appointment.category.id;
+            this.appointment.category = this.categoryList.find(p => p.id == selectedCategoryId);
+          }
           break;
 
         case DetailsListEnum.AppointmentAddition:

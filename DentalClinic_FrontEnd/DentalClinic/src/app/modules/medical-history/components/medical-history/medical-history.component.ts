@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MedicalHistory } from '../../../../core/models/medical-history.model';
 import { MedicalHistoryService } from '../../../../core/servcies/medical-history.service';
 import { BaseComponent } from '../../../../shared/components/base-component/base-component';
@@ -44,6 +45,14 @@ export class MedicalHistoryComponent extends BaseComponent {
       super(cdref, route, title);
   }
 
+  ngOnInit(){
+    this.searchSub.pipe(debounceTime(300), distinctUntilChanged())
+    .subscribe((filterValue: string) => {
+      this.searchText = filterValue.trim().toLowerCase();
+      this.getAllMedicalHistorys();
+    });
+  }
+  
   ngAfterViewInit() {
     this.getAllMedicalHistorys();
   }
@@ -140,8 +149,7 @@ export class MedicalHistoryComponent extends BaseComponent {
   }
 
   applyFilter(filterValue: string) {
-    this.searchText = filterValue.trim().toLowerCase();
-    this.getAllMedicalHistorys();
+    this.searchSub.next(filterValue);
   }
 
   getServerData(event: any) {

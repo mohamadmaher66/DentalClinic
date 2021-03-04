@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Request;
+using System.Globalization;
 
 namespace AppointmentModule
 {
@@ -25,17 +26,23 @@ namespace AppointmentModule
 
         public IEnumerable<AppointmentDTO> GetAll(GridSettings gridSettings)
         {
-            //IEnumerable<Appointment> appointmentList = dbset.Where(x => string.IsNullOrEmpty(gridSettings.SearchText) ? true :
-            //                        (x.FullName.Contains(gridSettings.SearchText)
-            //                        || x.Address.Contains(gridSettings.SearchText)
-            //                        || x.Phone.Contains(gridSettings.SearchText)
-            //                        ));
+            DateTime.TryParseExact(gridSettings.SearchText, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date);
 
-            //gridSettings.RowsCount = appointmentList.Count();
-            //return _mapper.Map<List<AppointmentDTO>>(appointmentList.OrderByDescending(m => m.CreationDate)
-            //                         .Skip(gridSettings.PageSize * gridSettings.PageIndex)
-            //                         .Take(gridSettings.PageSize));
-            return null;
+            IEnumerable<Appointment> appointmentList = dbset.Include(a => a.Category)
+                                                             .Include(a => a.Patient)
+                                                             .Include(a => a.Clinic)
+                                                             .Include(a => a.User)
+                                                             .Where(a => string.IsNullOrEmpty(gridSettings.SearchText) ? true :
+                                                                    (a.Category.Name.Contains(gridSettings.SearchText)
+                                                                    || a.Clinic.Name.Contains(gridSettings.SearchText)
+                                                                    || a.Patient.FullName.Contains(gridSettings.SearchText)
+                                                                    || a.User.FullName.Contains(gridSettings.SearchText)
+                                                                    || (date > DateTime.MinValue && a.Date.Date >= date )));
+
+            gridSettings.RowsCount = appointmentList.Count();
+            return _mapper.Map<List<AppointmentDTO>>(appointmentList.OrderByDescending(m => m.CreationDate)
+                                     .Skip(gridSettings.PageSize * gridSettings.PageIndex)
+                                     .Take(gridSettings.PageSize));
         }
 
         public IEnumerable<AppointmentDTO> GetAllLite()
@@ -45,19 +52,32 @@ namespace AppointmentModule
 
         public AppointmentDTO GetById(int appointmentId)
         {
-            //return _mapper.Map<AppointmentDTO>(entities.Set<Appointment>()
-            //    .Include(PMH => PMH.AppointmentMedicalHistoryList)
-            //    .ThenInclude(MH => MH.MedicalHistory)
-            //    .AsNoTracking().FirstOrDefault(c => c.Id == appointmentId));
-            return null;
+            return _mapper.Map<AppointmentDTO>(entities.Set<Appointment>()
+                .Include(PMH => PMH.AppointmentAppointmentAdditionList)
+                .ThenInclude(MH => MH.AppointmentAddition)
+                .Include(a => a.AppointmentToothList)
+                .Include(a => a.AttachmentList)
+                .Include(a => a.Category)
+                .Include(a => a.Clinic)
+                .Include(a => a.Patient)
+                .Include(a => a.User)
+                .AsNoTracking().FirstOrDefault(c => c.Id == appointmentId));
         }
 
         public int Add(AppointmentDTO appointment, int userId)
         {
             Appointment model = _mapper.Map<Appointment>(appointment);
+            model.CategoryId = appointment.Category.Id;
+            model.ClinicId = appointment.Clinic.Id;
+            model.PatientId = appointment.Patient.Id;
+            model.UserId = appointment.User.Id;
             model.CreationDate = DateTime.Now;
             model.CreatedBy = userId;
+            model.AttachmentList = new List<Attachment>();
+            model.AppointmentToothList = new List<AppointmentTooth>();
 
+            entities.Attach(model);
+            entities.Entry(model).State = EntityState.Added;
             dbset.Add(model);
             entities.SaveChanges();
             return model.Id;
@@ -66,9 +86,14 @@ namespace AppointmentModule
         public void Update(AppointmentDTO appointment, int userId)
         {
             Appointment model = _mapper.Map<Appointment>(appointment);
+            model.CategoryId = appointment.Category.Id;
+            model.ClinicId = appointment.Clinic.Id;
+            model.PatientId = appointment.Patient.Id;
+            model.UserId = appointment.User.Id;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = userId;
 
+            entities.Attach(model);
             entities.Entry(model).State = EntityState.Modified;
             entities.Entry(model).Property(m => m.CreatedBy).IsModified = false;
             entities.Entry(model).Property(m => m.CreationDate).IsModified = false;
@@ -77,6 +102,82 @@ namespace AppointmentModule
         public void Delete(AppointmentDTO appointment)
         {
             dbset.Remove(_mapper.Map<Appointment>(appointment));
+        }
+
+        internal void AddAppointmentAdditionList(List<AppointmentAdditionDTO> appointmentAdditionList, int appointmentId)
+        {
+            DbSet<AppointmentAppointmentAddition> appointmentAppointmentAdditionDBSet = entities.Set<AppointmentAppointmentAddition>();
+
+            foreach (var appointmentAddition in appointmentAdditionList)
+            {
+                appointmentAppointmentAdditionDBSet.Add(new AppointmentAppointmentAddition()
+                {
+                    AppointmentId = appointmentId,
+                    AppointmentAdditionId = appointmentAddition.Id
+                });
+            }
+        }
+
+        internal void AddToothList(List<AppointmentToothDTO> toothList, int appointmentId)
+        {
+            DbSet<AppointmentTooth> appointmentToothDBSet = entities.Set<AppointmentTooth>();
+
+            foreach (var appointmentTooth in toothList)
+            {
+                appointmentToothDBSet.Add(new AppointmentTooth()
+                {
+                    AppointmentId = appointmentId,
+                    ToothNumber = appointmentTooth.ToothNumber,
+                    ToothPosition = appointmentTooth.ToothPosition,
+                });
+            }
+        }
+
+        internal void AddAttachmentList(List<AttachmentDTO> attachmentList, int appointmentId)
+        {
+            DbSet<Attachment> attachmentDBSet = entities.Set<Attachment>();
+
+            foreach (var appointmentAddition in attachmentList)
+            {
+                attachmentDBSet.Add(new Attachment()
+                {
+                    AppointmentId = appointmentId,
+                    Url = appointmentAddition.Url,
+                });
+            }
+        }
+
+        internal void DeleteAppointmentAdditionList(int appointmentId)
+        {
+            DbSet<AppointmentAppointmentAddition> appointmentAdditionDBSet = entities.Set<AppointmentAppointmentAddition>();
+
+            IEnumerable<AppointmentAppointmentAddition> appointmentAppointmentAdditionList = appointmentAdditionDBSet.Where(p => p.AppointmentId == appointmentId);
+            if (appointmentAppointmentAdditionList != null && appointmentAppointmentAdditionList.Count() > 0)
+            {
+                appointmentAdditionDBSet.RemoveRange(appointmentAppointmentAdditionList);
+            }
+        }
+
+        internal void DeleteToothList(int appointmentId)
+        {
+            DbSet<AppointmentTooth> appointmentToothDBSet = entities.Set<AppointmentTooth>();
+
+            IEnumerable<AppointmentTooth> appointmentToothList = appointmentToothDBSet.Where(p => p.AppointmentId == appointmentId);
+            if (appointmentToothList != null && appointmentToothList.Count() > 0)
+            {
+                appointmentToothDBSet.RemoveRange(appointmentToothList);
+            }
+        }
+
+        internal void DeleteAttachmentList(int appointmentId)
+        {
+            DbSet<Attachment> attachmentDBSet = entities.Set<Attachment>();
+
+            IEnumerable<Attachment> attachmentList = attachmentDBSet.Where(p => p.AppointmentId == appointmentId);
+            if (attachmentList != null && attachmentList.Count() > 0)
+            {
+                attachmentDBSet.RemoveRange(attachmentList);
+            }
         }
     }
 }
