@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <h3>الكشوفات</h3>
-    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">اضافة جديد</button>
+    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">اضافة كشف جديد</button>
     <br>
     <div class="row">
         <mat-form-field class="col-md-6">
@@ -50,6 +50,7 @@
                     <label *ngIf="appointment.state == appointmentStateEnum.Finished">انتهى</label>
                     <label *ngIf="appointment.state == appointmentStateEnum.Pending">قيد الانتظار</label>
                     <label *ngIf="appointment.state == appointmentStateEnum.Current">جارى</label>
+                    <label *ngIf="appointment.state == appointmentStateEnum.Cancelled">ملغي</label>
                 </td>
             </ng-container>
 

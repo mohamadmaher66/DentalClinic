@@ -8,6 +8,7 @@ using System.Linq;
 using System;
 using Request;
 using System.Globalization;
+using Enums;
 
 namespace AppointmentModule
 {
@@ -43,6 +44,34 @@ namespace AppointmentModule
             return _mapper.Map<List<AppointmentDTO>>(appointmentList.OrderByDescending(m => m.CreationDate)
                                      .Skip(gridSettings.PageSize * gridSettings.PageIndex)
                                      .Take(gridSettings.PageSize));
+        }
+
+        public IEnumerable<AppointmentDTO> GetAllDashboard(AppointmentDTO filterEntity)
+        {
+            IEnumerable<Appointment> appointmentList = dbset.Include(a => a.Category)
+                                                             .Include(a => a.Patient)
+                                                             .Include(a => a.Clinic)
+                                                             .Include(a => a.User)
+                                                             .Include(a => a.AppointmentToothList)
+                                                             .Where(a => (a.Clinic.Id == filterEntity.Clinic.Id || filterEntity.Clinic.Id == 0)
+                                                                      && (a.User.Id == filterEntity.User.Id || filterEntity.User.Id == 0)
+                                                                      && a.Date.Date == DateTime.Now.Date
+                                                                      && (a.State == AppointmentStateEnum.Current
+                                                                         || a.State == AppointmentStateEnum.Pending));
+
+            return _mapper.Map<List<AppointmentDTO>>(appointmentList.OrderByDescending(a => a.State).ThenBy(a => a.CreationDate));
+        }
+
+        public void SaveState(AppointmentDTO appointment, int userId)
+        {
+            Appointment model = _mapper.Map<Appointment>(appointment);
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = userId;
+
+            entities.Attach(model);
+            entities.Entry(model).State = EntityState.Modified;
+            entities.Entry(model).Property(m => m.CreatedBy).IsModified = false;
+            entities.Entry(model).Property(m => m.CreationDate).IsModified = false;
         }
 
         public IEnumerable<AppointmentDTO> GetAllLite()

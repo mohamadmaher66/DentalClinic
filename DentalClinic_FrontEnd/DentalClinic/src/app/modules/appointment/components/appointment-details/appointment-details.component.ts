@@ -21,7 +21,7 @@ import { PatientDetailsComponent } from '../../../patient/components/patient-det
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertType } from '../../../../shared/enum/alert-type.enum';
 import { AppointmentStateEnum } from '../../../../shared/enum/appointment-state.enum';
-
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-appointment-details',
@@ -59,6 +59,7 @@ export class AppointmentDetailsComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
+    private location: Location,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -134,7 +135,7 @@ export class AppointmentDetailsComponent implements OnInit {
 
   private AppointmentActionOnSuccess(response: any) {
     this.alertService.viewAlerts(response.alerts);
-    this.router.navigate(['appointment']);
+    this.location.back();
   }
 
   private AppointmentActionOnError(response: any) {
@@ -311,7 +312,7 @@ export class AppointmentDetailsComponent implements OnInit {
   }
 
   public cancel(){
-    this.router.navigate(['appointment']);
+    this.location.back();
   }
 
 }

@@ -79,8 +79,7 @@
                       <div class="col-md-12">
                         <h5>التاريخ الطبي :</h5>
                       </div>
-                      <ul
-                        *ngIf="appointment.patient.medicalHistoryList != undefined && appointment.patient.medicalHistoryList.length > 0; else NoMedicalHistory"
+                      <ul *ngIf="appointment.patient.medicalHistoryList != undefined && appointment.patient.medicalHistoryList.length > 0; else NoMedicalHistory"
                         class="list-inline">
                         <li *ngFor="let PMH of appointment.patient.medicalHistoryList" class="list-inline-item"
                           style="margin-right: 25px;">
@@ -186,7 +185,8 @@
                           <mat-option [value]="appointmentStateEnum.Pending">قيد الانتظار </mat-option>
                           <mat-option [value]="appointmentStateEnum.Current">جارى</mat-option>
                           <mat-option [value]="appointmentStateEnum.Finished">انتهى</mat-option>
-                        </mat-select>
+                          <mat-option [value]="appointmentStateEnum.Cancelled">ملغي</mat-option>
+                  </mat-select>
                       </mat-form-field><br>
                       <small *ngIf="category.invalid && (category.touched || category.dirty)" style="color: red">يجب
                         اختيار نوع

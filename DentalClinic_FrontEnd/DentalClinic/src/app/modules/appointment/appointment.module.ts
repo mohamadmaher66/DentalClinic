@@ -6,12 +6,14 @@ import { AppointmentDetailsComponent } from './components/appointment-details/ap
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { FileUploaderComponent } from '../../shared/components/file-uploader/file-uploader.component';
 import { PatientModule } from '../patient/patient.module';
+import { AppointmentDashboardComponent } from './components/appointment-dashboard/appointment-dashboard.component';
 
 @NgModule({
   declarations: [
     AppointmentComponent,
     AppointmentDetailsComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    AppointmentDashboardComponent
   ],
   imports: [
     CommonModule,

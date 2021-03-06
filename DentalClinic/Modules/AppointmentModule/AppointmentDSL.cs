@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using Request;
 using Enums;
-using MedicalHistoryModule;
 using ClinicModule;
 using PatientModule;
 using UserModule;
@@ -40,6 +39,15 @@ namespace AppointmentModule
                 throw e;
             }
         }
+        public List<AppointmentDTO> GetAllDashboard(AppointmentDTO filterEntity)
+        {
+            try
+            {
+                return appointmentRepository.GetAllDashboard(filterEntity).ToList();
+            }
+            catch (Exception e) {throw e;}
+        }
+        
 
         public AppointmentDTO GetById(int appointmentId)
         {
@@ -104,6 +112,16 @@ namespace AppointmentModule
             }
         }
 
+        public void SaveState(AppointmentDTO appointment, int userId)
+        {
+            try
+            {
+                appointmentRepository.SaveState(appointment, userId);
+                UoW.SaveChanges();
+            }
+            catch (Exception e) { throw e; }
+        }
+
         public List<AppointmentDTO> Delete(AppointmentDTO appointment, GridSettings gridSettings)
         {
             try
@@ -121,6 +139,37 @@ namespace AppointmentModule
             }
             return GetAll(gridSettings);
         }
+
+        
+
+        private void AddAttachmentList(List<AttachmentDTO> attachmentList, int appointmentId)
+        {
+            appointmentRepository.AddAttachmentList(attachmentList, appointmentId);
+        }
+        private void AddToothList(List<AppointmentToothDTO> toothList, int appointmentId)
+        {
+            appointmentRepository.AddToothList(toothList, appointmentId);
+        }
+        private void AddAppointmentAdditionList(List<AppointmentAdditionDTO> appointmentAdditionList, int appointmentId)
+        {
+            appointmentRepository.AddAppointmentAdditionList(appointmentAdditionList, appointmentId);
+        }
+
+        private void DeleteAttachmentList(int appointmentId)
+        {
+            appointmentRepository.DeleteAttachmentList(appointmentId);
+        }
+
+        private void DeleteToothList(int appointmentId)
+        {
+            appointmentRepository.DeleteToothList(appointmentId);
+        }
+
+        private void DeleteAppointmentAdditionList(int appointmentId)
+        {
+            appointmentRepository.DeleteAppointmentAdditionList(appointmentId);
+        }
+
 
         public List<DetailsList> GetDetailsLists()
         {
@@ -170,33 +219,31 @@ namespace AppointmentModule
                 throw e;
             }
         }
+        public List<DetailsList> GetDashboardDetailsLists()
+        {
+            try
+            {
+                List<DetailsList> detailsList = new List<DetailsList>();
 
-        private void AddAttachmentList(List<AttachmentDTO> attachmentList, int appointmentId)
-        {
-            appointmentRepository.AddAttachmentList(attachmentList, appointmentId);
-        }
-        private void AddToothList(List<AppointmentToothDTO> toothList, int appointmentId)
-        {
-            appointmentRepository.AddToothList(toothList, appointmentId);
-        }
-        private void AddAppointmentAdditionList(List<AppointmentAdditionDTO> appointmentAdditionList, int appointmentId)
-        {
-            appointmentRepository.AddAppointmentAdditionList(appointmentAdditionList, appointmentId);
-        }
+                List<ClinicDTO> clinicList = new ClinicDSL(mapper).GetAllLite();
+                detailsList.Add(new DetailsList()
+                {
+                    DetailsListId = (int)DetailsListEnum.Clinic,
+                    List = clinicList
+                });
 
-        private void DeleteAttachmentList(int appointmentId)
-        {
-            appointmentRepository.DeleteAttachmentList(appointmentId);
-        }
-
-        private void DeleteToothList(int appointmentId)
-        {
-            appointmentRepository.DeleteToothList(appointmentId);
-        }
-
-        private void DeleteAppointmentAdditionList(int appointmentId)
-        {
-            appointmentRepository.DeleteAppointmentAdditionList(appointmentId);
+                List<UserDTO> userList = new UserDSL(mapper).GetAllDoctorsLite();
+                detailsList.Add(new DetailsList()
+                {
+                    DetailsListId = (int)DetailsListEnum.User,
+                    List = userList
+                });
+                return detailsList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

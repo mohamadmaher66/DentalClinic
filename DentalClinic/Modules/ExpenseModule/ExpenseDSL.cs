@@ -6,8 +6,8 @@ using DTOs;
 using System.Collections.Generic;
 using AutoMapper;
 using Request;
-using ClinicModule;
 using Enums;
+using ClinicModule;
 
 namespace ExpenseModule
 {

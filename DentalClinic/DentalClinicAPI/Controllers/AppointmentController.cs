@@ -32,6 +32,15 @@ namespace DentalAppointmentAPI.Controllers
         }
 
         [HttpPost]
+        [Route("GetAllAppointmentsDashboard")]
+        public IActionResult GetAllAppointmentsDashboard([FromBody] RequestedData<AppointmentDTO> requestedData)
+        {
+            requestedData.EntityList = appointmentDSL.GetAllDashboard(requestedData.Entity);
+            requestedData.DetailsList = appointmentDSL.GetDashboardDetailsLists();
+            return Ok(requestedData);
+        }
+
+        [HttpPost]
         [Route("GetAppointment")]
         public IActionResult GetAppointment([FromBody] RequestedData<AppointmentDTO> requestedData)
         {
@@ -67,6 +76,15 @@ namespace DentalAppointmentAPI.Controllers
             return Ok(requestedData);
         }
 
+        [HttpPost]
+        [Route("SaveState")]
+        public IActionResult SaveState([FromBody] RequestedData<AppointmentDTO> requestedData)
+        {
+            appointmentDSL.SaveState(requestedData.Entity, requestedData.UserId);
+            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حفظ الكشف بنجاح" });
+            return Ok(requestedData);
+        }
+        
         [HttpPost]
         [Route("GetAppointmentDetailsLists")]
         public IActionResult GetAppointmentDetailsLists([FromBody] RequestedData<AppointmentDTO> requestedData)

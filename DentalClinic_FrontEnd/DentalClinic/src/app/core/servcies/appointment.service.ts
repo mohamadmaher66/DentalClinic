@@ -14,6 +14,10 @@ export class AppointmentService {
     return this.httpService.httpPost(object, this.url + 'GetAllAppointments');
   }
 
+  public getAllDashboard(object: any) {
+    return this.httpService.httpPost(object, this.url + 'GetAllAppointmentsDashboard');
+  }
+
   public getAllAppointmentLite(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAllAppointmentLite');
   }
@@ -35,4 +39,9 @@ export class AppointmentService {
   public getAppointmentDetailsLists(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetAppointmentDetailsLists');
   }
+  public saveState(object: any) {
+    return this.httpService.httpPost(object, this.url + 'SaveState');
+  }
+
+  
 }
