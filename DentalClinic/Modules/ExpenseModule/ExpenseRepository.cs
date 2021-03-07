@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Request;
+using Enums;
 
 namespace ExpenseModule
 {
@@ -27,23 +28,23 @@ namespace ExpenseModule
         {
             DbSet<Clinic> clinics = entities.Set<Clinic>();
             double.TryParse(gridSettings.SearchText, out double cost);
-            
+
             IEnumerable<ExpenseDTO> expenseList = from expense in dbset
-                                               join clinic in clinics on expense.ClinicId equals clinic.Id
-                                               where string.IsNullOrEmpty(gridSettings.SearchText) ? true :
-                                                (expense.Name.Contains(gridSettings.SearchText)
-                                                || expense.Cost == cost)
-                                               select new ExpenseDTO()
-                                               {
-                                                   Id = expense.Id,
-                                                   Cost = expense.Cost,
-                                                   Name = expense.Name,
-                                                   Description = expense.Description,
-                                                   ActionDate = expense.ActionDate,
-                                                   Type = expense.Type,
-                                                   ClinicId = expense.ClinicId,
-                                                   ClinicName = clinic.Name
-                                               };
+                                                  join clinic in clinics on expense.ClinicId equals clinic.Id
+                                                  where string.IsNullOrEmpty(gridSettings.SearchText) ? true :
+                                                   (expense.Name.Contains(gridSettings.SearchText)
+                                                   || expense.Cost == cost)
+                                                  select new ExpenseDTO()
+                                                  {
+                                                      Id = expense.Id,
+                                                      Cost = expense.Cost,
+                                                      Name = expense.Name,
+                                                      Description = expense.Description,
+                                                      ActionDate = expense.ActionDate,
+                                                      Type = expense.Type,
+                                                      ClinicId = expense.ClinicId,
+                                                      ClinicName = clinic.Name
+                                                  };
 
 
             gridSettings.RowsCount = expenseList.Count();
@@ -76,9 +77,38 @@ namespace ExpenseModule
             entities.Entry(model).Property(m => m.CreatedBy).IsModified = false;
             entities.Entry(model).Property(m => m.CreationDate).IsModified = false;
         }
+
         public void Delete(ExpenseDTO expense)
         {
             dbset.Remove(_mapper.Map<Expense>(expense));
+        }
+
+        internal IEnumerable<ExpenseDTO> GetExpenseReport(DateTime dateFrom, DateTime dateTo, int clinicId, int userId, ExpenseType type)
+        {
+            DbSet<Clinic> clinics = entities.Set<Clinic>();
+            DbSet<User> users = entities.Set<User>();
+
+            return from expense in dbset
+                   join clinic in clinics on expense.ClinicId equals clinic.Id
+                   join user in users on expense.CreatedBy equals user.Id
+                   where (expense.ActionDate >= dateFrom && expense.ActionDate <= dateTo)
+                        && (clinicId == 0 || expense.ClinicId == clinicId)
+                        && (userId == 0 || expense.CreatedBy == userId)
+                        && (type == ExpenseType.None || expense.Type == type)
+                   orderby expense.CreatedBy         
+                   select new ExpenseDTO()
+                   {
+                       Id = expense.Id,
+                       Cost = expense.Cost,
+                       Name = expense.Name,
+                       Description = expense.Description,
+                       ActionDate = expense.ActionDate,
+                       Type = expense.Type,
+                       TypeName = expense.Type == ExpenseType.In ? "داخل للعيادة" : "خارج من العيادة",
+                       ClinicId = expense.ClinicId,
+                       ClinicName = clinic.Name,
+                       UserFullName = user.FullName
+                   };
         }
     }
 }

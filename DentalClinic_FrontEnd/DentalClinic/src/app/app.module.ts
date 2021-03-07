@@ -80,7 +80,7 @@ export function initializerFn(configService: ConfigService) {
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    LoginComponent
+    LoginComponent,
   ],
   providers: [
     IconSetService,

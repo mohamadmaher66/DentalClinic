@@ -26,6 +26,11 @@ export const doctorNavItems: INavData[] = [
     icon: 'cil-medical-cross'
   },
   {
+    name: 'المصاريف',
+    url: '/expense',
+    icon: 'cil-dollar'
+  },
+  {
     name: 'اعداد البيانات الرئيسية',
     url: '/base',
     icon: 'cil-bookmark',
@@ -50,10 +55,17 @@ export const doctorNavItems: INavData[] = [
         name: 'انواع الكشف',
         url: '/appointmentcategory',
         icon: 'cil-layers'
-      },
+      }
+    ]
+  },
+  {
+    name: 'التقارير',
+    url: '/report',
+    icon: 'cil-print',
+    children: [
       {
-        name: 'المصاريف',
-        url: '/expense',
+        name: 'تقرير المصاريف',
+        url: '/report/expensereport',
         icon: 'cil-dollar'
       }
     ]

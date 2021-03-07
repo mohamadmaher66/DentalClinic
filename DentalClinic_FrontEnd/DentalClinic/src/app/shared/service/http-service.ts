@@ -41,7 +41,8 @@ export class HttpService {
     }
 
     public httpDownloadFile(data: any, url: string) {
-        this.baseUrl = environment.apiUrl;
+        this.inProgressEventEmitterChange(true);
+        this.baseUrl = this.configService.configuration.apiUrl;
         url = this.baseUrl + url;
 
         let body = JSON.stringify(data);
@@ -49,7 +50,10 @@ export class HttpService {
             .set('Content-Type', 'application/json; charset=utf-8')
             .set('Accept', 'q=0.8;application/json;q=0.9');
 
-        
+        if (typeof (Storage) !== "undefined" && hasValue(this.sessionService.getToken())) {
+            headers = headers.set('Authorization', this.sessionService.getToken());
+        }
+
         let options = { headers: headers, body: body };
         return this.http.post(url, body, { headers, responseType: 'blob' })
             .pipe(map((response) => this.parseResponse(response)))

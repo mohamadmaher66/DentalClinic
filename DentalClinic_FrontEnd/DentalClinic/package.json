@@ -37,6 +37,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "ng2-charts": "^2.4.2",
+    "ng2-pdfjs-viewer": "^6.0.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-perfect-scrollbar": "^10.1.0",
     "ngx-toastr": "^13.2.0",

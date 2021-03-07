@@ -63,6 +63,11 @@ export const routes: Routes = [
         path: 'appointment',
         loadChildren: () => import('./modules/appointment/appointment.module').then(m => m.AppointmentModule) ,
         data:{ title: 'الكشوفات'}
+      },
+      {
+        path: 'report',
+        loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule),
+        data:{ title: 'التقارير'}
       }
     ]
   }

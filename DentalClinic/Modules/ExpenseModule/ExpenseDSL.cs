@@ -107,5 +107,14 @@ namespace ExpenseModule
                 throw e;
             }
         }
+
+        public List<ExpenseDTO> GetExpenseReport(DateTime dateFrom, DateTime dateTo, int clinicId, int userId, ExpenseType type)
+        {
+            try
+            {
+                return expenseRepository.GetExpenseReport(dateFrom, dateTo, clinicId, userId, type).ToList();
+            }
+            catch (Exception e) { throw e; }
+        }
     }
 }
