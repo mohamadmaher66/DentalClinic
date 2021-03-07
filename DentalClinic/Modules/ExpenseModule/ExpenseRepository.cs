@@ -59,19 +59,22 @@ namespace ExpenseModule
             return _mapper.Map<ExpenseDTO>(entities.Set<Expense>().AsNoTracking().FirstOrDefault(c => c.Id == expenseId));
         }
 
-        public void Add(ExpenseDTO expense, int expenseId)
+        public void Add(ExpenseDTO expense, int userId)
         {
             Expense model = _mapper.Map<Expense>(expense);
             model.CreationDate = DateTime.Now;
-            model.CreatedBy = expenseId;
+            model.CreatedBy = userId;
+            model.Clinic = null;
+
             dbset.Add(model);
         }
 
-        public void Update(ExpenseDTO expense, int expenseId)
+        public void Update(ExpenseDTO expense, int userId)
         {
             Expense model = _mapper.Map<Expense>(expense);
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = expenseId;
+            model.ModifiedBy = userId;
+            model.Clinic = null;
 
             entities.Entry(model).State = EntityState.Modified;
             entities.Entry(model).Property(m => m.CreatedBy).IsModified = false;

@@ -1,6 +1,7 @@
 ﻿using Enums;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Request;
@@ -17,17 +18,20 @@ namespace DentalClinicAPI.Helpers
 
             Logger.Log(exception.Message + "\n" + exception.InnerException);
 
+            Alert alert = new Alert
+            {
+                Type = AlertTypeEnum.Error,
+                Message = exception.Message,
+                Title = "حذث خطأ"
+            };
+
+            if (exception.InnerException is SqlException sqlEx && (sqlEx.Number == 547))
+            {
+                alert.Message = "يجب حذف البيانات المربوطة اولا";
+            }
             RequestedData<object> requestedData = new RequestedData<object>
             {
-                Alerts = new List<Alert>()
-                    {
-                        new Alert
-                        {
-                            Type = AlertTypeEnum.Error,
-                            Message = exception.Message,
-                            Title = "حذث خطأ"
-                        }
-                    }
+                Alerts = new List<Alert>() { alert }
             };
 
             var result = JsonConvert.SerializeObject(requestedData, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });

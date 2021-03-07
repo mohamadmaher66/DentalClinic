@@ -48,11 +48,11 @@ namespace ExpenseModule
             }
         }
 
-        public void Add(ExpenseDTO expense, int expenseId)
+        public void Add(ExpenseDTO expense, int userId)
         {
             try
             {
-                expenseRepository.Add(expense, expenseId);
+                expenseRepository.Add(expense, userId);
                 UoW.SaveChanges();
             }
             catch (Exception e)
@@ -61,11 +61,11 @@ namespace ExpenseModule
             }
         }
 
-        public void Update(ExpenseDTO expense, int expenseId)
+        public void Update(ExpenseDTO expense, int userId)
         {
             try
             {
-                expenseRepository.Update(expense, expenseId);
+                expenseRepository.Update(expense, userId);
                 UoW.SaveChanges();
             }
             catch (Exception e)
