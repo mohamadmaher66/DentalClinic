@@ -34,6 +34,22 @@ namespace DentalClinicAPI.Controllers
             requestedData.DetailsList = reportDSL.GetExpenseDetailsLists();
             return Ok(requestedData);
         }
-        
+
+        [HttpPost]
+        [Route("GetAppointmentReport")]
+        public IActionResult GetAppointmentReport([FromBody] RequestedData<AppointmentFilterDTO> requestedData)
+        {
+            var reportString = reportDSL.GetAppointmentReport(requestedData.Entity);
+            return File(reportString, System.Net.Mime.MediaTypeNames.Application.Octet, "AppointmentReport" + ".pdf");
+        }
+
+        [HttpPost]
+        [Route("GetAppointmentDetailsLists")]
+        public IActionResult GetAppointmentDetailsLists([FromBody] RequestedData<ExpenseFilterDTO> requestedData)
+        {
+            requestedData.DetailsList = reportDSL.GetAppointmentDetailsLists();
+            return Ok(requestedData);
+        }
+
     }
 }

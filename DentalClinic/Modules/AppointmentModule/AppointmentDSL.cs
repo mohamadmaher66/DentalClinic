@@ -112,6 +112,15 @@ namespace AppointmentModule
             }
         }
 
+        public List<AppointmentReportDTO> GetAppointmentReport(DateTime dateFrom, DateTime dateTo, int patientId, int categoryId, int clinicId, int userId, AppointmentStateEnum state)
+        {
+            try
+            {
+                return appointmentRepository.GetAppointmentReport(dateFrom, dateTo, patientId, categoryId, clinicId, userId, state).ToList();
+            }
+            catch (Exception e) { throw e; }
+        }
+
         public void SaveState(AppointmentDTO appointment, int userId)
         {
             try

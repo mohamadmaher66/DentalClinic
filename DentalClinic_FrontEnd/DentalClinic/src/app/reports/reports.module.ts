@@ -6,11 +6,13 @@ import { ExpenseReportComponent } from './expense-report/expense-report.componen
 import { ReportPopupComponent } from './report-popup/report-popup.component';
 import { ReportService } from '../core/servcies/report.service';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { AppointmentReportComponent } from './appointment-report/appointment-report.component';
 
 @NgModule({
   declarations: [
     ReportPopupComponent,
-    ExpenseReportComponent
+    ExpenseReportComponent,
+    AppointmentReportComponent
   ],
   imports: [
     CommonModule,

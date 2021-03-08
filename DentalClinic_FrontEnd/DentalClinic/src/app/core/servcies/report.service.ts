@@ -10,10 +10,16 @@ export class ReportService {
 
   constructor(private httpService: HttpService) { }
 
-  public GetExpenseReport(object: any) {
+  public getExpenseReport(object: any) {
     return this.httpService.httpDownloadFile(object, this.url + 'GetExpenseReport');
   }
   public getExpenseDetailsLists(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetExpenseDetailsLists');
+  }
+  public getAppointmentDetailsLists(object: any) {
+    return this.httpService.httpPost(object, this.url + 'GetAppointmentDetailsLists');
+  }
+  public getAppointmentReport(object: any) {
+    return this.httpService.httpDownloadFile(object, this.url + 'GetAppointmentReport');
   }
 }

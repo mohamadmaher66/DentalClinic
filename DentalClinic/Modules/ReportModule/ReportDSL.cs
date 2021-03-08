@@ -14,18 +14,19 @@ using ExpenseModule;
 using ClinicModule;
 using UserModule;
 using System.Linq;
+using AppointmentModule;
+using PatientModule;
+using AppointmentCategoryModule;
 
 namespace ReportModule
 {
     public class ReportDSL
     {
-        UnitOfWork UoW;
         IMapper mapper;
         private readonly IHostEnvironment _hostEnvironment;
 
         public ReportDSL(IMapper _mapper, IHostEnvironment hostEnvironment)
         {
-            UoW = new UnitOfWork(new DentalClinicDBContext());
             mapper = _mapper;
             _hostEnvironment = hostEnvironment;
         }
@@ -66,6 +67,54 @@ namespace ReportModule
             }
             catch (Exception e) { throw e; }
         }
+        public byte[] GetAppointmentReport(AppointmentFilterDTO appointmentFilter)
+        {
+            try
+            {
+                AppointmentDSL appointmentDSL = new AppointmentDSL(mapper);
+                List<AppointmentReportDTO> appointmentList = appointmentDSL.GetAppointmentReport(appointmentFilter.DateFrom, appointmentFilter.DateTo, appointmentFilter.PatientId,
+                                                                               appointmentFilter.CategoryId, appointmentFilter.ClinicId, appointmentFilter.UserId, appointmentFilter.State);
+                double totalPaid = appointmentList.Sum(a => a.PaidAmount);
+
+                if (appointmentFilter.ClinicId > 0)
+                {
+                    appointmentFilter.ClinicName = new ClinicDSL(mapper).GetById(appointmentFilter.ClinicId).Name;
+                }
+                if (appointmentFilter.UserId > 0)
+                {
+                    appointmentFilter.UserFullName = new UserDSL(mapper).GetById(appointmentFilter.UserId).FullName;
+                }
+                if (appointmentFilter.PatientId > 0)
+                {
+                    appointmentFilter.PatientFullName = new PatientDSL(mapper).GetById(appointmentFilter.PatientId).FullName;
+                }
+                if (appointmentFilter.CategoryId > 0)
+                {
+                    appointmentFilter.CategoryName = new AppointmentCategoryDSL(mapper).GetById(appointmentFilter.CategoryId).Name;
+                }
+                switch (appointmentFilter.State)
+                {
+                    case 0: appointmentFilter.StateName = "الكل"; break;
+                    case AppointmentStateEnum.Cancelled: appointmentFilter.StateName = "ملغي"; break;
+                    case AppointmentStateEnum.Current: appointmentFilter.StateName = "جارى"; break;
+                    case AppointmentStateEnum.Finished: appointmentFilter.StateName = "انتهى"; break;
+                    case AppointmentStateEnum.Pending: appointmentFilter.StateName = "قيد الانتظار"; break;
+                }
+                Dictionary<string, string> parameters = new Dictionary<string, string>()
+                {
+                    { "DateFrom", appointmentFilter.DateFrom.ToString("dd/MM/yyyy") },
+                    { "DateTo" , appointmentFilter.DateTo.ToString("dd/MM/yyyy") },
+                    { "ClinicName" , appointmentFilter.ClinicId == 0 ? "الكل" : appointmentFilter.ClinicName },
+                    { "UserFullName" , appointmentFilter.UserId == 0 ? "الكل" : appointmentFilter.UserFullName },
+                    { "PatientFullName" , appointmentFilter.PatientId == 0 ? "الكل" : appointmentFilter.PatientFullName },
+                    { "CategoryName" , appointmentFilter.CategoryId == 0 ? "الكل" : appointmentFilter.CategoryName },
+                    { "StateName" , appointmentFilter.StateName },
+                    { "TotalPaid" , totalPaid.ToString() }
+                };
+                return GenerateReportAsync("AppointmentReport", "AppointmentList", appointmentList, parameters);
+            }
+            catch (Exception e) { throw e; }
+        }
 
         public List<DetailsList> GetExpenseDetailsLists()
         {
@@ -93,6 +142,11 @@ namespace ReportModule
             {
                 throw e;
             }
+        }
+
+        public List<DetailsList> GetAppointmentDetailsLists()
+        {
+            return (new AppointmentDSL(mapper)).GetDetailsLists();
         }
 
 

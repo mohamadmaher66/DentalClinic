@@ -62,6 +62,51 @@ namespace AppointmentModule
             return _mapper.Map<List<AppointmentDTO>>(appointmentList.OrderByDescending(a => a.State).ThenBy(a => a.CreationDate));
         }
 
+        internal IEnumerable<AppointmentReportDTO> GetAppointmentReport(DateTime dateFrom, DateTime dateTo, int patientId, int categoryId, int clinicId, int userId, AppointmentStateEnum state)
+        {
+            DbSet<Clinic> clinics = entities.Set<Clinic>();
+            DbSet<User> users = entities.Set<User>();
+            DbSet<AppointmentCategory> categories = entities.Set<AppointmentCategory>();
+            DbSet<Patient> patients = entities.Set<Patient>();
+
+            return from appointment in dbset
+                   join clinic in clinics on appointment.ClinicId equals clinic.Id
+                   join user in users on appointment.UserId equals user.Id
+                   join category in categories on appointment.CategoryId equals category.Id
+                   join patient in patients on appointment.PatientId equals patient.Id
+                   where (appointment.Date >= dateFrom && appointment.Date <= dateTo)
+                        && (clinicId == 0 || appointment.ClinicId == clinicId)
+                        && (userId == 0 || appointment.UserId == userId)
+                        && (patientId == 0 || appointment.PatientId == patientId)
+                        && (categoryId == 0 || appointment.CategoryId == categoryId)
+                        && (state == AppointmentStateEnum.None || appointment.State == state)
+                   orderby appointment.CreatedBy
+                   select new AppointmentReportDTO()
+                   {
+                       PatientFullName = patient.FullName,
+                       ClinicName = clinic.Name,
+                       UserFullName = user.FullName,
+                       CategoryName = category.Name,
+                       Date = appointment.Date,
+                       DiscountPercentage = appointment.DiscountPercentage,
+                       PaidAmount = appointment.PaidAmount,
+                       TotalPrice = appointment.TotalPrice,
+                       StateName = GetStateName(appointment.State)
+                   };
+        }
+
+        private static string GetStateName(AppointmentStateEnum state)
+        {
+            switch (state)
+            {
+                case AppointmentStateEnum.Cancelled: return "ملغي";
+                case AppointmentStateEnum.Current: return "جارى";
+                case AppointmentStateEnum.Finished: return "انتهي";
+                case AppointmentStateEnum.Pending: return "قيد الانتظار";
+            }
+            return null;
+        }
+
         public void SaveState(AppointmentDTO appointment, int userId)
         {
             Appointment model = _mapper.Map<Appointment>(appointment);

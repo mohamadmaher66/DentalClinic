@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\Core\Enums\Enums.csproj" />
     <ProjectReference Include="..\..\Core\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\..\Core\Request\Request.csproj" />
+    <ProjectReference Include="..\AppointmentModule\AppointmentModule.csproj" />
     <ProjectReference Include="..\ClinicModule\ClinicModule.csproj" />
     <ProjectReference Include="..\ExpenseModule\ExpenseModule.csproj" />
     <ProjectReference Include="..\MedicalHistoryModule\MedicalHistoryModule.csproj" />

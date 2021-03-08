@@ -88,7 +88,7 @@ export class ExpenseReportComponent implements OnInit {
     let requestedData = new RequestedData<ExpenseFilter>();
     requestedData.entity = this.expenseFilter;
 
-    this.reportService.GetExpenseReport(requestedData).subscribe(
+    this.reportService.getExpenseReport(requestedData).subscribe(
         res => this.getReportOnSuccess(res),  
         err => this.alertService.viewAlerts(err.error.alerts)                      
     );
