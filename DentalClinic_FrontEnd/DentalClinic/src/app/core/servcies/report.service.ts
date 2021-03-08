@@ -5,7 +5,7 @@ import { HttpService } from '../../shared/service/http-service';
   providedIn: 'root'
 })
 export class ReportService {
-
+ 
   url: string = "api/report/";
 
   constructor(private httpService: HttpService) { }
@@ -21,5 +21,8 @@ export class ReportService {
   }
   public getAppointmentReport(object: any) {
     return this.httpService.httpDownloadFile(object, this.url + 'GetAppointmentReport');
+  }
+  public getTotalExpenseReport(object: any) {
+    return this.httpService.httpDownloadFile(object, this.url + 'GetTotalExpenseReport');
   }
 }

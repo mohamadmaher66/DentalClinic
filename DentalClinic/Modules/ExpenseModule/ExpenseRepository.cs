@@ -98,7 +98,7 @@ namespace ExpenseModule
                         && (clinicId == 0 || expense.ClinicId == clinicId)
                         && (userId == 0 || expense.CreatedBy == userId)
                         && (type == ExpenseType.None || expense.Type == type)
-                   orderby expense.CreatedBy         
+                   orderby expense.ActionDate         
                    select new ExpenseDTO()
                    {
                        Id = expense.Id,

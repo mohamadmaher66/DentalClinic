@@ -72,7 +72,13 @@ export const doctorNavItems: INavData[] = [
         name: 'تقرير الكشوفات',
         url: '/report/appointmentreport',
         icon: 'cil-briefcase'
+      },
+      {
+        name: 'تقرير اجمالى المصاريف',
+        url: '/report/totalexpensereport',
+        icon: 'cil-briefcase'
       }
+      
     ]
   }
 ];

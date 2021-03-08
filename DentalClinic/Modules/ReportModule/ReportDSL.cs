@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using Request;
 using Enums;
-using MedicalHistoryModule;
 using System.Text;
 using AspNetCore.Reporting;
 using Microsoft.Extensions.Hosting;
@@ -67,6 +66,7 @@ namespace ReportModule
             }
             catch (Exception e) { throw e; }
         }
+
         public byte[] GetAppointmentReport(AppointmentFilterDTO appointmentFilter)
         {
             try
@@ -112,6 +112,40 @@ namespace ReportModule
                     { "TotalPaid" , totalPaid.ToString() }
                 };
                 return GenerateReportAsync("AppointmentReport", "AppointmentList", appointmentList, parameters);
+            }
+            catch (Exception e) { throw e; }
+        }
+
+        public byte[] GetTotalExpenseReport(TotalExpenseFilterDTO totalExpenseFilter)
+        {
+            try
+            {
+                ReportDSL reportDSL = new ReportDSL(mapper, _hostEnvironment);
+                List<TotalExpenseReportDTO> totalExpenseList = new ReportRepository(new UnitOfWork(new DentalClinicDBContext()))
+                                                                .GetTotalExpenseReport(totalExpenseFilter.DateFrom, totalExpenseFilter.DateTo, totalExpenseFilter.ClinicId, totalExpenseFilter.UserId).ToList();
+                
+                double inSum = totalExpenseList.Where(e => e.Type == ExpenseType.In).Sum(e => e.Cost);
+                double outSum = totalExpenseList.Where(e => e.Type == ExpenseType.Out).Sum(e => e.Cost);
+                
+                if (totalExpenseFilter.ClinicId > 0)
+                {
+                    totalExpenseFilter.ClinicName = new ClinicDSL(mapper).GetById(totalExpenseFilter.ClinicId).Name;
+                }
+                if (totalExpenseFilter.UserId > 0)
+                {
+                    totalExpenseFilter.UserFullName = new UserDSL(mapper).GetById(totalExpenseFilter.UserId).FullName;
+                }
+               
+                Dictionary<string, string> parameters = new Dictionary<string, string>()
+                {
+                    { "DateFrom", totalExpenseFilter.DateFrom.ToString("dd/MM/yyyy") },
+                    { "DateTo" , totalExpenseFilter.DateTo.ToString("dd/MM/yyyy") },
+                    { "ClinicName" , totalExpenseFilter.ClinicId == 0 ? "الكل" : totalExpenseFilter.ClinicName },
+                    { "UserFullName" , totalExpenseFilter.UserId == 0 ? "الكل" : totalExpenseFilter.UserFullName },
+                    { "InSum" , inSum.ToString() },
+                    { "OutSum" , outSum.ToString() },
+                };
+                return GenerateReportAsync("TotalExpenseReport", "TotalExpenseList", totalExpenseList, parameters);
             }
             catch (Exception e) { throw e; }
         }

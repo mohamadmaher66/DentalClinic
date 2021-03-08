@@ -51,5 +51,13 @@ namespace DentalClinicAPI.Controllers
             return Ok(requestedData);
         }
 
+        [HttpPost]
+        [Route("GetTotalExpenseReport")]
+        public IActionResult GetTotalExpenseReport([FromBody] RequestedData<TotalExpenseFilterDTO> requestedData)
+        {
+            var reportString = reportDSL.GetTotalExpenseReport(requestedData.Entity);
+            return File(reportString, System.Net.Mime.MediaTypeNames.Application.Octet, "TotalExpenseReport" + ".pdf");
+        }
+
     }
 }

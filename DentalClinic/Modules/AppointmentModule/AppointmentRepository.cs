@@ -80,7 +80,7 @@ namespace AppointmentModule
                         && (patientId == 0 || appointment.PatientId == patientId)
                         && (categoryId == 0 || appointment.CategoryId == categoryId)
                         && (state == AppointmentStateEnum.None || appointment.State == state)
-                   orderby appointment.CreatedBy
+                   orderby appointment.Date
                    select new AppointmentReportDTO()
                    {
                        PatientFullName = patient.FullName,
