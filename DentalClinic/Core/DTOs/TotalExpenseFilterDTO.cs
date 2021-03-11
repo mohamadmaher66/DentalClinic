@@ -12,5 +12,7 @@ namespace DTOs
         public string ClinicName { get; set; }
         public int UserId { get; set; }
         public string UserFullName { get; set; }
+        public double InSum { get; set; }
+        public double OutSum { get; set; }
     }
 }

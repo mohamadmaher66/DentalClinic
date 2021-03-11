@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using Request;
 using Enums;
-using System.Text;
 using AspNetCore.Reporting;
 using Microsoft.Extensions.Hosting;
 using ExpenseModule;
@@ -36,33 +35,21 @@ namespace ReportModule
             {
                 ExpenseDSL expenseDSL = new ExpenseDSL(mapper);
                 List<ExpenseDTO> expenseList = expenseDSL.GetExpenseReport(expenseFilter.DateFrom, expenseFilter.DateTo, expenseFilter.ClinicId, expenseFilter.UserId, expenseFilter.Type);
-                double inSum = expenseList.Where(e => e.Type == ExpenseType.In).Sum(e => e.Cost);
-                double outSum = expenseList.Where(e => e.Type == ExpenseType.Out).Sum(e => e.Cost);
-                if (expenseFilter.ClinicId > 0)
-                {
-                    expenseFilter.ClinicName = new ClinicDSL(mapper).GetById(expenseFilter.ClinicId).Name;
-                }
-                if (expenseFilter.UserId > 0)
-                {
-                    expenseFilter.UserFullName = new UserDSL(mapper).GetById(expenseFilter.UserId).FullName;
-                }
+                
+                expenseFilter.InSum = expenseList.Where(e => e.Type == ExpenseType.In).Sum(e => e.Cost);
+                expenseFilter.OutSum = expenseList.Where(e => e.Type == ExpenseType.Out).Sum(e => e.Cost);
+                expenseFilter.ClinicName = expenseFilter.ClinicId == 0 ? "الكل" : new ClinicDSL(mapper).GetById(expenseFilter.ClinicId).Name;
+                expenseFilter.UserFullName = expenseFilter.UserId == 0 ? "الكل" : new UserDSL(mapper).GetById(expenseFilter.UserId).FullName;
+
                 switch (expenseFilter.Type)
                 {
                     case 0: expenseFilter.TypeName = "الكل"; break;
                     case ExpenseType.In: expenseFilter.TypeName = "داخل للعيادة"; break;
                     case ExpenseType.Out: expenseFilter.TypeName = "خارج من العيادة"; break;
                 }
-                Dictionary<string, string> parameters = new Dictionary<string, string>()
-                {
-                    { "DateFrom", expenseFilter.DateFrom.ToString("dd/MM/yyyy") },
-                    { "DateTo" , expenseFilter.DateTo.ToString("dd/MM/yyyy") },
-                    { "ClinicName" , expenseFilter.ClinicId == 0 ? "الكل" : expenseFilter.ClinicName },
-                    { "UserFullName" , expenseFilter.UserId == 0 ? "الكل" : expenseFilter.UserFullName },
-                    { "TypeName" , expenseFilter.TypeName },
-                    { "InSum" , inSum.ToString() },
-                    { "OutSum" , outSum.ToString() },
-                };
-                return GenerateReportAsync("ExpenseReport", "ExpenseList", expenseList, parameters);
+                List<ExpenseFilterDTO> parameterList = new List<ExpenseFilterDTO> { expenseFilter };
+               
+                return GenerateReportAsync("ExpenseReport", "ExpenseList", expenseList, parameterList);
             }
             catch (Exception e) { throw e; }
         }
@@ -74,24 +61,12 @@ namespace ReportModule
                 AppointmentDSL appointmentDSL = new AppointmentDSL(mapper);
                 List<AppointmentReportDTO> appointmentList = appointmentDSL.GetAppointmentReport(appointmentFilter.DateFrom, appointmentFilter.DateTo, appointmentFilter.PatientId,
                                                                                appointmentFilter.CategoryId, appointmentFilter.ClinicId, appointmentFilter.UserId, appointmentFilter.State);
-                double totalPaid = appointmentList.Sum(a => a.PaidAmount);
+                appointmentFilter.TotalPaid = appointmentList.Sum(a => a.PaidAmount);
+                appointmentFilter.ClinicName = appointmentFilter.ClinicId == 0 ? "الكل" : new ClinicDSL(mapper).GetById(appointmentFilter.ClinicId).Name;
+                appointmentFilter.UserFullName = appointmentFilter.UserId == 0 ? "الكل" : new UserDSL(mapper).GetById(appointmentFilter.UserId).FullName;
+                appointmentFilter.PatientFullName = appointmentFilter.PatientId == 0 ? "الكل" : new PatientDSL(mapper).GetById(appointmentFilter.PatientId).FullName;
+                appointmentFilter.CategoryName = appointmentFilter.CategoryId == 0 ? "الكل" : new AppointmentCategoryDSL(mapper).GetById(appointmentFilter.CategoryId).Name;
 
-                if (appointmentFilter.ClinicId > 0)
-                {
-                    appointmentFilter.ClinicName = new ClinicDSL(mapper).GetById(appointmentFilter.ClinicId).Name;
-                }
-                if (appointmentFilter.UserId > 0)
-                {
-                    appointmentFilter.UserFullName = new UserDSL(mapper).GetById(appointmentFilter.UserId).FullName;
-                }
-                if (appointmentFilter.PatientId > 0)
-                {
-                    appointmentFilter.PatientFullName = new PatientDSL(mapper).GetById(appointmentFilter.PatientId).FullName;
-                }
-                if (appointmentFilter.CategoryId > 0)
-                {
-                    appointmentFilter.CategoryName = new AppointmentCategoryDSL(mapper).GetById(appointmentFilter.CategoryId).Name;
-                }
                 switch (appointmentFilter.State)
                 {
                     case 0: appointmentFilter.StateName = "الكل"; break;
@@ -100,18 +75,9 @@ namespace ReportModule
                     case AppointmentStateEnum.Finished: appointmentFilter.StateName = "انتهى"; break;
                     case AppointmentStateEnum.Pending: appointmentFilter.StateName = "قيد الانتظار"; break;
                 }
-                Dictionary<string, string> parameters = new Dictionary<string, string>()
-                {
-                    { "DateFrom", appointmentFilter.DateFrom.ToString("dd/MM/yyyy") },
-                    { "DateTo" , appointmentFilter.DateTo.ToString("dd/MM/yyyy") },
-                    { "ClinicName" , appointmentFilter.ClinicId == 0 ? "الكل" : appointmentFilter.ClinicName },
-                    { "UserFullName" , appointmentFilter.UserId == 0 ? "الكل" : appointmentFilter.UserFullName },
-                    { "PatientFullName" , appointmentFilter.PatientId == 0 ? "الكل" : appointmentFilter.PatientFullName },
-                    { "CategoryName" , appointmentFilter.CategoryId == 0 ? "الكل" : appointmentFilter.CategoryName },
-                    { "StateName" , appointmentFilter.StateName },
-                    { "TotalPaid" , totalPaid.ToString() }
-                };
-                return GenerateReportAsync("AppointmentReport", "AppointmentList", appointmentList, parameters);
+                List<AppointmentFilterDTO> parameterList = new List<AppointmentFilterDTO> { appointmentFilter };
+
+                return GenerateReportAsync("AppointmentReport", "AppointmentList", appointmentList, parameterList);
             }
             catch (Exception e) { throw e; }
         }
@@ -123,29 +89,14 @@ namespace ReportModule
                 ReportDSL reportDSL = new ReportDSL(mapper, _hostEnvironment);
                 List<TotalExpenseReportDTO> totalExpenseList = new ReportRepository(new UnitOfWork(new DentalClinicDBContext()))
                                                                 .GetTotalExpenseReport(totalExpenseFilter.DateFrom, totalExpenseFilter.DateTo, totalExpenseFilter.ClinicId, totalExpenseFilter.UserId).ToList();
-                
-                double inSum = totalExpenseList.Where(e => e.Type == ExpenseType.In).Sum(e => e.Cost);
-                double outSum = totalExpenseList.Where(e => e.Type == ExpenseType.Out).Sum(e => e.Cost);
-                
-                if (totalExpenseFilter.ClinicId > 0)
-                {
-                    totalExpenseFilter.ClinicName = new ClinicDSL(mapper).GetById(totalExpenseFilter.ClinicId).Name;
-                }
-                if (totalExpenseFilter.UserId > 0)
-                {
-                    totalExpenseFilter.UserFullName = new UserDSL(mapper).GetById(totalExpenseFilter.UserId).FullName;
-                }
-               
-                Dictionary<string, string> parameters = new Dictionary<string, string>()
-                {
-                    { "DateFrom", totalExpenseFilter.DateFrom.ToString("dd/MM/yyyy") },
-                    { "DateTo" , totalExpenseFilter.DateTo.ToString("dd/MM/yyyy") },
-                    { "ClinicName" , totalExpenseFilter.ClinicId == 0 ? "الكل" : totalExpenseFilter.ClinicName },
-                    { "UserFullName" , totalExpenseFilter.UserId == 0 ? "الكل" : totalExpenseFilter.UserFullName },
-                    { "InSum" , inSum.ToString() },
-                    { "OutSum" , outSum.ToString() },
-                };
-                return GenerateReportAsync("TotalExpenseReport", "TotalExpenseList", totalExpenseList, parameters);
+
+                totalExpenseFilter.InSum = totalExpenseList.Where(e => e.Type == ExpenseType.In).Sum(e => e.Cost);
+                totalExpenseFilter.OutSum = totalExpenseList.Where(e => e.Type == ExpenseType.Out).Sum(e => e.Cost);
+                totalExpenseFilter.ClinicName = totalExpenseFilter.ClinicId == 0 ? "الكل" : new ClinicDSL(mapper).GetById(totalExpenseFilter.ClinicId).Name;
+                totalExpenseFilter.UserFullName = totalExpenseFilter.UserId == 0 ? "الكل" : new UserDSL(mapper).GetById(totalExpenseFilter.UserId).FullName;
+                List<TotalExpenseFilterDTO> parameterList = new List<TotalExpenseFilterDTO> { totalExpenseFilter };
+
+                return GenerateReportAsync("TotalExpenseReport", "TotalExpenseList", totalExpenseList, parameterList);
             }
             catch (Exception e) { throw e; }
         }
@@ -184,15 +135,17 @@ namespace ReportModule
         }
 
 
-        public byte[] GenerateReportAsync<T>(string reportName, string dataSourceName, List<T> dataSourceList, Dictionary<string, string> parameters)
+        public byte[] GenerateReportAsync<T,Y>(string reportName, string dataSourceName, List<T> dataSourceList, List<Y> parameterList)
         {
+            Dictionary<string, string> param = new Dictionary<string, string>();
+
             string rdlcFilePath = string.Format("{0}\\Reports\\{1}.rdlc", _hostEnvironment.ContentRootPath, reportName);
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Encoding.GetEncoding("windows-1252");
             LocalReport report = new LocalReport(rdlcFilePath);
 
             report.AddDataSource(dataSourceName, dataSourceList);
-            var result = report.Execute(RenderType.Pdf, 1, parameters);
+            report.AddDataSource("ParameterList", parameterList);
+
+            var result = report.Execute(RenderType.Pdf, 1, null, "");
             return result.MainStream;
         }
     }

@@ -11,6 +11,7 @@ namespace DentalClinicAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None, Duration = 0)]
     public class ReportController : ControllerBase
     {
         private readonly ReportDSL reportDSL;
@@ -18,6 +19,7 @@ namespace DentalClinicAPI.Controllers
         public ReportController(IMapper _mapper, IHostEnvironment hostEnvironment)
         {
             reportDSL = new ReportDSL(_mapper, hostEnvironment);
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         }
         [HttpPost]
         [Route("GetExpenseReport")]
@@ -56,7 +58,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult GetTotalExpenseReport([FromBody] RequestedData<TotalExpenseFilterDTO> requestedData)
         {
             var reportString = reportDSL.GetTotalExpenseReport(requestedData.Entity);
-            return File(reportString, System.Net.Mime.MediaTypeNames.Application.Octet, "TotalExpenseReport" + ".pdf");
+            return File(reportString, "application/pdf");
         }
 
     }

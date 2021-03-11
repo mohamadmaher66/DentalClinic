@@ -1,7 +1,5 @@
 ﻿using Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DTOs
 {
@@ -19,5 +17,6 @@ namespace DTOs
         public string UserFullName { get; set; }
         public AppointmentStateEnum State { get; set; }
         public string StateName { get; set; }
+        public double TotalPaid { get; set; }
     }
 }

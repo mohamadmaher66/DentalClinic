@@ -5,6 +5,17 @@ namespace DTOs
 {
     public class AppointmentReportDTO
     {
+        // Parameters
+        public string DateFrom { get; set; }
+        public string DateTo { get; set; }
+        public string ParamPatientFullName { get; set; }
+        public string ParamClinicName { get; set; }
+        public string ParamCategoryName { get; set; }
+        public string ParamUserFullName { get; set; }
+        public string ParamStateName { get; set; }
+        public string ParamTotalPrice { get; set; }
+
+        // List
         public string CategoryName { get; set; }
         public string UserFullName { get; set; }
         public string PatientFullName { get; set; }
