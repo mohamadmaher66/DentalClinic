@@ -31,7 +31,7 @@ export const doctorNavItems: INavData[] = [
     icon: 'cil-dollar'
   },
   {
-    name: 'اعداد البيانات الرئيسية',
+    name: 'البيانات الرئيسية',
     url: '/base',
     icon: 'cil-bookmark',
     children: [

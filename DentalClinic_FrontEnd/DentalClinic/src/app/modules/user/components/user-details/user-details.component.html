@@ -52,13 +52,13 @@
                 <div class="col-md-4 form-group">
                   <label for="username">اسم المستخدم <i style="color: red;">*</i></label>
                   <input [(ngModel)]="user.username" #username="ngModel" type="text" class="form-control"
-                    name="username" id="username" placeholder="اسم المستخدم" required>
+                    name="username" id="username" placeholder="اسم المستخدم" autocomplete="new-password" required>
                     <small *ngIf="username.invalid && (username.touched || username.dirty)" style="color: red">يجب ادخال اسم المستخدم</small>
                   </div>
 
                 <div class="col-md-4 form-group">
                   <label for="password">كلمة المرور <i *ngIf="user.id == undefined || user.id == 0" style="color: red;">*</i></label>
-                  <input [(ngModel)]="user.password" #password="ngModel" type="password" class="form-control"
+                  <input [(ngModel)]="user.password" #password="ngModel" type="password" class="form-control" autocomplete="new-password"
                     name="password" id="password" placeholder="كلمة المرور" [required]="user.id == undefined || user.id == 0">
                     <small *ngIf="password.invalid && (password.touched || password.dirty)" style="color: red">يجب ادخال كلمة المرور</small>
                   </div>

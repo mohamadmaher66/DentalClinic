@@ -52,8 +52,31 @@ namespace DBContext
             modelBuilder.Entity<PatientMedicalHistory>()
                .HasKey(PMH => new { PMH.PatientId, PMH.MedicalHistoryId });
 
+            modelBuilder.Entity<PatientMedicalHistory>()
+                    .HasOne(PMH => PMH.Patient)
+                    .WithMany(PMH => PMH.PatientMedicalHistoryList)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PatientMedicalHistory>()
+                .HasOne(PMH => PMH.MedicalHistory)
+                .WithMany(PMH => PMH.PatientMedicalHistoryList)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<AppointmentAppointmentAddition>()
                 .HasKey(aaa => new { aaa.AppointmentId, aaa.AppointmentAdditionId });
+
+            modelBuilder.Entity<AppointmentAppointmentAddition>()
+                    .HasOne(aaa => aaa.Appointment)
+                    .WithMany(aaa => aaa.AppointmentAppointmentAdditionList)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AppointmentAppointmentAddition>()
+                .HasOne(aaa => aaa.AppointmentAddition)
+                .WithMany(aaa => aaa.AppointmentAppointmentAddition)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            
         }
+
     }
 }

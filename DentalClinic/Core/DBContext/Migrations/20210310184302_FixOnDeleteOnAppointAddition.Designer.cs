@@ -4,14 +4,16 @@ using DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBContext.Migrations
 {
     [DbContext(typeof(DentalClinicDBContext))]
-    partial class DentalClinicDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210310184302_FixOnDeleteOnAppointAddition")]
+    partial class FixOnDeleteOnAppointAddition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -501,13 +503,13 @@ namespace DBContext.Migrations
                     b.HasOne("DBModels.MedicalHistory", "MedicalHistory")
                         .WithMany("PatientMedicalHistoryList")
                         .HasForeignKey("MedicalHistoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DBModels.Patient", "Patient")
                         .WithMany("PatientMedicalHistoryList")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

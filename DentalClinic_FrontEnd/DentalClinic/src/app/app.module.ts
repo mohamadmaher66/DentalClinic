@@ -11,8 +11,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
-import { P404Component } from './views/error/404.component';
-
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -79,7 +77,6 @@ export function initializerFn(configService: ConfigService) {
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    P404Component,
     LoginComponent,
   ],
   providers: [
