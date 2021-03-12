@@ -166,10 +166,17 @@ export class AppointmentDetailsComponent implements OnInit {
       .filter(option => option.name.toLowerCase().startsWith(filter));
   }
 
-  public filterPatient(value: string) {
+  public filterPatient(value: string, type: number) {
     let filter = value.toLowerCase();
-    this.filteredPatientList = this.patientList
-      .filter(option => option.fullName.toLowerCase().startsWith(filter) || option.phone.startsWith(filter));
+    if(type == 1){
+      this.filteredPatientList = this.patientList
+      .filter(option => option.fullName.toLowerCase().startsWith(filter));
+    }
+    else{
+      this.filteredPatientList = this.patientList
+      .filter(option => option.phone != undefined && option.phone.startsWith(filter));
+    }
+    
   }
 
   public filterUser(value: string) {

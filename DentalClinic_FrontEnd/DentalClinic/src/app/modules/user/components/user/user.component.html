@@ -29,7 +29,7 @@
             </ng-container>
             
             <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef>نوع المستخدم</th>
+                <th mat-header-cell *matHeaderCellDef>فئة المستخدم</th>
                 <td mat-cell *matCellDef="let user" style="width: 10%;"> 
                     <label *ngIf="user.role == roleEnum.Doctor">دكتور</label>
                     <label *ngIf="user.role == roleEnum.Assistant">مساعد</label>

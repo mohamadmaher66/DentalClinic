@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Clinic } from '../../core/models/clinic.model';
 import { AppointmentFilter } from '../../core/models/appointment-filter.model';
@@ -12,12 +12,15 @@ import { ReportPopupComponent } from '../report-popup/report-popup.component';
 import { AppointmentStateEnum } from '../../shared/enum/appointment-state.enum';
 import { Patient } from '../../core/models/patient.model';
 import { AppointmentCategory } from '../../core/models/appointment-category.model';
+import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { BaseComponent } from '../../shared/components/base-component/base-component';
 
 @Component({
   selector: 'app-appointment-report',
   templateUrl: './appointment-report.component.html'
 })
-export class AppointmentReportComponent implements OnInit {
+export class AppointmentReportComponent extends BaseComponent implements OnInit {
 
   appointmentFilter = new AppointmentFilter();
   appointmentStateEnum = AppointmentStateEnum;
@@ -35,7 +38,12 @@ export class AppointmentReportComponent implements OnInit {
   constructor(private reportService: ReportService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ReportPopupComponent>,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    protected cdref: ChangeDetectorRef,
+    protected route: ActivatedRoute,
+    protected title: Title) { 
+      super(cdref, route, title);
+  }
 
   ngOnInit(): void {
     this.getDetailsLists();
@@ -56,7 +64,7 @@ export class AppointmentReportComponent implements OnInit {
   public filterPatient(value: string) {
     let filter = value.toLowerCase();
     this.filteredPatientList = this.patientList
-      .filter(option => option.fullName.toLowerCase().startsWith(filter) || option.phone.startsWith(filter));
+      .filter(option => option.fullName.toLowerCase().startsWith(filter) || option.fullName.startsWith(filter));
   }
 
   public filterCategory(value: string) {

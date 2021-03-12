@@ -20,7 +20,7 @@
     <div class="example-container">
         <table mat-table [dataSource]="appointmentList" style="width: 100%;">
             <ng-container matColumnDef="categoryName">
-                <th mat-header-cell *matHeaderCellDef>نوع الكشف</th>
+                <th mat-header-cell *matHeaderCellDef>فئة الكشف</th>
                 <td mat-cell *matCellDef="let appointment" style="width: 15%;"> {{appointment.category.name}} </td>
             </ng-container>
 

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { Clinic } from '../../core/models/clinic.model';
 import { ExpenseFilter } from '../../core/models/expense-filter.model';
 import { User } from '../../core/models/user.model';
 import { ReportService } from '../../core/servcies/report.service';
+import { BaseComponent } from '../../shared/components/base-component/base-component';
 import { DetailsListEnum } from '../../shared/enum/details-list.enum';
 import { ExpenseTypeEnum } from '../../shared/enum/expense-type.enum';
 import { RequestedData } from '../../shared/models/request-data.entity';
@@ -15,7 +18,7 @@ import { ReportPopupComponent } from '../report-popup/report-popup.component';
   selector: 'app-expense-report',
   templateUrl: './expense-report.component.html'
 })
-export class ExpenseReportComponent implements OnInit {
+export class ExpenseReportComponent extends BaseComponent implements OnInit {
 
   expenseFilter = new ExpenseFilter();
   expenseTypeEnum = ExpenseTypeEnum;
@@ -28,7 +31,12 @@ export class ExpenseReportComponent implements OnInit {
   constructor(private reportService: ReportService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ReportPopupComponent>,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    protected cdref: ChangeDetectorRef,
+    protected route: ActivatedRoute,
+    protected title: Title) { 
+      super(cdref, route, title);
+   }
 
   ngOnInit(): void {
     this.getDetailsLists();

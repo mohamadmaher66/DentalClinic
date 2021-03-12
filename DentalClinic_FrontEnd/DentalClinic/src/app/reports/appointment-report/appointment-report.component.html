@@ -75,11 +75,11 @@
 
                             <div class="row">
                                 <div class="col-md-4 form-group">
-                                  <label for="category">نوع الكشف </label>
+                                  <label for="category">فئة الكشف </label>
                                   <mat-form-field appearance="fill" class="mat-select-cls">
                                     <mat-label>اختر</mat-label>
                                     <mat-select [(ngModel)]="appointmentFilter.categoryId" #category="ngModel" name="category" id="category">
-                                      <input (keyup)="filterCategory($event.target.value)" class="form-control" placeholder="اختر نوع الكشف">
+                                      <input (keyup)="filterCategory($event.target.value)" class="form-control" placeholder="اختر فئة الكشف">
                                       <mat-option [value]="0">الكل </mat-option>
                                       <mat-option *ngFor="let category of filteredCategoryList" [value]="category.id">{{ category.name }}
                                       </mat-option>

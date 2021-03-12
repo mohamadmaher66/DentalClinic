@@ -16,7 +16,7 @@ export class BaseComponent  {
   }
 
   ngAfterContentInit() {
-    this.cdref.detectChanges();
+    setTimeout(() => { this.cdref.detectChanges() , 2000});
     this.route.data.subscribe(data => this.title.setTitle(data.title));
   }
 }

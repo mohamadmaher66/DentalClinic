@@ -24,7 +24,7 @@
                         <mat-label>اختر</mat-label>
                         <mat-select [(ngModel)]="appointment.patient" #patientId="ngModel" name="patientId"
                           id="patientId" [required]="true">
-                          <input (keyup)="filterPatient($event.target.value)" class="form-control"
+                          <input (keyup)="filterPatient($event.target.value, 1)" class="form-control"
                             placeholder="اختر المريض">
                           <mat-option *ngFor="let patient of filteredPatientList" [value]="patient">{{ patient.fullName
                             }}
@@ -41,7 +41,7 @@
                         <mat-label>اختر</mat-label>
                         <mat-select [(ngModel)]="appointment.patient" #patientPhone="ngModel" name="patientPhone"
                           id="patientPhone">
-                          <input (keyup)="filterPatient($event.target.value)" class="form-control"
+                          <input (keyup)="filterPatient($event.target.value, 2)" class="form-control"
                             placeholder="اختر التليفون">
                           <mat-option *ngFor="let patient of filteredPatientList" [value]="patient">{{ patient.phone }}
                           </mat-option>
@@ -150,20 +150,20 @@
 
                   <div class="row">
                     <div class="col-md-4 form-group">
-                      <label for="category">نوع الكشف <i style="color: red;">*</i></label>
+                      <label for="category">فئة الكشف <i style="color: red;">*</i></label>
                       <mat-form-field appearance="fill" class="mat-select-cls">
                         <mat-label>اختر</mat-label>
                         <mat-select [(ngModel)]="appointment.category" #category="ngModel"
                           (selectionChange)="updatePrices()" name="category" id="category" [required]="true">
                           <input (keyup)="filterCategory($event.target.value)" class="form-control"
-                            placeholder="اختر نوع الكشف">
+                            placeholder="اختر فئة الكشف">
                           <mat-option *ngFor="let category of filteredCategoryList" [value]="category">{{ category.name
                             }}
                           </mat-option>
                         </mat-select>
                       </mat-form-field><br>
                       <small *ngIf="category.invalid && (category.touched || category.dirty)" style="color: red">يجب
-                        اختيار نوع
+                        اختيار فئة
                         الكشف</small>
                     </div>
 
@@ -189,7 +189,7 @@
                   </mat-select>
                       </mat-form-field><br>
                       <small *ngIf="category.invalid && (category.touched || category.dirty)" style="color: red">يجب
-                        اختيار نوع
+                        اختيار فئة
                         الكشف</small>
                     </div>
                   </div>

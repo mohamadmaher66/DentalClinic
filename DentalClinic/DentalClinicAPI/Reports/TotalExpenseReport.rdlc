@@ -681,6 +681,8 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <FixedColumnHeaders>true</FixedColumnHeaders>
             <DataSetName>TotalExpenseList</DataSetName>
             <Top>5.97641cm</Top>
             <Left>0.72473cm</Left>
@@ -1258,6 +1260,7 @@
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>8a5518c5-365e-46d5-86a2-296d31b87419</rd:ReportID>
 </Report>

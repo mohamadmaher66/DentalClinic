@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>اضافة تاريخ طبي جديد</h1>
+<h1 mat-dialog-title *ngIf="medicalHistory.id == undefined">اضافة تاريخ طبي جديد</h1>
+<h1 mat-dialog-title *ngIf="medicalHistory.id != undefined">تعديل تاريخ طبي</h1>
 <div mat-dialog-content>
   <div class="content-wrapper" style="margin-left: 0px; background-color: #ffffff; min-height: 0px;">
     <div class="row">
@@ -32,7 +33,7 @@
 </div>
 <div mat-dialog-actions style="float: right;">
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary" (click)="submitMedicalHistory(medicalHistoryFrom)">{{btnTitle}}</button>
+    <button type="submit" class="btn btn-primary" (click)="submitMedicalHistory(medicalHistoryFrom)" [disabled]="medicalHistoryFrom.invalid">{{btnTitle}}</button>
     <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
       (click)="dialogRef.close();">الغاء</button>
   </div>

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { Clinic } from '../../core/models/clinic.model';
 import { TotalExpenseFilter } from '../../core/models/total-expense-filter.model';
 import { User } from '../../core/models/user.model';
 import { ReportService } from '../../core/servcies/report.service';
+import { BaseComponent } from '../../shared/components/base-component/base-component';
 import { DetailsListEnum } from '../../shared/enum/details-list.enum';
 import { RequestedData } from '../../shared/models/request-data.entity';
 import { AlertService } from '../../shared/service/alert.service';
@@ -14,7 +17,7 @@ import { ReportPopupComponent } from '../report-popup/report-popup.component';
   selector: 'app-total-expense-report',
   templateUrl: './total-expense-report.component.html'
 })
-export class TotalExpenseReportComponent implements OnInit {
+export class TotalExpenseReportComponent extends BaseComponent implements OnInit {
 
   totalExpenseFilter = new TotalExpenseFilter();
   // Lists
@@ -26,7 +29,12 @@ export class TotalExpenseReportComponent implements OnInit {
   constructor(private reportService: ReportService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ReportPopupComponent>,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    protected cdref: ChangeDetectorRef,
+    protected route: ActivatedRoute,
+    protected title: Title) { 
+      super(cdref, route, title);
+    }
 
   ngOnInit(): void {
     this.getDetailsLists();

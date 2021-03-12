@@ -2,6 +2,7 @@ using DBContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace DentalClinicAPI
 {
@@ -11,8 +12,11 @@ namespace DentalClinicAPI
         {
             using (var dbContext = new DentalClinicDBContext())
             {
-                dbContext.Database.Migrate();
-                dbContext.SaveChanges();
+                if (dbContext.Database.GetPendingMigrations().Any())
+                {
+                    dbContext.Database.Migrate();
+                    dbContext.SaveChanges();
+                }
             }
             CreateHostBuilder(args).Build().Run();
         }

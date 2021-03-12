@@ -381,7 +381,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>نوع الكشف</Value>
+                                  <Value>فئة الكشف</Value>
                                   <Style>
                                     <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -978,7 +978,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>نوع الكشف :</Value>
+                    <Value>فئة الكشف :</Value>
                     <Style>
                       <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1519,6 +1519,7 @@
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>8a5518c5-365e-46d5-86a2-296d31b87419</rd:ReportID>
 </Report>

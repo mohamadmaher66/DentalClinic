@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>اضافة مستخدم جديد</h1>
+<h1 mat-dialog-title *ngIf="user.id == undefined">اضافة مستخدم جديد</h1>
+<h1 mat-dialog-title *ngIf="user.id != undefined">تعديل مستخدم</h1>
 <div mat-dialog-content>
   <div class="content-wrapper" style="margin-left: 0px; background-color: #ffffff; min-height: 0px;">
     <div class="row">
@@ -30,7 +31,7 @@
               </div>
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <label for="description">نوع المستخدم <i style="color: red;">*</i></label>
+                  <label for="description">فئة المستخدم <i style="color: red;">*</i></label>
                   <mat-form-field appearance="fill" class="mat-select-cls">
                     <mat-label>اختر</mat-label>
                     <mat-select [(ngModel)]="user.role" [required]="true" #role="ngModel" name="role" id="role" panelClass="mat-select-cls">
@@ -74,7 +75,7 @@
 </div>
 <div mat-dialog-actions style="float: right;">
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary" (click)="submitUser(userFrom)">{{btnTitle}}</button>
+    <button type="submit" class="btn btn-primary" (click)="submitUser(userFrom)" [disabled]="userFrom.invalid">{{btnTitle}}</button>
     <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
       (click)="dialogRef.close();">الغاء</button>
   </div>

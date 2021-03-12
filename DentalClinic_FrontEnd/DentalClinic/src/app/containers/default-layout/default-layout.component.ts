@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RoleEnum } from '../../shared/enum/role.enum';
 import { HttpService } from '../../shared/service/http-service';
 import { SessionService } from '../../shared/service/session.service';
@@ -15,17 +15,11 @@ export class DefaultLayoutComponent {
   inProgress: boolean = false;
 
   constructor(private httpService: HttpService,
-    public sessionService: SessionService,
-    private cdref: ChangeDetectorRef) {
+    public sessionService: SessionService) {
     this.setNavItems();
-
-    setTimeout(() => {
-      this.httpService.inProgressEventEmitter.subscribe(
-        res => this.inProgress = res,
-                cdref.detectChanges()
-      )
-    , 2000});
-
+    this.httpService.inProgressEventEmitter.subscribe(
+      res => this.inProgress = res,
+    )    
   }
 
   toggleMinimize(e) {

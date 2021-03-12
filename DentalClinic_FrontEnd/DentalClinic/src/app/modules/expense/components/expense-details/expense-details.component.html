@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>اضافة مصاريف جديد</h1>
+<h1 mat-dialog-title *ngIf="expense.id == undefined">اضافة مصاريف جديد</h1>
+<h1 mat-dialog-title *ngIf="expense.id != undefined">تعديل مصاريف</h1>
 <div mat-dialog-content>
   <div class="content-wrapper" style="margin-left: 0px; background-color: #ffffff; min-height: 0px;">
     <div class="row">
@@ -9,10 +10,10 @@
 
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <label for="name">الاسم <i style="color: red;">*</i></label>
+                  <label for="name">العنوان <i style="color: red;">*</i></label>
                   <input [(ngModel)]="expense.name" #name="ngModel" type="text" class="form-control" name="name"
-                    id="name" placeholder="الاسم" required>
-                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">يجب ادخال الاسم</small>
+                    id="name" placeholder="العنوان" required>
+                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">يجب ادخال العنوان</small>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -77,7 +78,7 @@
 </div>
 <div mat-dialog-actions style="float: right;">
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary" (click)="submitExpense(ExpenseFrom)">{{btnTitle}}</button>
+    <button type="submit" class="btn btn-primary" (click)="submitExpense(ExpenseFrom)" [disabled]="ExpenseFrom.invalid">{{btnTitle}}</button>
     <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
       (click)="dialogRef.close();">الغاء</button>
   </div>
