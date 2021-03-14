@@ -4,7 +4,6 @@ import { map, catchError } from 'rxjs/operators';
 import { ConfigService } from './config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionService } from './session.service';
-import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { hasValue } from './helper.service';
 

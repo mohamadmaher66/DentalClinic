@@ -17,9 +17,7 @@ export class DefaultLayoutComponent {
   constructor(private httpService: HttpService,
     public sessionService: SessionService) {
     this.setNavItems();
-    this.httpService.inProgressEventEmitter.subscribe(
-      res => this.inProgress = res,
-    )    
+       
   }
 
   toggleMinimize(e) {
