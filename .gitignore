@@ -82,3 +82,5 @@
 /DentalClinic/Modules/UserModule/obj
 bin
 obj
+*.mdf
+*.ldf
