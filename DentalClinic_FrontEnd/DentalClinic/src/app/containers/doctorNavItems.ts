@@ -3,7 +3,7 @@ import { INavData } from '@coreui/angular';
 export const doctorNavItems: INavData[] = [
   {
     title: true,
-    name: 'Components'
+    name: 'القائمة'
   },
   {
     name: 'كشوفات اليوم',
