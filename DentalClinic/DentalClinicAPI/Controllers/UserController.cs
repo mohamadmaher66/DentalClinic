@@ -95,5 +95,14 @@ namespace DentalClinicAPI.Controllers
             }
             return Ok(requestedData);
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("SeedUser")]
+        public IActionResult SeedUser()
+        {
+            userDSL.SeedLoginData();
+            return Ok("Admin user added successfully");
+        }
     }
 }

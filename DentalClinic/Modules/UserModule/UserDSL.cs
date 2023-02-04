@@ -119,6 +119,20 @@ namespace UserModule
             }
         }
 
+        public void SeedLoginData()
+        {
+            userRepository.Add(new UserDTO()
+            {
+                FullName = "Admin",
+                IsActive = true,
+                Password = "123456",
+                Role = Enums.RoleEnum.Doctor,
+                Username = "AdminUser"
+            }, 0);
+
+            UoW.SaveChanges();
+        }
+
         private void HandleErrorMessage(Exception ex)
         {
             if(ex.InnerException is SqlException sqlEx 
