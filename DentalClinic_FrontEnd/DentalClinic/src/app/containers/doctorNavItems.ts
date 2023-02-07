@@ -5,31 +5,31 @@ export const doctorNavItems: INavData[] = [
     title: true,
     name: 'القائمة'
   },
-  {
-    name: 'كشوفات اليوم',
-    url: '/appointment/dashboard',
-    icon: 'cil-calendar-check'
-  },
-  {
-    name: 'الكشوفات',
-    url: '/appointment',
-    icon: 'cil-briefcase'
-  },
-  {
-    name: 'المستخدمين',
-    url: '/user',
-    icon: 'cil-user'
-  },
-  {
-    name: 'المرضي',
-    url: '/patient',
-    icon: 'cil-medical-cross'
-  },
-  {
-    name: 'المصاريف',
-    url: '/expense',
-    icon: 'cil-dollar'
-  },
+  // {
+  //   name: 'كشوفات اليوم',
+  //   url: '/appointment/dashboard',
+  //   icon: 'cil-calendar-check'
+  // },
+  // {
+  //   name: 'الكشوفات',
+  //   url: '/appointment',
+  //   icon: 'cil-briefcase'
+  // },
+  // {
+  //   name: 'المستخدمين',
+  //   url: '/user',
+  //   icon: 'cil-user'
+  // },
+  // {
+  //   name: 'المرضي',
+  //   url: '/patient',
+  //   icon: 'cil-medical-cross'
+  // },
+  // {
+  //   name: 'المصاريف',
+  //   url: '/expense',
+  //   icon: 'cil-dollar'
+  // },
   {
     name: 'البيانات الرئيسية',
     url: '/base',
@@ -58,27 +58,27 @@ export const doctorNavItems: INavData[] = [
       }
     ]
   },
-  {
-    name: 'التقارير',
-    url: '/report',
-    icon: 'cil-print',
-    children: [
-      {
-        name: 'تقرير المصاريف',
-        url: '/report/expensereport',
-        icon: 'cil-dollar'
-      },
-      {
-        name: 'تقرير الكشوفات',
-        url: '/report/appointmentreport',
-        icon: 'cil-briefcase'
-      },
-      {
-        name: 'تقرير اجمالى المصاريف',
-        url: '/report/totalexpensereport',
-        icon: 'cil-chart-line'
-      }
+  // {
+  //   name: 'التقارير',
+  //   url: '/report',
+  //   icon: 'cil-print',
+  //   children: [
+  //     {
+  //       name: 'تقرير المصاريف',
+  //       url: '/report/expensereport',
+  //       icon: 'cil-dollar'
+  //     },
+  //     {
+  //       name: 'تقرير الكشوفات',
+  //       url: '/report/appointmentreport',
+  //       icon: 'cil-briefcase'
+  //     },
+  //     {
+  //       name: 'تقرير اجمالى المصاريف',
+  //       url: '/report/totalexpensereport',
+  //       icon: 'cil-chart-line'
+  //     }
       
-    ]
-  }
+  //   ]
+  // }
 ];

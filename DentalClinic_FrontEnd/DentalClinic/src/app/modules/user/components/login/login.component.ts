@@ -43,7 +43,7 @@ export class LoginComponent {
       this.sessionService.setToken(res.entity.token);
       this.sessionService.setUserRole(res.entity.role);
       this.sessionService.setUserName(res.entity.fullName);
-      this.router.navigateByUrl('/appointment/dashboard');
+      this.router.navigateByUrl('/clinic');
     }
     else{
       this.invalidLogin = true;
