@@ -77,7 +77,7 @@
 
                     <div class="row">
                       <div class="col-md-12">
-                        <h5>التاريخ الطبي :</h5>
+                        <h5>الامراض المزمنة :</h5>
                       </div>
                       <ul *ngIf="appointment.patient.medicalHistoryList != undefined && appointment.patient.medicalHistoryList.length > 0; else NoMedicalHistory"
                         class="list-inline">
@@ -87,7 +87,7 @@
                         </li>
                       </ul>
                       <ng-template #NoMedicalHistory>
-                        <div class="col-md-12"><label>لا يوجد تاريخ طبي</label></div>
+                        <div class="col-md-12"><label>لا يوجد مرض مزمن</label></div>
                       </ng-template>
                     </div>
                 </div>

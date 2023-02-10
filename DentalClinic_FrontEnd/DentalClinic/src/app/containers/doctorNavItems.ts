@@ -25,11 +25,11 @@ export const doctorNavItems: INavData[] = [
     url: '/patient',
     icon: 'cil-medical-cross'
   },
-  {
-    name: 'المصاريف',
-    url: '/expense',
-    icon: 'cil-dollar'
-  },
+  // {
+  //   name: 'المصاريف',
+  //   url: '/expense',
+  //   icon: 'cil-dollar'
+  // },
   {
     name: 'البيانات الرئيسية',
     url: '/base',
@@ -41,7 +41,7 @@ export const doctorNavItems: INavData[] = [
         icon: 'cil-location-pin'
       },
       {
-        name: 'التاريخ الطبي',
+        name: 'الامراض المزمنة',
         url: '/medicalhistory',
         icon: 'cil-hospital'
       },
@@ -58,27 +58,27 @@ export const doctorNavItems: INavData[] = [
       }
     ]
   },
-  {
-    name: 'التقارير',
-    url: '/report',
-    icon: 'cil-print',
-    children: [
-      {
-        name: 'تقرير المصاريف',
-        url: '/report/expensereport',
-        icon: 'cil-dollar'
-      },
-      {
-        name: 'تقرير الكشوفات',
-        url: '/report/appointmentreport',
-        icon: 'cil-briefcase'
-      },
-      {
-        name: 'تقرير اجمالى المصاريف',
-        url: '/report/totalexpensereport',
-        icon: 'cil-chart-line'
-      }
+  // {
+  //   name: 'التقارير',
+  //   url: '/report',
+  //   icon: 'cil-print',
+  //   children: [
+  //     {
+  //       name: 'تقرير المصاريف',
+  //       url: '/report/expensereport',
+  //       icon: 'cil-dollar'
+  //     },
+  //     {
+  //       name: 'تقرير الكشوفات',
+  //       url: '/report/appointmentreport',
+  //       icon: 'cil-briefcase'
+  //     },
+  //     {
+  //       name: 'تقرير اجمالى المصاريف',
+  //       url: '/report/totalexpensereport',
+  //       icon: 'cil-chart-line'
+  //     }
       
-    ]
-  }
+  //   ]
+  // }
 ];

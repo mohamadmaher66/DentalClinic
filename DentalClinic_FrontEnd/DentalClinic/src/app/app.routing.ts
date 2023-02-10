@@ -12,7 +12,7 @@ export const routes: Routes = [
       {
         path: 'medicalhistory',
         loadChildren: () => import('./modules/medical-history/medical-history.module').then(m => m.MedicalHistoryModule) ,
-        data:{ title: 'التاريخ الطبي'}
+        data:{ title: 'الامراض المزمنة'}
       },
       {
         path: 'user',
