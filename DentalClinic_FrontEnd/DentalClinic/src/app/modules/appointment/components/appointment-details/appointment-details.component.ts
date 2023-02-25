@@ -22,6 +22,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertType } from '../../../../shared/enum/alert-type.enum';
 import { AppointmentStateEnum } from '../../../../shared/enum/appointment-state.enum';
 import {Location} from '@angular/common';
+import { PatientService } from '../../../../core/servcies/patient.service';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-appointment-details',
@@ -35,6 +38,9 @@ export class AppointmentDetailsComponent implements OnInit {
   public appointment: Appointment = new Appointment();
   requestAppointmentData: RequestedData<Appointment>;
   uploadURL:string;
+  requestedPatient: RequestedData<Patient> = new RequestedData<Patient>();
+  patientNameSearchSubject = new Subject<string>();
+  patientPhoneSearchSubject = new Subject<string>();
 
   // Lists
   clinicList = new Array<Clinic>();
@@ -57,10 +63,17 @@ export class AppointmentDetailsComponent implements OnInit {
     private alertService: AlertService,
     private configService: ConfigService,
     private dialog: MatDialog,
-    private router: Router,
     private route: ActivatedRoute,
     private location: Location,
+    private patientService: PatientService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.patientNameSearchSubject.pipe(debounceTime(600),distinctUntilChanged()).subscribe(value => {
+          this.filterPatient(value, 1)
+        });
+
+      this.patientPhoneSearchSubject.pipe(debounceTime(600),distinctUntilChanged()).subscribe(value => {
+         this.filterPatient(value, 2)
+      });
   }
 
   ngOnInit() {
@@ -167,16 +180,20 @@ export class AppointmentDetailsComponent implements OnInit {
   }
 
   public filterPatient(value: string, type: number) {
-    let filter = value.toLowerCase();
+    this.requestedPatient.entity = new Patient();
+
     if(type == 1){
-      this.filteredPatientList = this.patientList
-      .filter(option => option.fullName.toLowerCase().startsWith(filter));
+      this.requestedPatient.entity.fullName = value;
     }
-    else{
-      this.filteredPatientList = this.patientList
-      .filter(option => option.phone != undefined && option.phone.startsWith(filter));
+    else
+    {
+      this.requestedPatient.entity.phone = value;
     }
-    
+
+    this.patientService.getFilteredPatientList(this.requestedPatient).subscribe(
+      res => this.filteredPatientList = res.entityList,
+      err => this.alertService.viewAlerts(err.error.alerts) 
+    );
   }
 
   public filterUser(value: string) {

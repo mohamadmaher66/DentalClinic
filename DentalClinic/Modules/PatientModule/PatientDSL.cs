@@ -124,6 +124,18 @@ namespace PatientModule
             }
         }
 
+        public List<PatientDTO> GetFilteredPatientList(string fullName, string phone)
+        {
+            try
+            {
+                return patientRepository.GetFilteredPatientList(fullName, phone);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         private void AddPatientMedicalHistoryList(List<MedicalHistoryDTO> medicalHistoryList, int patientId)
         {
             try

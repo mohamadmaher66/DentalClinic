@@ -102,5 +102,15 @@ namespace PatientModule
                 patientMedicalHistoryDBSet.RemoveRange(patientMedicalHistories);
             }
         }
+
+        internal List<PatientDTO> GetFilteredPatientList(string fullName, string phone)
+        {
+            return _mapper.Map<List<PatientDTO>>(dbset
+                            .Where(p => (!string.IsNullOrEmpty(fullName) && p.FullName.ToLower().Contains(fullName.ToLower()))
+                                         || (!string.IsNullOrEmpty(phone) && p.Phone.ToLower().Contains(phone.ToLower())))
+                            .Include(PMH => PMH.PatientMedicalHistoryList)
+                            .ThenInclude(MH => MH.MedicalHistory)
+                            .OrderBy(m => m.FullName).AsNoTracking());
+        }
     }
 }

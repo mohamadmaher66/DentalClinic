@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     MatMomentDateModule,
     MatRadioModule,
+    MatAutocompleteModule
   ],
   exports: [
     FormsModule,
@@ -46,6 +48,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     MatMomentDateModule,
     MatRadioModule,
+    MatAutocompleteModule
   ],
   declarations: [
     DeleteDialogComponent

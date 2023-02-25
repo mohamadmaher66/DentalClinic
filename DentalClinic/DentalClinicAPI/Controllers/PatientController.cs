@@ -71,5 +71,13 @@ namespace DentalPatientAPI.Controllers
             requestedData.DetailsList = patientDSL.GetDetailsLists();
             return Ok(requestedData);
         }
+
+        [HttpPost]
+        [Route("GetFilteredPatientList")]
+        public IActionResult GetFilteredPatientList([FromBody] RequestedData<PatientDTO> requestedData)
+        {
+            requestedData.EntityList = patientDSL.GetFilteredPatientList(requestedData.Entity.FullName, requestedData.Entity.Phone);
+            return Ok(requestedData);
+        }
     }
 }

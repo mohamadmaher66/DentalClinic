@@ -36,4 +36,8 @@ export class PatientService {
   public getPatientDetailsLists(object: any) {
     return this.httpService.httpPost(object, this.url + 'GetPatientDetailsLists');
   }
+
+  public getFilteredPatientList(object: any) {
+    return this.httpService.httpPost(object, this.url + 'GetFilteredPatientList');
+  }
 }

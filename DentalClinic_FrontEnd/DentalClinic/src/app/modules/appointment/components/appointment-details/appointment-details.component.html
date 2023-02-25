@@ -2,6 +2,10 @@
   i.fa {
     cursor: default;
   }
+  .hideArrow ::ng-deep .mat-select-arrow {
+    /* display: none !important; */
+    border: none;
+  }
 </style>
 <div>
   <h1 *ngIf="appointment.id == undefined">اضافة كشف جديد</h1>
@@ -20,15 +24,14 @@
                   <div class="row">
                     <div class="col-md-4 form-group">
                       <label for="name">الاسم <i style="color: red;">*</i></label>
-                      <mat-form-field appearance="fill" class="mat-select-cls">
-                        <mat-label>اختر</mat-label>
+                      <mat-form-field appearance="fill" class="mat-select-cls hideArrow">
                         <mat-select [(ngModel)]="appointment.patient" #patientId="ngModel" name="patientId"
                           id="patientId" [required]="true">
-                          <input (keyup)="filterPatient($event.target.value, 1)" class="form-control"
+                          <input (keyup)="patientNameSearchSubject.next($event.target.value)" class="form-control"
                             placeholder="اختر المريض">
-                          <mat-option *ngFor="let patient of filteredPatientList" [value]="patient">{{ patient.fullName
-                            }}
-                          </mat-option>
+                            <mat-option *ngIf="filteredPatientList.length == 0"></mat-option>
+                            <mat-option *ngFor="let patient of filteredPatientList" [value]="patient">{{ patient.fullName }}
+                            </mat-option>
                         </mat-select>
                       </mat-form-field><br>
                       <small *ngIf="patientId.invalid && (patientId.touched || patientId.dirty)" style="color: red">يجب
@@ -37,13 +40,14 @@
 
                     <div class="col-md-4 form-group">
                       <label for="phone">رقم التليفون </label>
-                      <mat-form-field appearance="fill" class="mat-select-cls">
+                      <mat-form-field appearance="fill" class="mat-select-cls hideArrow">
                         <mat-label>اختر</mat-label>
                         <mat-select [(ngModel)]="appointment.patient" #patientPhone="ngModel" name="patientPhone"
                           id="patientPhone">
-                          <input (keyup)="filterPatient($event.target.value, 2)" class="form-control"
+                          <input (keyup)="patientPhoneSearchSubject.next($event.target.value)" class="form-control"
                             placeholder="اختر التليفون">
-                          <mat-option *ngFor="let patient of filteredPatientList" [value]="patient">{{ patient.phone }}
+                            <mat-option *ngIf="filteredPatientList.length == 0"></mat-option>
+                            <mat-option *ngFor="let patient of filteredPatientList" [value]="patient">{{ patient.phone }}
                           </mat-option>
                         </mat-select>
                       </mat-form-field><br>

@@ -193,12 +193,12 @@ namespace AppointmentModule
                     List = clinicList
                 });
 
-                List<PatientDTO> patientList = new PatientDSL(mapper).GetAllLite();
-                detailsList.Add(new DetailsList()
-                {
-                    DetailsListId = (int)DetailsListEnum.Patient,
-                    List = patientList
-                });
+                //List<PatientDTO> patientList = new PatientDSL(mapper).GetAllLite();
+                //detailsList.Add(new DetailsList()
+                //{
+                //    DetailsListId = (int)DetailsListEnum.Patient,
+                //    List = patientList
+                //});
 
                 List<UserDTO> userList = new UserDSL(mapper).GetAllDoctorsLite();
                 detailsList.Add(new DetailsList()
