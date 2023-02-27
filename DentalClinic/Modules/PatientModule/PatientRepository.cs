@@ -108,6 +108,7 @@ namespace PatientModule
             return _mapper.Map<List<PatientDTO>>(dbset
                             .Where(p => (!string.IsNullOrEmpty(fullName) && p.FullName.ToLower().Contains(fullName.ToLower()))
                                          || (!string.IsNullOrEmpty(phone) && p.Phone.ToLower().Contains(phone.ToLower())))
+                            .Take(30)
                             .Include(PMH => PMH.PatientMedicalHistoryList)
                             .ThenInclude(MH => MH.MedicalHistory)
                             .OrderBy(m => m.FullName).AsNoTracking());
