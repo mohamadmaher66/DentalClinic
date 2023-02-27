@@ -8,6 +8,8 @@ using Request;
 using System.IO;
 using System.Net.Http.Headers;
 using System;
+using System.Collections.Generic;
+using PatientModule;
 
 namespace DentalAppointmentAPI.Controllers
 {
@@ -46,6 +48,15 @@ namespace DentalAppointmentAPI.Controllers
         {
             requestedData.Entity = appointmentDSL.GetById(requestedData.Entity.Id);
             requestedData.DetailsList = appointmentDSL.GetDetailsLists();
+            requestedData.DetailsList.Add(new DetailsList()
+            {
+                DetailsListId = (int)DetailsListEnum.Patient,
+                List = new List<PatientDTO>()
+                {
+                    requestedData.Entity.Patient
+                }
+            });
+
             return Ok(requestedData);
         }
 

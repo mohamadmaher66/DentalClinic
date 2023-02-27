@@ -5,6 +5,7 @@ import { AppointmentTooth } from "./appointment-tooth.model";
 import { Attachment } from "./attachment.model";
 import { Clinic } from "./clinic.model";
 import { Patient } from "./patient.model";
+import { Treatment } from "./treatment.model";
 import { User } from "./user.model";
 
 export class Appointment {
@@ -22,4 +23,5 @@ export class Appointment {
     public attachmentList = new Array<Attachment>();
     public toothList = new Array<AppointmentTooth>();
     public appointmentAdditionList = new Array<AppointmentAddition>();
+    public treatmentList = new Array<Treatment>();
 }

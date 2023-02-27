@@ -29,7 +29,7 @@ namespace DTOs
                 .ForMember(dto => dto.AppointmentAdditionList, AAA => AAA.MapFrom(AA => AA.AppointmentAppointmentAdditionList.Select(aa => aa.AppointmentAddition)))
                 .ForMember(dto => dto.AttachmentList, AAA => AAA.MapFrom(AA => AA.AttachmentList))
                 .ForMember(dto => dto.ToothList, AAA => AAA.MapFrom(AA => AA.AppointmentToothList))
-                .ForMember(dto => dto.AppointmentTreatmentList, AAA => AAA.MapFrom(AA => AA.AppointmentTreatmentList))
+                .ForMember(dto => dto.TreatmentList, AAA => AAA.MapFrom(AA => AA.AppointmentTreatmentList.Select(aa => aa.Treatment)))
                 .ReverseMap();
 
         }

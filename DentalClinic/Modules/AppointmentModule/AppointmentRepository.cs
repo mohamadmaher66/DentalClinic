@@ -126,7 +126,7 @@ namespace AppointmentModule
 
         public AppointmentDTO GetById(int appointmentId)
         {
-            return _mapper.Map<AppointmentDTO>(entities.Set<Appointment>()
+            var aaa = entities.Set<Appointment>()
                 .Include(PMH => PMH.AppointmentAppointmentAdditionList)
                 .ThenInclude(MH => MH.AppointmentAddition)
                 .Include(a => a.AppointmentToothList)
@@ -135,7 +135,10 @@ namespace AppointmentModule
                 .Include(a => a.Clinic)
                 .Include(a => a.Patient)
                 .Include(a => a.User)
-                .AsNoTracking().FirstOrDefault(c => c.Id == appointmentId));
+                .Include(a => a.AppointmentTreatmentList)
+                .ThenInclude(at => at.Treatment)
+                .AsNoTracking().FirstOrDefault(c => c.Id == appointmentId);
+            return _mapper.Map<AppointmentDTO>(aaa);
         }
 
         public int Add(AppointmentDTO appointment, int userId)
@@ -220,7 +223,19 @@ namespace AppointmentModule
                 });
             }
         }
+        internal void AddAppointmentTreatmentList(List<TreatmentDTO> appointmentTreatmentList, int appointmentId)
+        {
+            DbSet<AppointmentTreatment> appointmentTreatmentDBSet = entities.Set<AppointmentTreatment>();
 
+            foreach (var appointmentTreatment in appointmentTreatmentList)
+            {
+                appointmentTreatmentDBSet.Add(new AppointmentTreatment()
+                {
+                    AppointmentId = appointmentId,
+                    TreatmentId = appointmentTreatment.Id
+                });
+            }
+        }
         internal void DeleteAppointmentAdditionList(int appointmentId)
         {
             DbSet<AppointmentAppointmentAddition> appointmentAdditionDBSet = entities.Set<AppointmentAppointmentAddition>();
@@ -251,6 +266,16 @@ namespace AppointmentModule
             if (attachmentList != null && attachmentList.Count() > 0)
             {
                 attachmentDBSet.RemoveRange(attachmentList);
+            }
+        }
+        internal void DeleteAppointmentTreatmentList(int appointmentId)
+        {
+            DbSet<AppointmentTreatment> appointmentTreatmentDBSet = entities.Set<AppointmentTreatment>();
+
+            IEnumerable<AppointmentTreatment> appointmentAppointmentAdditionList = appointmentTreatmentDBSet.Where(p => p.AppointmentId == appointmentId);
+            if (appointmentAppointmentAdditionList != null && appointmentAppointmentAdditionList.Count() > 0)
+            {
+                appointmentTreatmentDBSet.RemoveRange(appointmentAppointmentAdditionList);
             }
         }
     }

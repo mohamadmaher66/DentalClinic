@@ -25,6 +25,7 @@ import {Location} from '@angular/common';
 import { PatientService } from '../../../../core/servcies/patient.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Treatment } from '../../../../core/models/treatment.model';
 
 @Component({
   selector: 'app-appointment-details',
@@ -52,6 +53,7 @@ export class AppointmentDetailsComponent implements OnInit {
   categoryList = new Array<AppointmentCategory>();
   filteredCategoryList = new Array<AppointmentCategory>();
   appointmentAdditionList = new Array<AppointmentAddition>();
+  treatmentList = new Array<Treatment>();
   imgViewerSrc: string;
 
   //Enums
@@ -331,12 +333,35 @@ export class AppointmentDetailsComponent implements OnInit {
         case DetailsListEnum.AppointmentAddition:
           this.appointmentAdditionList = list.list;
           break;
+
+        case DetailsListEnum.Treatment:
+          this.treatmentList = list.list;
+          break;
       }
     });
   }
 
   public cancel(){
     this.location.back();
+  }
+
+
+  public selectTreatment(selectedId: number, checked: boolean) {
+    if (checked) {
+      this.appointment.treatmentList.push(this.treatmentList.find(a => a.id == selectedId));
+    }
+    else {
+      this.appointment.treatmentList = this.appointment.treatmentList.filter(m => m.id != selectedId);
+    }
+  }
+
+  public treatmentIsChecked(checkBoxId: number) {
+    if (listHasValue(this.appointment.treatmentList) && this.appointment.treatmentList.some(m => m.id == checkBoxId)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }

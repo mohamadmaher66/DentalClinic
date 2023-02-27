@@ -6,5 +6,6 @@ export enum DetailsListEnum
     User = 3,
     Patient = 4,
     AppointmentCategory = 5,
-    AppointmentAddition = 6
+    AppointmentAddition = 6,
+    Treatment = 7
 }
