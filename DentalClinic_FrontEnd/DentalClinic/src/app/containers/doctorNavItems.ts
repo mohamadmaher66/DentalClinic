@@ -55,6 +55,11 @@ export const doctorNavItems: INavData[] = [
         name: 'انواع الكشف',
         url: '/appointmentcategory',
         icon: 'cil-layers'
+      },
+      {
+        name: 'Treatments',
+        url: '/treatment',
+        icon: 'cil-medical-cross'
       }
     ]
   },
