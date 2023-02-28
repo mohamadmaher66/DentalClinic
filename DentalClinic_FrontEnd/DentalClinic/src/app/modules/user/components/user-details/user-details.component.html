@@ -14,7 +14,7 @@
                   <label for="fullName">Name <i style="color: red;">*</i></label>
                   <input [(ngModel)]="user.fullName" #fullName="ngModel" type="text" class="form-control"
                     name="fullName" id="fullName" placeholder="Name" required>
-                  <small *ngIf="fullName.invalid && (fullName.touched || fullName.dirty)" style="color: red">يجب ادخال الاسم</small>
+                  <small *ngIf="fullName.invalid && (fullName.touched || fullName.dirty)" style="color: red">Name is required</small>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="col-md-4 form-group">
-                  <mat-checkbox [(ngModel)]="user.isActive" name="isActive" id="isActive">نشط</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="user.isActive" name="isActive" id="isActive">Active</mat-checkbox>
                 </div>
               </div>
 

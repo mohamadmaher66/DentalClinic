@@ -3,16 +3,16 @@ import { INavData } from '@coreui/angular';
 export const assistantNavItems: INavData[] = [
   {
     title: true,
-    name: 'القائمة'
+    name: 'Pages'
   },
   {
-    name: 'كشوفات اليوم',
+    name: 'Today`s visits',
     url: '/appointment/dashboard',
     icon: 'cil-calendar-check'
   },
   {
-    name: 'الكشوفات',
+    name: 'Visits',
     url: '/appointment',
     icon: 'cil-briefcase'
-  }
+}
 ];

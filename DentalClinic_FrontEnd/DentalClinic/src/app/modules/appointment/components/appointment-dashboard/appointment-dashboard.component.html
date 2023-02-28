@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <h3>Today's Visits</h3>
     <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">Add New Appointment</button>
-    <button (click)="getAllAppointments()" class="btn btn-primary" style="margin:10px"><i class="fa fa-refresh" aria-hidden="true"></i> تحديث </button>
+    <button (click)="getAllAppointments()" class="btn btn-primary" style="margin:10px"><i class="fa fa-refresh" aria-hidden="true"></i> Update </button>
     <br>
     <div class="row">
         <div class="col-md-4 form-group">
@@ -97,13 +97,13 @@
                                 <td>{{ appointment.totalPrice - appointment.discountPercentage - appointment.paidAmount }}
                                 </td>
                                 </tr>
-                                <tr><td></td><td><button (click)="saveState(appointment, appointment.state)" class="btn btn-info" style="float: left;">حفظ</button></td></tr>
+                                <tr><td></td><td><button (click)="saveState(appointment, appointment.state)" class="btn btn-info" style="float: left;">Save</button></td></tr>
                                 <tr>
                                     <td></td>
                                     <td style="float: left;">
-                                        <button *ngIf="appointment.state == appointmentStateEnum.Pending" (click)="saveState(appointment, appointmentStateEnum.Current)" class="btn btn-success">بدء</button>
-                                        <button *ngIf="appointment.state == appointmentStateEnum.Current" (click)="saveState(appointment, appointmentStateEnum.Finished)" class="btn btn-secondary">انهاء</button>
-                                        <button *ngIf="appointment.state == appointmentStateEnum.Pending" (click)="saveState(appointment, appointmentStateEnum.Cancelled)" class="btn btn-danger">الغاء</button>
+                                        <button *ngIf="appointment.state == appointmentStateEnum.Pending" (click)="saveState(appointment, appointmentStateEnum.Current)" class="btn btn-success">ٍStart</button>
+                                        <button *ngIf="appointment.state == appointmentStateEnum.Current" (click)="saveState(appointment, appointmentStateEnum.Finished)" class="btn btn-secondary">Finish</button>
+                                        <button *ngIf="appointment.state == appointmentStateEnum.Pending" (click)="saveState(appointment, appointmentStateEnum.Cancelled)" class="btn btn-danger">Cancel</button>
                                     </td>
                                 </tr>
                             </table>

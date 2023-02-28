@@ -13,7 +13,7 @@
                   <label for="name">Name <i style="color: red;">*</i></label>
                   <input [(ngModel)]="appointmentCategory.name" #name="ngModel" type="text" class="form-control"
                     name="name" id="name" placeholder="Name" required>
-                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">يجب ادخال الاسم</small>
+                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">Name is required</small>
                 </div>
 
                 <div class="col-md-4 form-group">

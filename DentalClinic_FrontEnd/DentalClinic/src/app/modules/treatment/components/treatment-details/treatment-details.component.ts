@@ -27,7 +27,7 @@ export class TreatmentDetailsComponent implements OnInit {
     this.treatment.id = this.data.selectedDetails;
 
     if (this.treatment.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getTreatment();
     }
 

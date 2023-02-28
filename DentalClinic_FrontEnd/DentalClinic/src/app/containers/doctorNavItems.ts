@@ -3,25 +3,25 @@ import { INavData } from '@coreui/angular';
 export const doctorNavItems: INavData[] = [
   {
     title: true,
-    name: 'القائمة'
+    name: 'Pages'
   },
   {
-    name: 'كشوفات اليوم',
+    name: 'Today`s visits',
     url: '/appointment/dashboard',
     icon: 'cil-calendar-check'
   },
   {
-    name: 'الكشوفات',
+    name: 'Visits',
     url: '/appointment',
     icon: 'cil-briefcase'
   },
   {
-    name: 'المستخدمين',
+    name: 'Users',
     url: '/user',
     icon: 'cil-user'
   },
   {
-    name: 'المرضي',
+    name: 'Patients',
     url: '/patient',
     icon: 'cil-medical-cross'
   },
@@ -31,28 +31,28 @@ export const doctorNavItems: INavData[] = [
   //   icon: 'cil-dollar'
   // },
   {
-    name: 'البيانات الرئيسية',
+    name: 'Main data',
     url: '/base',
     icon: 'cil-bookmark',
     children: [
       {
-        name: 'العيادات',
+        name: 'Clinics',
         url: '/clinic',
         icon: 'cil-location-pin'
       },
       {
-        name: 'الامراض المزمنة',
+        name: 'Chronic diseases',
         url: '/medicalhistory',
         icon: 'cil-hospital'
       },
       {
 
-        name: 'اضافات للكشف',
+        name: 'Visit additions',
         url: '/appointmentaddition',
         icon: 'cil-plus'
       },
       {
-        name: 'انواع الكشف',
+        name: 'Visits categories',
         url: '/appointmentcategory',
         icon: 'cil-layers'
       },

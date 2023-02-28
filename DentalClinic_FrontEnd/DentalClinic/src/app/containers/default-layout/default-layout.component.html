@@ -6,7 +6,7 @@
 
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
-      <h5>اهلا {{sessionService.getUserName()}}</h5>
+      <h5>Hello {{sessionService.getUserName()}}</h5>
     </li>
   </ul>
 
@@ -15,7 +15,7 @@
       <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" 
         dropdownToggle (click)="false">
         <button class="dropdown-item" style="min-width: 140ox;" (click)="logout()">
-          <i class="fa fa-sign-out fa-lg"></i> تسجيل خروج
+          <i class="fa fa-sign-out fa-lg"></i> Logout
         </button>
       </a>
     </li>

@@ -24,7 +24,7 @@
             </ng-container>
 
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Choices </th>
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let appointmentCategory" style="width: 15%; ">
                     <a (click)="editRecord(appointmentCategory.id)"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a>
                     <a (click)="deleteRecord(appointmentCategory.id, appointmentCategory.name)"><i class="fa fa-trash fa-lg"

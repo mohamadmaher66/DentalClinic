@@ -18,7 +18,7 @@ export class ExpenseDetailsComponent implements OnInit {
   //Variables
   public expense: Expense = new Expense();
   requestExpenseData: RequestedData<Expense>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
   expenseTypeEnum = ExpenseTypeEnum;
   clinicList = new Array<Clinic>();
   filteredClinicList = new Array<Clinic>();
@@ -32,7 +32,7 @@ export class ExpenseDetailsComponent implements OnInit {
   ngOnInit() {
     this.expense.id = this.data.selectedDetails;
     if (this.expense.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getExpense();
     }
     else{

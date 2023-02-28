@@ -25,7 +25,7 @@ export class SessionService {
     public setUserName(name: string) {
         name =  name.split(' ')[0];
         if(this.getUserRole() == RoleEnum.Doctor){
-            name = "دكتور " + name;
+            name = "Dr. " + name;
         }
         this.setValue(this.nameKey, name);
     }

@@ -19,7 +19,7 @@
             </ng-container>
 
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Choices </th>
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let medicalHistory" style="width: 10%; ">
                     <a (click)="editRecord(medicalHistory.id)"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a>
                     <a (click)="deleteRecord(medicalHistory.id, medicalHistory.name)"><i class="fa fa-trash fa-lg"

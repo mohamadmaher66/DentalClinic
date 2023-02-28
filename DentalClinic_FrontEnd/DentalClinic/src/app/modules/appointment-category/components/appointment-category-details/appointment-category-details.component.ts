@@ -14,7 +14,7 @@ export class AppointmentCategoryDetailsComponent implements OnInit {
   //Variables
   public appointmentCategory: AppointmentCategory = new AppointmentCategory();
   requestAppointmentCategoryData: RequestedData<AppointmentCategory>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
 
   constructor(private appointmentCategoryService: AppointmentCategoryService,
     private alertService: AlertService,
@@ -25,7 +25,7 @@ export class AppointmentCategoryDetailsComponent implements OnInit {
   ngOnInit() {
     this.appointmentCategory.id = this.data.selectedDetails;
     if (this.appointmentCategory.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getAppointmentCategory();
     }
   }

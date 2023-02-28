@@ -32,7 +32,7 @@ export class FileUploaderComponent implements OnInit {
     }
     Array.from(files).forEach((file:any) => {
       if(!file.type.includes("image")){
-        this.alertService.viewAlerts([{ title:"خطأ", message:"You have to choose a photo", type: AlertType.Error}]);
+        this.alertService.viewAlerts([{ title:"Error", message:"You have to choose a photo", type: AlertType.Error}]);
         return;
       }
       let fileToUpload = <File>file;
