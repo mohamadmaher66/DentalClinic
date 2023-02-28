@@ -1405,7 +1405,7 @@ html[dir="ltr"] .secondaryToolbarButton {
 }
 html[dir="rtl"] .secondaryToolbarButton {
   padding-right: 24px;
-  text-align: right;
+  text-align: left;
 }
 html[dir="ltr"] .secondaryToolbarButton.bookmark {
   padding-left: 27px;
@@ -1526,7 +1526,7 @@ html .verticalToolbarSeparator {
 .toolbarField.pageNumber {
   -moz-appearance: textfield; /* hides the spinner in moz */
   min-width: 16px;
-  text-align: right;
+  text-align: left;
   width: 40px;
 }
 
@@ -1723,7 +1723,7 @@ html .outlineItem > a {
 }
 html .attachmentsItem > button {
   padding: 2px 7px 3px 0;
-  text-align: right;
+  text-align: left;
 }
 
 .outlineItemToggler {
@@ -1919,7 +1919,7 @@ html[dir='ltr'] #documentPropertiesOverlay .row > * {
   text-align: left;
 }
 html #documentPropertiesOverlay .row > * {
-  text-align: right;
+  text-align: left;
 }
 #documentPropertiesOverlay .row > span {
   width: 125px;
