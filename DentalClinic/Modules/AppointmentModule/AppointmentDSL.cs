@@ -12,6 +12,7 @@ using PatientModule;
 using UserModule;
 using AppointmentCategoryModule;
 using AppointmentAdditionModule;
+using TreatmentModule;
 
 namespace AppointmentModule
 {
@@ -81,6 +82,7 @@ namespace AppointmentModule
                 AddAttachmentList(appointment.AttachmentList, appointment.Id);
                 AddToothList(appointment.ToothList, appointment.Id);
                 AddAppointmentAdditionList(appointment.AppointmentAdditionList, appointment.Id);
+                AddAppointmentTreatmentList(appointment.TreatmentList, appointment.Id);
                 UoW.SaveChanges();
             }
             catch (Exception e)
@@ -88,7 +90,7 @@ namespace AppointmentModule
                 throw e;
             }
         }
-        
+
         public void Update(AppointmentDTO appointment, int userId)
         {
             try
@@ -103,6 +105,9 @@ namespace AppointmentModule
 
                 DeleteAppointmentAdditionList(appointment.Id);
                 AddAppointmentAdditionList(appointment.AppointmentAdditionList, appointment.Id);
+
+                DeleteAppointmentTreatmentList(appointment.Id);
+                AddAppointmentTreatmentList(appointment.TreatmentList, appointment.Id);
 
                 UoW.SaveChanges();
             }
@@ -138,6 +143,7 @@ namespace AppointmentModule
                 DeleteAttachmentList(appointment.Id);
                 DeleteToothList(appointment.Id);
                 DeleteAppointmentAdditionList(appointment.Id);
+                DeleteAppointmentTreatmentList(appointment.Id);
 
                 appointmentRepository.Delete(appointment);
                 UoW.SaveChanges();
@@ -163,6 +169,10 @@ namespace AppointmentModule
         {
             appointmentRepository.AddAppointmentAdditionList(appointmentAdditionList, appointmentId);
         }
+        private void AddAppointmentTreatmentList(List<TreatmentDTO> appointmentTreatmentList, int appointmentId)
+        {
+            appointmentRepository.AddAppointmentTreatmentList(appointmentTreatmentList, appointmentId);
+        }
 
         private void DeleteAttachmentList(int appointmentId)
         {
@@ -178,7 +188,10 @@ namespace AppointmentModule
         {
             appointmentRepository.DeleteAppointmentAdditionList(appointmentId);
         }
-
+        private void DeleteAppointmentTreatmentList(int appointmentId)
+        {
+            appointmentRepository.DeleteAppointmentTreatmentList(appointmentId);
+        }
 
         public List<DetailsList> GetDetailsLists()
         {
@@ -219,6 +232,14 @@ namespace AppointmentModule
                 {
                     DetailsListId = (int)DetailsListEnum.AppointmentAddition,
                     List = additionList
+                });
+
+
+                List<TreatmentDTO> treatmentList = new TreatmentDSL(mapper).GetAllLite();
+                detailsList.Add(new DetailsList()
+                {
+                    DetailsListId = (int)DetailsListEnum.Treatment,
+                    List = treatmentList
                 });
 
                 return detailsList;

@@ -17,6 +17,7 @@ namespace DTOs
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<AppointmentTooth, AppointmentToothDTO>().ReverseMap();
             CreateMap<Clinic, ClinicDTO>().ReverseMap();
+            CreateMap<Treatment, TreatmentDTO>().ReverseMap();
             CreateMap<Patient, PatientDTO>()
                     .ForMember(dto => dto.MedicalHistoryList, PMH => PMH.MapFrom(MH => MH.PatientMedicalHistoryList.Select(cs => cs.MedicalHistory)))
                     .ReverseMap();
@@ -28,6 +29,7 @@ namespace DTOs
                 .ForMember(dto => dto.AppointmentAdditionList, AAA => AAA.MapFrom(AA => AA.AppointmentAppointmentAdditionList.Select(aa => aa.AppointmentAddition)))
                 .ForMember(dto => dto.AttachmentList, AAA => AAA.MapFrom(AA => AA.AttachmentList))
                 .ForMember(dto => dto.ToothList, AAA => AAA.MapFrom(AA => AA.AppointmentToothList))
+                .ForMember(dto => dto.TreatmentList, AAA => AAA.MapFrom(AA => AA.AppointmentTreatmentList.Select(aa => aa.Treatment)))
                 .ReverseMap();
 
         }

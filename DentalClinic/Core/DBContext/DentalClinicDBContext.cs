@@ -20,6 +20,8 @@ namespace DBContext
         public DbSet<Clinic> Clinic { get; set; }
         public DbSet<PatientMedicalHistory> PatientMedicalHistory { get; set; }
         public DbSet<AppointmentAppointmentAddition> AppointmentAppointmentAddition { get; set; }
+        public DbSet<Treatment> Treatment { get; set; }
+        public DbSet<AppointmentTreatment> AppointmentTreatment { get; set; }
 
 
         private static string _connectionString;
@@ -75,7 +77,18 @@ namespace DBContext
                 .WithMany(aaa => aaa.AppointmentAppointmentAddition)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+            modelBuilder.Entity<AppointmentTreatment>()
+               .HasKey(PMH => new { PMH.AppointmentId, PMH.TreatmentId });
+
+            modelBuilder.Entity<AppointmentTreatment>()
+                .HasOne(aaa => aaa.Appointment)
+                .WithMany(aaa => aaa.AppointmentTreatmentList)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AppointmentTreatment>()
+              .HasOne(aaa => aaa.Treatment)
+              .WithMany(aaa => aaa.AppointmentTreatmentList)
+              .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

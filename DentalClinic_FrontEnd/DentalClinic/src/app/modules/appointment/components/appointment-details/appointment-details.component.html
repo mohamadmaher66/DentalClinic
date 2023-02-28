@@ -228,6 +228,26 @@
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-accent-primary">
+                <div class="card-header">
+                  <h4>Treatments</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 form-group" *ngFor="let treatment of treatmentList">
+                      <mat-checkbox (change)="selectTreatment(treatment.id, $event.checked)" 
+                                    [checked]="treatmentIsChecked(treatment.id)"
+                      style="margin-top: 0px;font-size: 15px;">{{ treatment.name }}</mat-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
           <div class="row">
             <div class="col-md-12">
               <div class="card card-accent-primary">
@@ -250,6 +270,9 @@
               </div>
             </div>
           </div>
+
+          
+
           <hr>
           <div class="row">
             <div class="col-md-12">

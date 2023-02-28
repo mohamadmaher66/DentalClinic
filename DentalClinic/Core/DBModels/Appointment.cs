@@ -29,5 +29,6 @@ namespace DBModels
         public ICollection<AppointmentAppointmentAddition> AppointmentAppointmentAdditionList { get; set; }
         public ICollection<AppointmentTooth> AppointmentToothList { get; set; }
         public ICollection<Attachment> AttachmentList { get; set; }
+        public ICollection<AppointmentTreatment> AppointmentTreatmentList { get; set; }
     }
 }

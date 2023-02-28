@@ -53,6 +53,11 @@ export const routes: Routes = [
         path: 'report',
         loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule),
         data:{ title: 'Reports'}
+      },
+      {
+        path: 'treatment',
+        loadChildren: () => import('./modules/treatment/treatment.module').then(m => m.TreatmentModule),
+        data:{ title: 'Treatments'}
       }
     ]
   }

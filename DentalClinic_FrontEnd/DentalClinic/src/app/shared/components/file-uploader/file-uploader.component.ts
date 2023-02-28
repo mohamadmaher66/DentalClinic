@@ -30,7 +30,7 @@ export class FileUploaderComponent implements OnInit {
     if (files.length === 0) {
       return;
     }
-    files.forEach(file => {
+    Array.from(files).forEach((file:any) => {
       if(!file.type.includes("image")){
         this.alertService.viewAlerts([{ title:"خطأ", message:"You have to choose a photo", type: AlertType.Error}]);
         return;
@@ -58,7 +58,7 @@ export class FileUploaderComponent implements OnInit {
       this.alertService.viewAlerts(alerts);
       this.isUploaded = true;
       this.imgURLList.push(event.body);
-      this.onUploadFinished.emit(event.body);
+      this.onUploadFinished.emit(event.body)  ;
     }
   }
 
