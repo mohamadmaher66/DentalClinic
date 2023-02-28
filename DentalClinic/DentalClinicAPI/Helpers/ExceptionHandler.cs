@@ -22,12 +22,12 @@ namespace DentalClinicAPI.Helpers
             {
                 Type = AlertTypeEnum.Error,
                 Message = exception.Message,
-                Title = "حذث خطأ"
+                Title = " something wrong"
             };
 
             if (exception.InnerException is SqlException sqlEx && (sqlEx.Number == 547))
             {
-                alert.Message = "يجب حذف البيانات المربوطة اولا";
+                alert.Message = "You have to deleted the linked data firstly";
             }
             RequestedData<object> requestedData = new RequestedData<object>
             {

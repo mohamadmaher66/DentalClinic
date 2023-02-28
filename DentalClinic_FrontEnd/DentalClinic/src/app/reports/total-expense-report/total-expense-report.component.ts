@@ -105,7 +105,7 @@ export class TotalExpenseReportComponent extends BaseComponent implements OnInit
       width: '1100px',
       height: '640px',
       maxHeight: '650px',
-      data: { reportTitle: " تقرير اجمالى المصاريف", pdf: reportPDF }
+      data: { reportTitle: " Total Expenses Report", pdf: reportPDF }
     });
   }
 

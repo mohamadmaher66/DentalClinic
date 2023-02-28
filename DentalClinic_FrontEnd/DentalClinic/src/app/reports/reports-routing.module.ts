@@ -7,9 +7,9 @@ import { TotalExpenseReportComponent } from './total-expense-report/total-expens
 
 const routes: Routes = [
   { path:'', component: ExpenseReportComponent },
-  { path:'expensereport', component: ExpenseReportComponent, data:{ title: 'تقرير المصاريف'}, canActivate:[DoctorAuthGaurd]  },
-  { path:'appointmentreport', component: AppointmentReportComponent, data:{ title: 'تقرير الكشوفات'}, canActivate:[DoctorAuthGaurd]  },
-  { path:'totalexpensereport', component: TotalExpenseReportComponent, data:{ title: 'تقرير اجمالى المصاريف'}, canActivate:[DoctorAuthGaurd] },
+  { path:'expensereport', component: ExpenseReportComponent, data:{ title: ' Expenses Report'}, canActivate:[DoctorAuthGaurd]  },
+  { path:'appointmentreport', component: AppointmentReportComponent, data:{ title: ' Appointments Report'}, canActivate:[DoctorAuthGaurd]  },
+  { path:'totalexpensereport', component: TotalExpenseReportComponent, data:{ title: 'Total Expenses Report'}, canActivate:[DoctorAuthGaurd] },
 ];
 
 @NgModule({

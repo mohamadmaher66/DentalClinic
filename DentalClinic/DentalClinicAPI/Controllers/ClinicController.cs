@@ -49,7 +49,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult AddClinic([FromBody] RequestedData<ClinicDTO> requestedData)
         {
             clinicDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة العيادة بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully", Type = AlertTypeEnum.Success, Message = "New clinic added successfully" });
             return Ok(requestedData);
         }
 
@@ -58,7 +58,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult EditClinic([FromBody] RequestedData<ClinicDTO> requestedData)
         {
             clinicDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل العيادة بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = " clinic edited successfully" });
             return Ok(requestedData);
         }
 
@@ -67,7 +67,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteClinic([FromBody] RequestedData<ClinicDTO> requestedData)
         {
             requestedData.EntityList = clinicDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف العيادة بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "clinic deleted successfully" });
             return Ok(requestedData);
         }
     }

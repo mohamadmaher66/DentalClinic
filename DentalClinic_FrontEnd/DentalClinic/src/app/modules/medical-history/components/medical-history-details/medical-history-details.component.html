@@ -1,5 +1,5 @@
-<h1 mat-dialog-title *ngIf="medicalHistory.id == undefined">اضافة مرض مزمن جديد</h1>
-<h1 mat-dialog-title *ngIf="medicalHistory.id != undefined">تعديل مرض مزمن</h1>
+<h1 mat-dialog-title *ngIf="medicalHistory.id == undefined">Add new Chronic disease</h1>
+<h1 mat-dialog-title *ngIf="medicalHistory.id != undefined"> Edit Chronic disease </h1>
 <div mat-dialog-content>
   <div class="content-wrapper" style="margin-left: 0px; background-color: #ffffff; min-height: 0px;">
     <div class="row">
@@ -10,16 +10,16 @@
               <div class="row">
 
                 <div class="col-md-4 form-group">
-                  <label for="name">الاسم<i style="color: red;">*</i></label>
+                  <label for="name">Name<i style="color: red;">*</i></label>
                   <input [(ngModel)]="medicalHistory.name" #name="ngModel" type="text" class="form-control"
-                    name="name" id="name" placeholder="الاسم" required>
-                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">يجب ادخال الاسم</small>
+                    name="name" id="name" placeholder="Name" required>
+                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red"> You have to enter the name </small>
                 </div>
 
                 <div class="col-md-6 form-group">
-                  <label for="description">الوصف</label>
+                  <label for="description">Description</label>
                   <textarea [(ngModel)]="medicalHistory.description" #description="ngModel" type="text" name="description"
-                    class="form-control" id="description" placeholder="الوصف" rows="5"></textarea>
+                    class="form-control" id="description" placeholder="Description" rows="5"></textarea>
                 </div>
               </div>
             </div>
@@ -35,6 +35,6 @@
   <div class="box-footer">
     <button type="submit" class="btn btn-primary" (click)="submitMedicalHistory(medicalHistoryFrom)" [disabled]="medicalHistoryFrom.invalid">{{btnTitle}}</button>
     <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
-      (click)="dialogRef.close();">الغاء</button>
+      (click)="dialogRef.close();">Cancel</button>
   </div>
 </div>

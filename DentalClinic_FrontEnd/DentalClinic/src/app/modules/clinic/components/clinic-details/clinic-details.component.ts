@@ -15,7 +15,7 @@ export class ClinicDetailsComponent implements OnInit {
   //Variables
   public clinic: Clinic = new Clinic();
   requestClinicData: RequestedData<Clinic>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
   roleEnum = RoleEnum;
 
   constructor(private clinicService: ClinicService,
@@ -27,7 +27,7 @@ export class ClinicDetailsComponent implements OnInit {
   ngOnInit() {
     this.clinic.id = this.data.selectedDetails;
     if (this.clinic.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getClinic();
     }
   }

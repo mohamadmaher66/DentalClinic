@@ -54,7 +54,7 @@ namespace DentalAppointmentAPI.Controllers
         public IActionResult AddAppointment([FromBody] RequestedData<AppointmentDTO> requestedData)
         {
             appointmentDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة الكشف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Appointment reserved Successfully" });
             return Ok(requestedData);
         }
 
@@ -63,7 +63,7 @@ namespace DentalAppointmentAPI.Controllers
         public IActionResult EditAppointment([FromBody] RequestedData<AppointmentDTO> requestedData)
         {
             appointmentDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل الكشف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Appointment Edited Successfully" });
             return Ok(requestedData);
         }
 
@@ -72,7 +72,7 @@ namespace DentalAppointmentAPI.Controllers
         public IActionResult DeleteAppointment([FromBody] RequestedData<AppointmentDTO> requestedData)
         {
             requestedData.EntityList = appointmentDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف الكشف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Appointment deleted Successfully" });
             return Ok(requestedData);
         }
 
@@ -81,7 +81,7 @@ namespace DentalAppointmentAPI.Controllers
         public IActionResult SaveState([FromBody] RequestedData<AppointmentDTO> requestedData)
         {
             appointmentDSL.SaveState(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حفظ الكشف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Appointment saved Successfully" });
             return Ok(requestedData);
         }
         

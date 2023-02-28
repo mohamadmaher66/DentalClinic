@@ -14,7 +14,7 @@ export class AppointmentAdditionDetailsComponent implements OnInit {
   //Variables
   public appointmentAddition: AppointmentAddition = new AppointmentAddition();
   requestAppointmentAdditionData: RequestedData<AppointmentAddition>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
 
   constructor(private appointmentAdditionService: AppointmentAdditionService,
     private alertService: AlertService,
@@ -25,7 +25,7 @@ export class AppointmentAdditionDetailsComponent implements OnInit {
   ngOnInit() {
     this.appointmentAddition.id = this.data.selectedDetails;
     if (this.appointmentAddition.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getAppointmentAddition();
     }
   }

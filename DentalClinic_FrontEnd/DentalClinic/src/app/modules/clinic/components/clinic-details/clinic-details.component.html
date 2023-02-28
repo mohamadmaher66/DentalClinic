@@ -1,5 +1,5 @@
-<h1 mat-dialog-title *ngIf="clinic.id == undefined">اضافة عيادة جديد</h1>
-<h1 mat-dialog-title *ngIf="clinic.id != undefined">تعديل عيادة</h1>
+<h1 mat-dialog-title *ngIf="clinic.id == undefined">  Add New Clinic</h1>
+<h1 mat-dialog-title *ngIf="clinic.id != undefined"> Edit Clinic</h1>
 <div mat-dialog-content>
   <div class="content-wrapper" style="margin-left: 0px; background-color: #ffffff; min-height: 0px;">
     <div class="row">
@@ -10,16 +10,16 @@
 
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <label for="name">الاسم <i style="color: red;">*</i></label>
+                  <label for="name">Name <i style="color: red;">*</i></label>
                   <input [(ngModel)]="clinic.name" #name="ngModel" type="text" class="form-control"
-                    name="name" id="name" placeholder="الاسم" required>
-                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">يجب ادخال الاسم</small>
+                    name="name" id="name" placeholder="Name" required>
+                  <small *ngIf="name.invalid && (name.touched || name.dirty)" style="color: red">  You have to enter the name</small>
                 </div>
 
                 <div class="col-md-4 form-group">
-                  <label for="address">العنوان</label>
+                  <label for="address"><Address></Address></label>
                   <input [(ngModel)]="clinic.address" #address="ngModel" type="text" class="form-control"
-                    name="address" id="address" placeholder="العنوان">
+                    name="address" id="address" placeholder="Address">
                 </div>
               </div>
             </div>

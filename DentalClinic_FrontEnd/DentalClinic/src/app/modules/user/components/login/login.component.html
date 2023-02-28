@@ -7,35 +7,35 @@
             <div class="card p-4">
               <div class="card-body">
                 <form #loginForm="ngForm" (keyup.enter)="login(loginForm)">
-                  <h1>تسجيل الدخول</h1>
+                  <h1> Login</h1>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="اسم المستخدم" autocomplete required
+                    <input type="text" class="form-control" placeholder="Username" autocomplete required
                       [(ngModel)]="user.username" #username="ngModel" name="username" id="username">
 
                     <div class="invalid-feedback order-last"
                       *ngIf="username.invalid && (username.touched || username.dirty)">
-                      يجب ادخال اسم المستخدم
+                      You have to enter the username
                     </div>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="كلمة المرور" autocomplete
+                    <input type="password" class="form-control" placeholder=" Password" autocomplete
                       [(ngModel)]="user.password" #password="ngModel" name="password" id="password" required>
                     <div class="invalid-feedback order-last"
-                      *ngIf="password.invalid && (password.touched || password.dirty)" style="color: red">يجب
-                      ادخال كلمة المرور
+                      *ngIf="password.invalid && (password.touched || password.dirty)" style="color: red">
+                      You have to enter the password
                     </div>
                   </div>
-                  <small *ngIf="invalidLogin" style="color: red">خطأ في اسم المستخدم أو كلمة مرور</small>
+                  <small *ngIf="invalidLogin" style="color: red">Username or Password is wrong</small>
                   <div class="row">
                     <div class="col-6">
                       <button type="button" class="btn btn-primary" (click)="login(loginForm)"
-                        [disabled]="loginForm.invalid">تسجيل الدخول</button>
+                        [disabled]="loginForm.invalid"> Login</button>
                       <!-- <mat-spinner diameter="150" *ngIf="inProgress" style="top: -50px !important; right: 50%;"></mat-spinner> -->
                     </div>
                   </div>

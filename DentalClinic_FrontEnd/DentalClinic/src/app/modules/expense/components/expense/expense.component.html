@@ -1,43 +1,43 @@
 <div class="content-wrapper">
-    <h3>المصاريف</h3>
-    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">اضافة جديد</button>
+    <h3>Expenses</h3>
+    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px"> New</button>
     <br>
     <mat-form-field class="col-md-10">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث" style="font-size: 15px;">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" style="font-size: 15px;">
     </mat-form-field>
     <div class="example-container">
         <table mat-table [dataSource]="expenseList" style="width: 100%;">
 
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>العنوان</th>
+                <th mat-header-cell *matHeaderCellDef>Address</th>
                 <td mat-cell *matCellDef="let expense" style="width: 20%;"> {{expense.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="cost">
-                <th mat-header-cell *matHeaderCellDef>التكلفة</th>
+                <th mat-header-cell *matHeaderCellDef>Cost</th>
                 <td mat-cell *matCellDef="let expense" style="width: 10%;"> {{expense.cost}} </td>
             </ng-container>
 
             <ng-container matColumnDef="actionDate">
-                <th mat-header-cell *matHeaderCellDef>التاريخ</th>
+                <th mat-header-cell *matHeaderCellDef>Date</th>
                 <td mat-cell *matCellDef="let expense" style="width: 15%;"> {{expense.actionDate | date: 'dd/MM/yyyy'}} </td>
             </ng-container>
             
             <ng-container matColumnDef="type">
-                <th mat-header-cell *matHeaderCellDef>النوع</th>
+                <th mat-header-cell *matHeaderCellDef>Type</th>
                 <td mat-cell *matCellDef="let expense" style="width: 20%;"> 
-                    <label *ngIf="expense.type == expenseTypeEnum.In">داخل للعيادة</label>
-                    <label *ngIf="expense.type == expenseTypeEnum.Out">خارج من العيادة</label>
+                    <label *ngIf="expense.type == expenseTypeEnum.In"> Income</label>
+                    <label *ngIf="expense.type == expenseTypeEnum.Out">Expenses</label>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="clinicName">
-                <th mat-header-cell *matHeaderCellDef>العيادة</th>
+                <th mat-header-cell *matHeaderCellDef>Clinic</th>
                 <td mat-cell *matCellDef="let expense" style="width: 20%;"> {{expense.clinicName}} </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> الخيارات </th>
+                <th mat-header-cell *matHeaderCellDef> Choices </th>
                 <td mat-cell *matCellDef="let expense" style="width: 15%; ">
                     <a (click)="editRecord(expense.id)"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></a>
                     <a (click)="deleteRecord(expense.id, expense.name)"><i class="fa fa-trash fa-lg"

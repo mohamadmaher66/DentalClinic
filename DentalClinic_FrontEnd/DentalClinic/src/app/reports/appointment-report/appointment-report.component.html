@@ -5,29 +5,29 @@
                 <div class="col-md-12">
                     <div class="card card-accent-primary">
                         <div class="card-header">
-                            <h1>تقرير الكشوفات</h1>
+                            <h1>Appointment reports</h1>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 form-group">
-                                    <label for="date">من تاريخ <i style="color: red;">*</i></label>
+                                    <label for="date"> From date <i style="color: red;">*</i></label>
                                     <mat-form-field appearance="legacy">
-                                        <mat-label>اختر تاريخ</mat-label>
+                                        <mat-label> Choose data</mat-label>
                                         <input matInput [matDatepicker]="dateFromPicker" style="height: auto;"
                                             [(ngModel)]="appointmentFilter.dateFrom" #dateFrom="ngModel" name="dateFrom"
-                                            class="form-control" id="dateFrom" placeholder="من تاريخ" required>
+                                            class="form-control" id="dateFrom" placeholder=" From date" required>
                                         <mat-datepicker-toggle matSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
                                         <mat-datepicker #dateFromPicker></mat-datepicker>
                                     </mat-form-field>
                                 </div>
 
                                 <div class="col-md-4 form-group">
-                                    <label for="date">الى تاريخ <i style="color: red;">*</i></label>
+                                    <label for="date"> To date <i style="color: red;">*</i></label>
                                     <mat-form-field appearance="legacy">
-                                        <mat-label>اختر تاريخ</mat-label>
+                                        <mat-label> Choose date</mat-label>
                                         <input matInput [matDatepicker]="dateToPicker" style="height: auto;"
                                             [(ngModel)]="appointmentFilter.dateTo" #dateTo="ngModel" name="dateTo"
-                                            class="form-control" id="dateTo" placeholder="الى تاريخ" required>
+                                            class="form-control" id="dateTo" placeholder=" To date" required>
                                         <mat-datepicker-toggle matSuffix [for]="dateToPicker"></mat-datepicker-toggle>
                                         <mat-datepicker #dateToPicker></mat-datepicker>
                                     </mat-form-field>
@@ -36,36 +36,36 @@
 
                             <div class="row">
                                 <div class="col-md-4 form-group">
-                                    <label for="name">المريض </label>
+                                    <label for="name">Patient </label>
                                     <mat-form-field appearance="fill" class="mat-select-cls">
-                                      <mat-label>اختر</mat-label>
+                                      <mat-label>Choose</mat-label>
                                       <mat-select [(ngModel)]="appointmentFilter.patientId" #patientId="ngModel" name="patientId" id="patientId">
-                                        <input (keyup)="filterPatient($event.target.value)" class="form-control" placeholder="اختر المريض">
-                                        <mat-option [value]="0"> الكل </mat-option>
+                                        <input (keyup)="filterPatient($event.target.value)" class="form-control" placeholder=" Choose Patient">
+                                        <mat-option [value]="0"> All </mat-option>
                                         <mat-option *ngFor="let patient of filteredPatientList" [value]="patient.id">{{ patient.fullName }} </mat-option>
                                       </mat-select>
                                     </mat-form-field>
                                   </div>
 
                                 <div class="col-md-4 form-group">
-                                    <label for="clinic">العيادة</label>
+                                    <label for="clinic">Clinics</label>
                                     <mat-form-field appearance="fill" class="mat-select-cls">
-                                      <mat-label>اختر</mat-label>
+                                      <mat-label>Choose</mat-label>
                                       <mat-select [(ngModel)]="appointmentFilter.clinicId" #clinic="ngModel" name="clinic" id="clinic">
-                                        <input (keyup)="filterClinic($event.target.value)" class="form-control" placeholder="اختر العيادة">
-                                        <mat-option [value]="0">الكل </mat-option>
+                                        <input (keyup)="filterClinic($event.target.value)" class="form-control" placeholder=" Choose Clinic">
+                                        <mat-option [value]="0">All </mat-option>
                                         <mat-option *ngFor="let clinic of filteredClinicList" [value]="clinic.id">{{ clinic.name }} </mat-option>
                                       </mat-select>
                                     </mat-form-field>
                                   </div>
                                 
                                   <div class="col-md-4 form-group">
-                                    <label for="user">الدكتور </label>
+                                    <label for="user">Doctor </label>
                                     <mat-form-field appearance="fill" class="mat-select-cls">
-                                      <mat-label>اختر</mat-label>
+                                      <mat-label>Choose</mat-label>
                                       <mat-select [(ngModel)]="appointmentFilter.userId" #user="ngModel" name="user" id="user">
-                                        <input (keyup)="filterUser($event.target.value)" class="form-control" placeholder="اختر الدكتور">
-                                        <mat-option [value]="0">الكل </mat-option>
+                                        <input (keyup)="filterUser($event.target.value)" class="form-control" placeholder=" Choose Doctor">
+                                        <mat-option [value]="0">All </mat-option>
                                         <mat-option *ngFor="let user of filteredUserList" [value]="user.id">{{ user.fullName }}
                                         </mat-option>
                                       </mat-select>
@@ -75,12 +75,12 @@
 
                             <div class="row">
                                 <div class="col-md-4 form-group">
-                                  <label for="category">فئة الكشف </label>
+                                  <label for="category"> Appointment Category </label>
                                   <mat-form-field appearance="fill" class="mat-select-cls">
-                                    <mat-label>اختر</mat-label>
+                                    <mat-label>choose</mat-label>
                                     <mat-select [(ngModel)]="appointmentFilter.categoryId" #category="ngModel" name="category" id="category">
-                                      <input (keyup)="filterCategory($event.target.value)" class="form-control" placeholder="اختر فئة الكشف">
-                                      <mat-option [value]="0">الكل </mat-option>
+                                      <input (keyup)="filterCategory($event.target.value)" class="form-control" placeholder="Choose appointment category">
+                                      <mat-option [value]="0">All </mat-option>
                                       <mat-option *ngFor="let category of filteredCategoryList" [value]="category.id">{{ category.name }}
                                       </mat-option>
                                     </mat-select>
@@ -88,15 +88,15 @@
                                 </div>
 
                                 <div class="col-md-4 form-group">
-                                    <label for="category">الحالة</label>
+                                    <label for="category">Status</label>
                                     <mat-form-field appearance="fill" class="mat-select-cls">
-                                      <mat-label>اختر</mat-label>
+                                      <mat-label>Choose</mat-label>
                                       <mat-select [(ngModel)]="appointmentFilter.state" #state="ngModel" name="state" id="state">
-                                        <mat-option [value]="0">الكل </mat-option>
-                                        <mat-option [value]="appointmentStateEnum.Pending">قيد الانتظار </mat-option>
-                                        <mat-option [value]="appointmentStateEnum.Current">جارى</mat-option>
-                                        <mat-option [value]="appointmentStateEnum.Finished">انتهى</mat-option>
-                                        <mat-option [value]="appointmentStateEnum.Cancelled">ملغي</mat-option>
+                                        <mat-option [value]="0">All </mat-option>
+                                        <mat-option [value]="appointmentStateEnum.Pending">Waiting List </mat-option>
+                                        <mat-option [value]="appointmentStateEnum.Current">Processing</mat-option>
+                                        <mat-option [value]="appointmentStateEnum.Finished">Finished</mat-option>
+                                        <mat-option [value]="appointmentStateEnum.Cancelled">Cancelled</mat-option>
                                       </mat-select>
                                     </mat-form-field>
                                   </div>
@@ -104,7 +104,7 @@
 
                             <div class="row">
                                 <div class="col-md-12" style="text-align: center;">
-                                   <button class="btn btn-primary" (click)="openReport()">اعرض التقرير</button>
+                                   <button class="btn btn-primary" (click)="openReport()"> Show Report</button>
                                 </div>
                              </div>
                         </div>

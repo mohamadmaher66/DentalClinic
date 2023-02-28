@@ -117,7 +117,7 @@ export class AppointmentDetailsComponent implements OnInit {
       return;
     }
     if(this.appointment.totalPrice - this.appointment.discountPercentage - this.appointment.paidAmount < 0){
-      this.alertService.viewAlerts([{title:"خطأ", type: AlertType.Error, message: "لا يمكن ان يكون الباقي اقل من الصفر" }]);
+      this.alertService.viewAlerts([{title:"Wrong", type: AlertType.Error, message: "The change should not be less than 0" }]);
       return;
     }
     this.requestAppointmentData = new RequestedData<Appointment>();

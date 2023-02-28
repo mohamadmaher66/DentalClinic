@@ -1,5 +1,5 @@
-<h1 mat-dialog-title *ngIf="user.id == undefined">اضافة مستخدم جديد</h1>
-<h1 mat-dialog-title *ngIf="user.id != undefined">تعديل مستخدم</h1>
+<h1 mat-dialog-title *ngIf="user.id == undefined">Add New User</h1>
+<h1 mat-dialog-title *ngIf="user.id != undefined"> Edit User</h1>
 <div mat-dialog-content>
   <div class="content-wrapper" style="margin-left: 0px; background-color: #ffffff; min-height: 0px;">
     <div class="row">
@@ -8,38 +8,38 @@
           <form role="form" #userFrom="ngForm">
             <div class="box-body">
 
-              <h4>بيانات المستخدم</h4>
+              <h4>User Information</h4>
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <label for="fullName">الاسم <i style="color: red;">*</i></label>
+                  <label for="fullName">Name <i style="color: red;">*</i></label>
                   <input [(ngModel)]="user.fullName" #fullName="ngModel" type="text" class="form-control"
-                    name="fullName" id="fullName" placeholder="الاسم" required>
+                    name="fullName" id="fullName" placeholder="Name" required>
                   <small *ngIf="fullName.invalid && (fullName.touched || fullName.dirty)" style="color: red">يجب ادخال الاسم</small>
                 </div>
 
                 <div class="col-md-4 form-group">
-                  <label for="address">العنوان</label>
+                  <label for="address">Address</label>
                   <input [(ngModel)]="user.address" #address="ngModel" type="text" class="form-control"
-                    name="address" id="address" placeholder="العنوان">
+                    name="address" id="address" placeholder="Address">
                 </div>
 
                 <div class="col-md-4 form-group">
-                  <label for="phone">رقم التليفون</label>
+                  <label for="phone"> Phone number</label>
                   <input [(ngModel)]="user.phone" #phone="ngModel" type="text" class="form-control"
-                    name="phone" id="phone" placeholder="رقم التليفون">
+                    name="phone" id="phone" placeholder=" Phone number">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <label for="description">فئة المستخدم <i style="color: red;">*</i></label>
+                  <label for="description"> User type <i style="color: red;">*</i></label>
                   <mat-form-field appearance="fill" class="mat-select-cls">
-                    <mat-label>اختر</mat-label>
+                    <mat-label>Choose</mat-label>
                     <mat-select [(ngModel)]="user.role" [required]="true" #role="ngModel" name="role" id="role" panelClass="mat-select-cls">
-                      <mat-option [value]="roleEnum.Doctor"> دكتور </mat-option>
-                      <mat-option [value]="roleEnum.Assistant"> مساعد </mat-option>
+                      <mat-option [value]="roleEnum.Doctor"> Doctor </mat-option>
+                      <mat-option [value]="roleEnum.Assistant"> Assistant</mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <small *ngIf="role.invalid && (role.touched || role.dirty)" style="color: red">يجب اختيار نوغ المستخدم</small>
+                  <small *ngIf="role.invalid && (role.touched || role.dirty)" style="color: red">You have to enter the user type</small>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -48,20 +48,20 @@
               </div>
 
               <hr>
-              <h4>بيانات الدخول</h4>
+              <h4>Login date</h4>
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <label for="username">اسم المستخدم <i style="color: red;">*</i></label>
+                  <label for="username"> Username <i style="color: red;">*</i></label>
                   <input [(ngModel)]="user.username" #username="ngModel" type="text" class="form-control"
-                    name="username" id="username" placeholder="اسم المستخدم" autocomplete="new-password" required>
-                    <small *ngIf="username.invalid && (username.touched || username.dirty)" style="color: red">يجب ادخال اسم المستخدم</small>
+                    name="username" id="username" placeholder="Username " autocomplete="new-password" required>
+                    <small *ngIf="username.invalid && (username.touched || username.dirty)" style="color: red">You have to enter the username</small>
                   </div>
 
                 <div class="col-md-4 form-group">
-                  <label for="password">كلمة المرور <i *ngIf="user.id == undefined || user.id == 0" style="color: red;">*</i></label>
+                  <label for="password"> Password <i *ngIf="user.id == undefined || user.id == 0" style="color: red;">*</i></label>
                   <input [(ngModel)]="user.password" #password="ngModel" type="password" class="form-control" autocomplete="new-password"
-                    name="password" id="password" placeholder="كلمة المرور" [required]="user.id == undefined || user.id == 0">
-                    <small *ngIf="password.invalid && (password.touched || password.dirty)" style="color: red">يجب ادخال كلمة المرور</small>
+                    name="password" id="password" placeholder="Password " [required]="user.id == undefined || user.id == 0">
+                    <small *ngIf="password.invalid && (password.touched || password.dirty)" style="color: red">You have to enter the password</small>
                   </div>
               </div>
 
@@ -77,6 +77,6 @@
   <div class="box-footer">
     <button type="submit" class="btn btn-primary" (click)="submitUser(userFrom)" [disabled]="userFrom.invalid">{{btnTitle}}</button>
     <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
-      (click)="dialogRef.close();">الغاء</button>
+      (click)="dialogRef.close();">Cancel</button>
   </div>
 </div>

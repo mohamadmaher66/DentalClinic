@@ -12,47 +12,47 @@ export const routes: Routes = [
       {
         path: 'medicalhistory',
         loadChildren: () => import('./modules/medical-history/medical-history.module').then(m => m.MedicalHistoryModule) ,
-        data:{ title: 'الامراض المزمنة'}
+        data:{ title: 'Chronic diseases '}
       },
       {
         path: 'user',
         loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) ,
-        data:{ title: 'المستخدمين'}
+        data:{ title: 'Users'}
       },
       {
         path: 'clinic',
         loadChildren: () => import('./modules/clinic/clinic.module').then(m => m.ClinicModule) ,
-        data:{ title: 'العيادات'}
+        data:{ title: 'Clinics'}
       },
       {
         path: 'appointmentaddition',
         loadChildren: () => import('./modules/appointment-addition/appointment-addition.module').then(m => m.AppointmentAdditionModule) ,
-        data:{ title: 'اضافات الكشف'}
+        data:{ title: 'Add new appointment'}
       },
       {
         path: 'appointmentcategory',
         loadChildren: () => import('./modules/appointment-category/appointment-category.module').then(m => m.AppointmentCategoryModule) ,
-        data:{ title: 'انواع الكشف'}
+        data:{ title: ' Appointment category'}
       },
       {
         path: 'expense',
         loadChildren: () => import('./modules/expense/expense.module').then(m => m.ExpenseModule) ,
-        data:{ title: 'المصاريف'}
+        data:{ title: 'Expenses'}
       },
       {
         path: 'patient',
         loadChildren: () => import('./modules/patient/patient.module').then(m => m.PatientModule) ,
-        data:{ title: 'المرضي'}
+        data:{ title: 'Patients'}
       },
       {
         path: 'appointment',
         loadChildren: () => import('./modules/appointment/appointment.module').then(m => m.AppointmentModule) ,
-        data:{ title: 'الكشوفات'}
+        data:{ title: 'Appointments'}
       },
       {
         path: 'report',
         loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule),
-        data:{ title: 'التقارير'}
+        data:{ title: 'Reports'}
       }
     ]
   }

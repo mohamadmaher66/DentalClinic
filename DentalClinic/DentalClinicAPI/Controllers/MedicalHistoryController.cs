@@ -49,7 +49,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult AddMedicalHistory([FromBody] RequestedData<MedicalHistoryDTO> requestedData)
         {
             medicalHistoryDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة التاريخ الطبي بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully", Type = AlertTypeEnum.Success, Message = "Medical History added successfully" });
             return Ok(requestedData);
         }
 
@@ -58,7 +58,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult EditMedicalHistory([FromBody] RequestedData<MedicalHistoryDTO> requestedData)
         {
             medicalHistoryDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل التاريخ الطبي بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Medical History edited successfully" });
             return Ok(requestedData);
         }
 
@@ -67,7 +67,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteMedicalHistory([FromBody] RequestedData<MedicalHistoryDTO> requestedData)
         {
             requestedData.EntityList = medicalHistoryDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف التاريخ الطبي بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Medical History deleted successfully" });
             return Ok(requestedData);
         }
     }

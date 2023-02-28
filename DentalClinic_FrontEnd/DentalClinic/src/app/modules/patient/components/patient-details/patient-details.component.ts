@@ -18,7 +18,7 @@ export class PatientDetailsComponent implements OnInit {
   //Variables
   public patient: Patient = new Patient();
   requestPatientData: RequestedData<Patient>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
   genderEnum = GenderEnum;
   medicalHistoryList = new Array<MedicalHistory>();
   selectedMedicalHistoryList = new Array<MedicalHistory>();
@@ -32,7 +32,7 @@ export class PatientDetailsComponent implements OnInit {
   ngOnInit() {
     this.patient.id = this.data.selectedDetails;
     if (this.patient.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getPatient();
     }
     else{

@@ -54,7 +54,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult AddUser([FromBody] RequestedData<UserDTO> requestedData)
         {
             userDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة المستخدم بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully", Type = AlertTypeEnum.Success, Message = "User Added Successfully" });
             return Ok(requestedData);
         }
 
@@ -63,7 +63,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult EditUser([FromBody] RequestedData<UserDTO> requestedData)
         {
             userDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل المستخدم بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "User edited Successfully" });
             return Ok(requestedData);
         }
 
@@ -72,7 +72,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteUser([FromBody] RequestedData<UserDTO> requestedData)
         {
             requestedData.EntityList = userDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف المستخدم بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = " Done Successfully", Type = AlertTypeEnum.Success, Message = "User deleted Successfully" });
             return Ok(requestedData);
         }
 

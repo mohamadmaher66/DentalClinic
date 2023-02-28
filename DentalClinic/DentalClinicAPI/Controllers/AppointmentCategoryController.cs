@@ -49,7 +49,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult AddAppointmentCategory([FromBody] RequestedData<AppointmentCategoryDTO> requestedData)
         {
             appointmentCategoryDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم الاضافة بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully", Type = AlertTypeEnum.Success, Message = "Added Successfully" });
             return Ok(requestedData);
         }
 
@@ -58,7 +58,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult EditAppointmentCategory([FromBody] RequestedData<AppointmentCategoryDTO> requestedData)
         {
             appointmentCategoryDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم التعديل بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Edited Successfully" });
             return Ok(requestedData);
         }
 
@@ -67,7 +67,7 @@ namespace DentalClinicAPI.Controllers
         public IActionResult DeleteAppointmentCategory([FromBody] RequestedData<AppointmentCategoryDTO> requestedData)
         {
             requestedData.EntityList = appointmentCategoryDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم الحذف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Removed Successfully" });
             return Ok(requestedData);
         }
     }

@@ -42,7 +42,7 @@ namespace DentalExpenseAPI.Controllers
         public IActionResult AddExpense([FromBody] RequestedData<ExpenseDTO> requestedData)
         {
             expenseDSL.Add(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم اضافة المصاريف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully", Type = AlertTypeEnum.Success, Message = "Expenses added successfully" });
             return Ok(requestedData);
         }
 
@@ -51,7 +51,7 @@ namespace DentalExpenseAPI.Controllers
         public IActionResult EditExpense([FromBody] RequestedData<ExpenseDTO> requestedData)
         {
             expenseDSL.Update(requestedData.Entity, requestedData.UserId);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم تعديل المصاريف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Expenses edited successfully" });
             return Ok(requestedData);
         }
 
@@ -60,7 +60,7 @@ namespace DentalExpenseAPI.Controllers
         public IActionResult DeleteExpense([FromBody] RequestedData<ExpenseDTO> requestedData)
         {
             requestedData.EntityList = expenseDSL.Delete(requestedData.Entity, requestedData.GridSettings);
-            requestedData.Alerts.Add(new Alert { Title = "تم بنجاح", Type = AlertTypeEnum.Success, Message = "تم حذف المصاريف بنجاح" });
+            requestedData.Alerts.Add(new Alert { Title = "Done Successfully ", Type = AlertTypeEnum.Success, Message = "Expenses deleted successfully" });
             return Ok(requestedData);
         }
 

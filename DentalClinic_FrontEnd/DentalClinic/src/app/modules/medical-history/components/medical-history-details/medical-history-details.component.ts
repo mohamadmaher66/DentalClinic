@@ -15,7 +15,7 @@ export class MedicalHistoryDetailsComponent implements OnInit {
   //Variables
   public medicalHistory: MedicalHistory = new MedicalHistory();
   requestMedicalHistoryData: RequestedData<MedicalHistory>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
 
   constructor(private medicalHistoryService: MedicalHistoryService,
     private route: ActivatedRoute,
@@ -30,7 +30,7 @@ export class MedicalHistoryDetailsComponent implements OnInit {
     this.medicalHistory.id = this.data.selectedDetails;
 
     if (this.medicalHistory.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getMedicalHistory();
     }
 

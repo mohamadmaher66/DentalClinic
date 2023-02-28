@@ -1,26 +1,26 @@
 <div class="content-wrapper">
-    <h3>كشوفات اليوم</h3>
-    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">اضافة كشف جديد</button>
+    <h3>Today's Visits</h3>
+    <button (click)="addNewRecord()" class="btn btn-primary" style="margin:10px">Add New Appointment</button>
     <button (click)="getAllAppointments()" class="btn btn-primary" style="margin:10px"><i class="fa fa-refresh" aria-hidden="true"></i> تحديث </button>
     <br>
     <div class="row">
         <div class="col-md-4 form-group">
-            <label for="user">الدكتور  </label>
+            <label for="user">Doctor</label>
             <mat-form-field class="mat-select-cls">
               <mat-select name="user" id="user" (selectionChange)="selectUser($event.value)" value="0">
-                <input (keyup)="filterUser($event.target.value)" class="form-control" placeholder="اختر الدكتور">
-                <mat-option value="0">الكل </mat-option>
+                <input (keyup)="filterUser($event.target.value)" class="form-control" placeholder="Choose Doctor">
+                <mat-option value="0">All </mat-option>
                 <mat-option *ngFor="let user of filteredUserList" [value]="user.id">{{ user.fullName }} </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
 
           <div class="col-md-4 form-group">
-            <label for="clinic">العيادة  </label>
+            <label for="clinic">clinic  </label>
             <mat-form-field class="mat-select-cls">
               <mat-select name="clinic" id="clinic" (selectionChange)="selectClinic($event.value)" value="0">
-                <input (keyup)="filterClinic($event.target.value)" class="form-control" placeholder="اختر العيادة">
-                <mat-option value="0" selected>الكل </mat-option>
+                <input (keyup)="filterClinic($event.target.value)" class="form-control" placeholder=" Choose Clinic">
+                <mat-option value="0" selected>All </mat-option>
                 <mat-option *ngFor="let clinic of filteredClinicList" [value]="clinic.id">{{ clinic.name }} </mat-option>
               </mat-select>
             </mat-form-field>
@@ -31,15 +31,15 @@
             <div class="card"
                 [ngClass]="{'border-success': appointment.state == appointmentStateEnum.Current,
                                                     'border-warning':appointment.state == appointmentStateEnum.Pending }">
-                <div class="card-header">اسم المريض : {{ appointment.patient.fullName }}
+                <div class="card-header"> Patient's Name : {{ appointment.patient.fullName }}
                     <span class="badge float-right"
                         [ngClass]="{'badge-success': appointment.state == appointmentStateEnum.Current,
                                          'badge-warning':appointment.state == appointmentStateEnum.Pending }">
-                        <label *ngIf="appointment.state == appointmentStateEnum.Current">جارى</label>
-                        <label *ngIf="appointment.state == appointmentStateEnum.Pending">قيد الانتظار</label>
+                        <label *ngIf="appointment.state == appointmentStateEnum.Current">Processing</label>
+                        <label *ngIf="appointment.state == appointmentStateEnum.Pending">Waiting List</label>
                     </span>
                     <span style="float: left;margin-left: 15px;">
-                        <button (click)="editRecord(appointment.id)" class="btn btn-primary">تعديل الكشف </button>
+                        <button (click)="editRecord(appointment.id)" class="btn btn-primary"> Edit Appointment </button>
                     </span>
                 </div>
                 <div class="card-body">
@@ -47,15 +47,15 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-12">
-                                  <label for="age">فئة الكشف : {{appointment.category.name}}</label>
+                                  <label for="age">Appointment category  : {{appointment.category.name}}</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-md-4"><label for="age">رقم السن :</label></div>
+                                    <div class="col-md-4"><label for="age"> Teeth Number :</label></div>
                                     <ul class="list-inline col-md-12">
                                         <li *ngFor="let tooth of appointment.toothList" class="list-inline-item" style="margin-right: 25px;">
                                             <label for="age"><i class="fa fa-asterisk" aria-hidden="true"></i> {{ tooth.toothNumber }} (
-                                                <span *ngIf="tooth.toothPosition == toothPositionEnum.Upper">علوى</span>
-                                                <span *ngIf="tooth.toothPosition == toothPositionEnum.Lower">سفلى</span>
+                                                <span *ngIf="tooth.toothPosition == toothPositionEnum.Upper">Upper</span>
+                                                <span *ngIf="tooth.toothPosition == toothPositionEnum.Lower">Lower</span>
                                                 )</label>
                                         </li>
                                       </ul>
@@ -64,36 +64,36 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="notes">ملاحظات</label>
+                                    <label for="notes">Notes</label>
                                     <textarea [(ngModel)]="appointment.notes" #notes="ngModel" type="text" name="notes"
-                                        class="form-control" id="notes" placeholder="ملاحظات" rows="4" disabled></textarea>
+                                        class="form-control" id="notes" placeholder="Notes" rows="4" disabled></textarea>
                                 </div>
                               </div>
                         </div>
                         <div class="col-md-4">
                             <table>
                                 <tr>
-                                <td><label for="totalPrice">المبلغ الكلي: </label></td>
+                                <td><label for="totalPrice">Total fees: </label></td>
                                 <td> <input [(ngModel)]="appointment.totalPrice" #totalPrice="ngModel" type="number"
-                                    class="form-control" name="totalPrice" id="totalPrice" placeholder="المبلغ الكلي" min="0">
+                                    class="form-control" name="totalPrice" id="totalPrice" placeholder="Total fees " min="0">
                                 </td>
                                 </tr>
                                 <tr>
-                                <td><label for="discountPercentage">الخصم: </label></td>
+                                <td><label for="discountPercentage">Discount Percentage: </label></td>
                                 <td><input [(ngModel)]="appointment.discountPercentage" #discount="ngModel" type="number"
-                                    class="form-control" name="discount" id="discount" placeholder="الخصم" min="0"></td>
+                                    class="form-control" name="discount" id="discount" placeholder="Discount" min="0"></td>
                                 </tr>
                                 <tr>
-                                <td><label for="finalPrice">السعر النهائي: </label></td>
+                                <td><label for="finalPrice"> Final Price : </label></td>
                                 <td>{{ appointment.totalPrice - appointment.discountPercentage }}</td>
                                 </tr>
                                 <tr>
-                                <td><label for="paidAmount">المدفوع: </label></td>
+                                <td><label for="paidAmount">Paid Amount: </label></td>
                                 <td><input [(ngModel)]="appointment.paidAmount" #paidAmount="ngModel" type="number"
-                                    class="form-control" name="paidAmount" id="paidAmount" placeholder="الخصم" min="0"></td>
+                                    class="form-control" name="paidAmount" id="paidAmount" placeholder="Discount Percentage" min="0"></td>
                                 </tr>
                                 <tr>
-                                <td><label for="change">الباقى: </label></td>
+                                <td><label for="change">Remaining amount: </label></td>
                                 <td>{{ appointment.totalPrice - appointment.discountPercentage - appointment.paidAmount }}
                                 </td>
                                 </tr>
@@ -117,7 +117,7 @@
             <div class="col-md-12">
               <div class="card card-accent-primary">
                 <div class="card-body">
-                    <h4>لا يوجد كشوفات</h4>
+                    <h4>There are no Appointments</h4>
 				 </div>
               </div>
             </div>

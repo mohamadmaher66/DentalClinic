@@ -32,7 +32,7 @@ export class FileUploaderComponent implements OnInit {
     }
     files.forEach(file => {
       if(!file.type.includes("image")){
-        this.alertService.viewAlerts([{ title:"خطأ", message:"يجب اخيتار صورة", type: AlertType.Error}]);
+        this.alertService.viewAlerts([{ title:"خطأ", message:"You have to choose a photo", type: AlertType.Error}]);
         return;
       }
       let fileToUpload = <File>file;
@@ -54,7 +54,7 @@ export class FileUploaderComponent implements OnInit {
     }
     else if (event.type === HttpEventType.Response) {
       let alerts = new Array<Alert>();
-      alerts.push({ type: AlertType.Info, title: "ملاحظة", message: "تم رفع الصور بنجاح" })
+      alerts.push({ type: AlertType.Info, title: "Note", message: "Uploaded successfully" })
       this.alertService.viewAlerts(alerts);
       this.isUploaded = true;
       this.imgURLList.push(event.body);

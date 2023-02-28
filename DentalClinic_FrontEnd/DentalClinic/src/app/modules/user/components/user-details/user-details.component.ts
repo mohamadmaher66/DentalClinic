@@ -15,7 +15,7 @@ export class UserDetailsComponent implements OnInit {
   //Variables
   public user: User = new User();
   requestUserData: RequestedData<User>;
-  btnTitle: string = "حفظ";
+  btnTitle: string = "Save";
   roleEnum = RoleEnum;
 
   constructor(private userService: UserService,
@@ -27,7 +27,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.user.id = this.data.selectedDetails;
     if (this.user.id > 0) {
-      this.btnTitle = 'حفظ';
+      this.btnTitle = 'Save';
       this.getUser();
     }
   }
